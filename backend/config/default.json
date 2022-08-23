@@ -1,0 +1,17 @@
+{
+    "dbConfig": {
+        "host": "localhost",
+        "dialect": "mysql",
+        "user": "root",
+        "password": "",
+        "dbName": "task_manager",
+        "pool": {
+            "max": 10,
+            "min": 0,
+            "acquire": 30000,
+            "idle": 10000
+        }
+    },
+    "serverPort": 5000,
+    "secretKey": "secret-key"
+}
