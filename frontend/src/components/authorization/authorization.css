@@ -21,6 +21,10 @@
     display: flex;
     flex-direction: row;
 }
+.header > .active {
+    background-color: var(--light-100);
+    font-size: 1.25em;
+}
 
 .body {
     display: flex;

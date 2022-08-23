@@ -4,14 +4,12 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Authorization from "./authorization/Authorization";
 import './app.css';
 import { auth } from '../actions/user'
+import Navbar from "./navbar/Navbar";
+import Calendar from "./calendar/Calendar";
 
 function App() {
   const isAuth = useSelector(state => state.user.isAuth)
   const dispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch(auth())
-  })
 
   return (
     <BrowserRouter>
@@ -21,10 +19,14 @@ function App() {
           <Route path="*" element={<Navigate to="/auth" />} />
         </Routes>
         :
-        <Routes>
-          <Route exact path="/" element={null} />
-          <Route path="*" element={<Navigate to="/" />} />
-        </Routes>
+        <React.Fragment>
+          <Navbar />
+          <Routes>
+            <Route exact path="/" element={<Calendar/>} />
+            <Route path="/profile" element={null} />
+            <Route path="*" element={<Navigate to="/" />} />
+          </Routes>
+        </React.Fragment>
       }
     </BrowserRouter>
   );

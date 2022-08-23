@@ -52,11 +52,11 @@ class Registration extends React.Component {
         return (
             <React.Fragment>
                 <div className="body">
-                    <input value={this.state.email} onChange={this.handleChangeInput} name="email" Type="email" placeholder="Электронная почта" />
-                    <input value={this.state.firstName} onChange={this.handleChangeInput} name="firstName" Type="text" placeholder="Имя" />
-                    <input value={this.state.lastName} onChange={this.handleChangeInput} name="lastName" Type="text" placeholder="Фамилия" />
-                    <input value={this.state.password} onChange={this.handleChangeInput} name="password" Type="password" placeholder="Пароль" />
-                    <input value={this.state.password2} onChange={this.handleChangeInput} name="password2" Type="password" placeholder="Повторите пароль" />
+                    <input value={this.state.email} onChange={this.handleChangeInput} name="email" type="email" placeholder="Электронная почта" />
+                    <input value={this.state.firstName} onChange={this.handleChangeInput} name="firstName" type="text" placeholder="Имя" />
+                    <input value={this.state.lastName} onChange={this.handleChangeInput} name="lastName" type="text" placeholder="Фамилия" />
+                    <input value={this.state.password} onChange={this.handleChangeInput} name="password" type="password" placeholder="Пароль" />
+                    <input value={this.state.password2} onChange={this.handleChangeInput} name="password2" type="password" placeholder="Повторите пароль" />
                     {this.state.valid.password ? null : <span className="error">Пароли не совпадают!</span>}
                 </div>
                 <div className="footer">

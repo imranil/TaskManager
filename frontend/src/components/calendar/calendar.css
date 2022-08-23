@@ -1,0 +1,69 @@
+@import url('../../utils/colors.css');
+
+
+.top-row {
+    padding: 1em 0;
+    display: flex;
+    flex-direction: row;
+    gap: 2em;
+    justify-content: start;
+    align-items: center;
+}
+
+.month-control {
+    display: flex;
+    gap: 2em;
+    align-items: center;
+}
+.month-control>span {
+    font-size: 1.5em;
+    line-height: 1.5em;
+}
+.month-control > button > svg {
+    width: 1.5em;
+    height: 1.5em;
+}
+.month-control > button > svg > path {
+    fill: var(--dark-100)
+}
+
+.month {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.week, .week-header {
+    display: flex;
+    flex-direction: row;
+}
+
+.week > .day {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25em;
+    padding: 0.5em;
+    margin: 0.5px;
+    height: 8em;
+    outline: 1px solid var(--dark-200);
+}
+
+.day:hover {
+    background-color: var(--neutral-100);
+}
+
+.week-header > .day {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25em;
+    padding: 0.5em;
+    margin: 0.5px;
+    outline: 1px solid var(--dark-200);
+}
+
+.title {
+    display: flex;
+    flex-direction: row;
+}

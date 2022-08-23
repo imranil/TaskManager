@@ -1,0 +1,46 @@
+@import url('../../utils/colors.css');
+
+
+nav {
+    height: 100vh;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: var(--dark-200);
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1em;
+    padding: 1em;
+}
+
+.primary, .secondary {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1em;
+}
+a {
+    cursor: pointer;
+}
+.active::after {
+    content: '';
+    position: absolute;
+    top: 1.5em;
+    right: 0;
+    border: 0.5em solid transparent; 
+    border-right: 0.5em solid var(--light-100);
+}
+
+.primary > a > svg {
+    width: 2em;
+    height: 2em;
+}
+.primary > a > svg > path {
+    fill: var(--light-100);
+}
+.primary > a:hover > svg > path {
+    fill: var(--neutral-100);
+}
