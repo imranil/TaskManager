@@ -1,46 +1,73 @@
 @import url('../../utils/colors.css');
 
 
-nav {
-    height: 100vh;
-    position: absolute;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: var(--dark-200);
-    overflow-x: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 1em;
-    padding: 1em;
+header {
+    box-shadow: 0 0 0.5em .1em rgba(0, 0, 0, 0.2);
 }
 
-.primary, .secondary {
+nav {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 1em;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1.5em;
+    padding: .75em 0;
 }
-a {
+
+nav>.input-area {
+    width: 100%;
+    position: relative;
+    left: -2em;
+}
+
+nav>.input-area>input[type=search] {
+    width: 100%;
+    padding-left: 2.5em;
+}
+
+nav>.input-area>input[type=search]::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    height: 1em;
+    width: 1em;
+    background: url('../../assets/img/cross.svg') no-repeat 50% 50%;
+    background-size: contain;
     cursor: pointer;
 }
-.active::after {
-    content: '';
-    position: absolute;
-    top: 1.5em;
-    right: 0;
-    border: 0.5em solid transparent; 
-    border-right: 0.5em solid var(--light-100);
+
+nav>.input-area>svg {
+    width: 2em;
+    height: 2em;
+    position: relative;
+    top: 0.1em;
+    left: 2.25em;
 }
 
-.primary > a > svg {
+nav>.input-area>svg>path {
+    fill: gray;
+}
+
+a {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    border: 1px solid transparent;
+    border-radius: 0.5em;
+    color: var(--dark-200);
+    font-size: 1.25em;
+    padding: 0 0.5em;
+    cursor: pointer;
+}
+
+a>svg,
+a>img {
     width: 2em;
     height: 2em;
 }
-.primary > a > svg > path {
-    fill: var(--light-100);
+
+a:hover {
+    border: 1px solid var(--orange-100);
 }
-.primary > a:hover > svg > path {
-    fill: var(--neutral-100);
+
+nav a.active {
+    border: 1px solid var(--orange-100);
 }

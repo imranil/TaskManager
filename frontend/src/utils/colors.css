@@ -2,10 +2,13 @@
     --light-100: #fff;
     --neutral-100: #f4f4f4;
     --neutral-200: #cfcfcf;
-    --blue-100: #bb86fc;
-    --blue-200: #3700b3;
-    --blue-300: #03dac6;
-    --dark-100: #6b6b6b;
-    --dark-200: #292929;
-    --red-100: #e94e4e;
+    --blue-100: #d9e5f9;
+    --blue-200: #27a1ff;
+    --blue-300: #0271c7;
+    --orange-100: #fd633d;
+    --orange-200: #FFA500;
+    --red-100: #e74444;
+    --green-100: #67cb65;
+    --gray-100: #808080;
+    --dark-100: #000;
 }

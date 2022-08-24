@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { prevMonth, todayMonth, nextMonth } from "../../reducers/calendarSlice";
-import ucFirst from '../../utils/ucFirst'
+import { prevMonth, todayMonth, nextMonth } from "../../../reducers/calendarSlice";
+import ucFirst from '../../../utils/ucFirst'
 
 const MonthControl = () => {
     const dispatch = useDispatch();

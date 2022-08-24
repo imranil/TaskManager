@@ -5,6 +5,7 @@ const calendarSlice = createSlice({
     name: 'calendar',
     initialState: {
         currentDate: new Date(),
+        view: 'grid'
     },
     reducers: {
         prevMonth(state) {
@@ -28,8 +29,11 @@ const calendarSlice = createSlice({
                 state.currentDate = new Date(currentYear, currentMonth + 1, 1)
             }
         },
+        setView(state, action) {
+            state.view = action.payload
+        }
     }
 })
 
 export default calendarSlice.reducer
-export const { prevMonth, todayMonth, nextMonth} = calendarSlice.actions
+export const { prevMonth, todayMonth, nextMonth, setView} = calendarSlice.actions
