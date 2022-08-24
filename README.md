@@ -9,7 +9,7 @@ Calendar2.0<br/>
 ## Скриншоты
 
 Автторизация/регистрация<br/>
-![image](https://user-images.githubusercontent.com/61901497/186159104-fd5cc628-b4c7-4dd5-a2b9-610acc41a927.png)<br/>
+![image](https://user-images.githubusercontent.com/61901497/186442598-a5394863-1921-4af4-bbb4-221be7e2222a.png)<br/>
 <br/>
 Домашняя страницы<br/>
-![image](https://user-images.githubusercontent.com/61901497/186159316-c382080d-31a8-4f53-a835-46891816c20f.png)
+![image](https://user-images.githubusercontent.com/61901497/186442807-c954596f-d22d-4aa3-90ae-9c7d733a7cd9.png)
