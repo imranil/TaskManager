@@ -1,15 +1,35 @@
-import React, { useState } from "react";
-import { useDispatch } from 'react-redux';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { getTasks } from "../../actions/task";
 import MonthControl from "./month/MonthControl";
-import MonthGrid from "./month/MonthGrid";
-import './calendar.css'
+import Month from "./month/Month";
+import './calendar.css';
 
 
 const Calendar = () => {
+    const dispatch = useDispatch()
+    const loader = useSelector(state => state.app.loader)
+    const currentMonth = useSelector(state => state.calendar.currentMonth)
+    const currentYear = useSelector(state => state.calendar.currentYear)
+    const startDate = new Date(currentYear, currentMonth, 1).toLocaleDateString('en-CA') // yyyy-mm-dd
+    const endDate = new Date(currentYear, currentMonth +1, 0).toLocaleDateString('en-CA')
+
+    useEffect(() => {
+        dispatch(getTasks({startDate, endDate}))
+    }, [currentMonth, currentYear]);
+
+    if (loader) {
+        return (
+            <div className="loader">
+                <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+            </div>
+        );
+    }
+
     return (
         <div className="container">
             <MonthControl/>
-            <MonthGrid/>
+            <Month/>
         </div>
     );
 }

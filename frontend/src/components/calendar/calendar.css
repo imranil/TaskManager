@@ -38,10 +38,20 @@
     height: 8em;
     outline: 1px solid var(--dark-100);
     background-color:  var(--light-100);
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.day::-webkit-scrollbar {
+    width: 0.5em;
+}
+.day::-webkit-scrollbar-thumb {
+    background-color: var(--neutral-200);
+    border-radius: 1em;
 }
 .day:active {
     box-shadow: 0px 0px 10px 2px var(--orange-200);
 }
+
 .today > .heading {
     color: var(--orange-100);
     font-weight: 700;
@@ -60,7 +70,39 @@
     background-color: var(--neutral-100);
 }
 
-.title {
+.tasks {
+    list-style: none;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    box-sizing: border-box;
+
+}
+
+.task {
+}
+
+.task > .name {
+    display: inline-block;
+}
+
+.task > .low {
+    display: inline;
+    color: var(--light-100);
+    background-color: var(--green-100);
+    border-radius:.5em;
+    padding: 0 0.25em;
+}
+.task > .medium {
+    display: inline;
+    color: var(--light-100);
+    background-color: var(--orange-100);
+    border-radius:.5em;
+    padding: 0 0.25em;
+}
+.task > .high {
+    display: inline;
+    color: var(--light-100);
+    background-color: var(--red-100);
+    border-radius:.5em;
+    padding: 0 0.25em;
 }

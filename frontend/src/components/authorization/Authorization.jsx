@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Login from "./Login";
 import Registration from "./Registration";
-import './authorization.css'
+import './authorization.css';
 
 
 const Authorization = () => {

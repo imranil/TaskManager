@@ -4,29 +4,29 @@ import { createSlice } from "@reduxjs/toolkit"
 const calendarSlice = createSlice({
     name: 'calendar',
     initialState: {
-        currentDate: new Date(),
-        view: 'grid'
+        currentMonth: new Date().getMonth(),
+        currentYear: new Date().getFullYear(),
+        daysOfWeek: {'ПН': 'Понедельник', 'ВТ': 'Вторник', 'СР': 'Среда', 'ЧТ': 'Четверг', 'ПТ': 'Пятница', 'СБ': 'Суббота', 'ВС': 'Воскресенье'},
     },
     reducers: {
         prevMonth(state) {
-            const currentMonth = state.currentDate.getMonth()
-            const currentYear = state.currentDate.getFullYear()
-            if(currentMonth === 0) {
-                state.currentDate = new Date(currentYear - 1, 11, 1)
+            if(state.currentMonth === 0) {
+                state.currentMonth = 11
+                state.currentYear = state.currentYear - 1
             } else {
-                state.currentDate = new Date(currentYear, currentMonth - 1, 1)
+                state.currentMonth = state.currentMonth - 1
             }
         },
         todayMonth(state) {
-            state.currentDate = new Date()
+            state.currentMonth = new Date().getMonth()
+            state.currentYear = new Date().getFullYear()
         },
         nextMonth(state) {
-            const currentMonth = state.currentDate.getMonth()
-            const currentYear = state.currentDate.getFullYear()
-            if(currentMonth === 11) {
-                state.currentDate = new Date(currentYear + 1, 0, 1)
+            if(state.currentMonth === 11) {
+                state.currentMonth = 0
+                state.currentYear = state.currentYear + 1
             } else {
-                state.currentDate = new Date(currentYear, currentMonth + 1, 1)
+                state.currentMonth = state.currentMonth + 1
             }
         },
         setView(state, action) {
