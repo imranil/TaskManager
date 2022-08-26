@@ -7,6 +7,7 @@ class TaskController {
         try {
 
             const { name, description, priority, status, deadline } = req.body
+            console.log(req.body)
             const task = await Task.create({ name, description, priority, status, deadline })
             await UserTask.create({ userId: req.user.id, taskId: task.id })
 

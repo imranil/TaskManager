@@ -4,7 +4,7 @@ module.exports = (sequelize, type) => {
             type: type.STRING,
             allowNull: false,
             validate: {
-                notNull: {msg: "field is required"}
+                notNull: {msg: "name is required"}
             },
         },
         description: {
@@ -14,21 +14,21 @@ module.exports = (sequelize, type) => {
             type: type.STRING,
             allowNull: false,
             validate: {
-                notNull: {msg: "field is required"}
+                notNull: {msg: "description is required"}
             },
         },
         status: {
             type: type.STRING,
             allowNull: false,
             validate: {
-                notNull: {msg: "field is required"}
+                notNull: {msg: "status is required"}
             },
         },
         deadline: {
             type: type.DATEONLY,
             allowNull: false,
             validate: {
-                notNull: {msg: "field is required"}
+                notNull: {msg: "deadline is required"}
             },
         },
     });

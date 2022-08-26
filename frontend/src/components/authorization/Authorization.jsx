@@ -8,8 +8,8 @@ const Authorization = () => {
     const [login, setLogin] = useState(true);
 
     return (
-        <div className="authorization">
-            <div className="authorization-content">
+        <div className="row">
+            <div className="authorization content">
                 <div className="header">
                     <button className={login ? 'tab-button active' : 'tab-button'} onClick={() => setLogin(true)}>Авторизация</button>
                     <button className={login ? 'tab-button' : 'tab-button active'} onClick={() => setLogin(false)}>Регистрация</button>

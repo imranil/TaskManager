@@ -6,10 +6,15 @@ import './app.css';
 import { auth } from '../actions/user'
 import Navbar from "./navbar/Navbar";
 import Calendar from "./calendar/Calendar";
+import CreateTask from "./task/CreateTask";
 
 function App() {
   const isAuth = useSelector(state => state.user.isAuth)
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(auth())
+  })
 
   return (
     <BrowserRouter>
@@ -22,9 +27,10 @@ function App() {
         <React.Fragment>
           <Navbar />
           <Routes>
-            <Route exact path="/" element={<Calendar/>} />
+            <Route exact path="/calendar" element={<Calendar/>} />
+            <Route exact path="/task/create" element={<CreateTask/>} />
             <Route path="/profile" element={null} />
-            <Route path="*" element={<Navigate to="/" />} />
+            <Route path="*" element={<Navigate to="/calendar" />} />
           </Routes>
         </React.Fragment>
       }

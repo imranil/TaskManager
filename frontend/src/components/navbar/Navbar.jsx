@@ -25,18 +25,19 @@ const Navbar = () => {
                         </svg>
                         <input value={searchInput} onChange={(event) => searchChangeHandler(event)} className="search" type='search' placeholder="Поиск" />
                     </div>
-                    <NavLink to="/">
+                    <NavLink to="/calendar">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
                             <path d="M5 4.5a.5.5 0 0 1-.5-.5V2a.5.5 0 0 1 1 0v2a.5.5 0 0 1-.5.5zM11 4.5a.5.5 0 0 1-.5-.5V2a.5.5 0 0 1 1 0v2a.5.5 0 0 1-.5.5z" /><path d="M13 14.5H3c-.827 0-1.5-.673-1.5-1.5V4c0-.827.673-1.5 1.5-1.5h10c.827 0 1.5.673 1.5 1.5v9c0 .827-.673 1.5-1.5 1.5zM3 3.5a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5V4a.5.5 0 0 0-.5-.5H3z" /><path d="M14 6.5H2a.5.5 0 0 1 0-1h12a.5.5 0 0 1 0 1zM5.5 7.5h1v1h-1zM7.5 7.5h1v1h-1zM9.5 7.5h1v1h-1zM11.5 7.5h1v1h-1zM3.5 9.5h1v1h-1zM5.5 9.5h1v1h-1zM7.5 9.5h1v1h-1zM9.5 9.5h1v1h-1zM11.5 9.5h1v1h-1zM3.5 11.5h1v1h-1zM5.5 11.5h1v1h-1zM7.5 11.5h1v1h-1z" />
                         </svg>
                     </NavLink>
-                    <a>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
-                            <rect width="256" height="256" fill="none" />
-                            <path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16" d="M56.20305 104A71.899 71.899 0 0 1 128.5484 32.002c39.58967.29432 71.25651 33.20133 71.25651 72.90185V112c0 35.81563 7.49325 56.59893 14.093 67.95814A7.999 7.999 0 0 1 207.01628 192H48.98365A7.99908 7.99908 0 0 1 42.103 179.95641c6.60328-11.35959 14.1-32.1426 14.1-67.95641zM96 192v8a32 32 0 0 0 64 0v-8" />
+                    <NavLink to="/task/create">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 29 29">
+                            <path d="M14.5 27.071c-6.893 0-12.5-5.607-12.5-12.5s5.607-12.5 12.5-12.5S27 7.678 27 14.571s-5.607 12.5-12.5 12.5zm0-23c-5.79 0-10.5 4.71-10.5 10.5s4.71 10.5 10.5 10.5S25 20.36 25 14.571s-4.71-10.5-10.5-10.5z" />
+                            <path d="M14.5 21.571a1 1 0 0 1-1-1v-12a1 1 0 0 1 2 0v12a1 1 0 0 1-1 1z" />
+                            <path d="M20.5 15.571h-12a1 1 0 0 1 0-2h12a1 1 0 0 1 0 2z" />
                         </svg>
-                    </a>
-                    <DropDownMenu/>
+                    </NavLink>
+                    <DropDownMenu />
                 </nav>
             </div>
         </header>
@@ -60,7 +61,7 @@ const DropDownMenu = () => {
     return (
         <div className="dropdown">
             <a className="dropdown-control" onClick={dropDownHandler}><img src={avatar} /> {currentUser.firstName}</a>
-            <div className="dropdown-content" style={{display: display}}>
+            <div className="dropdown-content" style={{ display: display }}>
                 <a className="dropdown-item" href={null}>Профиль</a>
                 <a className="dropdown-item" onClick={() => dispatch(logout())}>Выход</a>
             </div>
