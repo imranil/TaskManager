@@ -70,36 +70,41 @@
     background-color: var(--neutral-100);
 }
 
-.tasks {
+.task-list {
     list-style: none;
     display: flex;
     flex-direction: column;
-    box-sizing: border-box;
-
+    width: -webkit-fill-available;
 }
 
-.task {
+.item {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap:.25em;
+    padding: 0 .2em;
+    width: 100%;
+}
+.item:hover {
+    background-color: var(--neutral-200);
+    cursor: pointer;
 }
 
-.task > .name {
-    display: inline-block;
-}
-
-.task > .low {
+.item > .low {
     display: inline;
     color: var(--light-100);
     background-color: var(--green-100);
     border-radius:.5em;
     padding: 0 0.25em;
 }
-.task > .medium {
+.item > .medium {
     display: inline;
     color: var(--light-100);
     background-color: var(--orange-100);
     border-radius:.5em;
     padding: 0 0.25em;
 }
-.task > .high {
+.item > .high {
     display: inline;
     color: var(--light-100);
     background-color: var(--red-100);

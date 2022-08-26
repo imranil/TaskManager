@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import Week from "./Week/Week";
-import Day from './Week/Day/Day'
 
 const Month = () => {
     const currentMonth = useSelector(state => state.calendar.currentMonth)
@@ -50,9 +48,44 @@ const Month = () => {
 
     return (
         <div className="month">
-            <div className="week">{daysOfWeek.map(day => <div className="week-day">{day}</div>)}</div>
+            <Week days={daysOfWeek.map(day => <div className="week-day">{day}</div>)} />
             {createMonthGrid()}
         </div>
+    );
+}
+
+const Week = ({days}) => {
+    return (
+        <div className='week'>
+            {days}
+        </div>
+    );
+}
+
+const Day = (props) => {
+    const classes = props.today ? 'day today' : 'day'
+    let tasks = []
+    for (let key in props.tasks) {
+        tasks.push(props.tasks[key])
+    }
+    return (
+        <div className={classes}>
+            <div className="heading">{props.heading} {props.today && 'Сегодня'}</div>
+            <ul className="task-list">
+                {tasks.length !== 0 &&
+                    tasks.map(task => <TaskOfDay task={task}/>)
+                }
+            </ul>
+        </div>
+    );
+}
+
+const TaskOfDay = ({task}) => {
+    return (
+        <li className="item">
+            {task.name}
+            <div className={task.priority}>{task.priority}</div>
+        </li>
     );
 }
 

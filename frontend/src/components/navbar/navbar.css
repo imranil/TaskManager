@@ -71,3 +71,33 @@ a:hover {
 nav a.active {
     border: 1px solid var(--orange-100);
 }
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown>.dropdown-control::after {
+    content: url('../../assets/img/arrow.svg');
+    position: relative;
+    top: .15em;
+    width: 1.25em;
+    height: 1.25em;
+}
+
+.dropdown-content {
+    position: absolute;
+    top: 2.75em;
+    right: 0;
+    left: 0;
+    background-color: var(--light-100);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.dropdown-content a {
+    text-decoration: none;
+    padding: 0.5em 1em;
+    font-size: 1.15em;
+}
