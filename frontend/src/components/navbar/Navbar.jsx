@@ -61,8 +61,8 @@ const DropDownMenu = () => {
         <div className="dropdown">
             <a className="dropdown-control" onClick={dropDownHandler}><img src={avatar} /> {currentUser.firstName}</a>
             <div className="dropdown-content" style={{ display: display }}>
-                <a className="dropdown-item" href={null}>Профиль</a>
-                <a className="dropdown-item" onClick={() => dispatch(logout())}>Выход</a>
+                <a href={null} className="dropdown-item">Профиль</a>
+                <a href={null} onClick={() => dispatch(logout())} className="dropdown-item">Выход</a>
             </div>
         </div>
     );

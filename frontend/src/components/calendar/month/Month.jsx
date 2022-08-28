@@ -85,12 +85,8 @@ const Day = (props) => {
 const TaskOfDay = ({ task }) => {
     const dispatch = useDispatch()
 
-    function redirectHandler () {
-        dispatch(setCurrentTask(task))
-    }
-
     return (
-        <NavLink to={'/task/' + task.id} onClick={() => redirectHandler()} className="item">
+        <NavLink to={'/task/' + task.id} onClick={() => dispatch(setCurrentTask(task))} className="item">
             {task.name}
             <div className={task.priority}>{task.priority}</div>
         </NavLink>

@@ -1,7 +1,6 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useDispatch } from 'react-redux';
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { createTask } from "../../actions/task";
 import { setCurrentTask } from "../../reducers/taskSlice";
 import './task.css';
@@ -10,6 +9,7 @@ import './task.css';
 
 const CreateTask = () => {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [priority, setPriority] = useState('')
@@ -17,19 +17,18 @@ const CreateTask = () => {
     const [deadline, setDeadline] = useState('')
 
 
-    function submitHandler() {
-        const { name, description, priority, status, deadline } = this.state
+    function submitHandler(event) {
+        event.preventDefault()
+        event.stopPropagation()
         const task = dispatch(createTask(name, description, priority, status, deadline))
         dispatch(setCurrentTask(task))
-        return (
-            <Navigate to="/calendar" />
-        );
+        navigate(`/task/${task.id}`)
     }
 
     return (
         <div className="container">
             <div className="row">
-                <form onSubmit={submitHandler} className="create-task content">
+                <form onSubmit={(event) => submitHandler(event)} className="create-task content">
                     <div className="header">
                         Создание задачи
                     </div>
@@ -37,11 +36,13 @@ const CreateTask = () => {
                         <input value={name} onChange={(event) => setName(event.target.value)} name="name" type="text" placeholder="Название" />
                         <textarea value={description} onChange={(event) => setDescription(event.target.value)} name="description" placeholder="Описание" rows="5" />
                         <select value={priority} onChange={(event) => setPriority(event.target.value)} name="priority">
+                            <option value="" disabled>Приоритет</option>
                             <option value="low">Низкий</option>
                             <option value="medium">Средний</option>
                             <option value="high">Высокий</option>
                         </select>
                         <select value={status} onChange={(event) => setStatus(event.target.value)} name="status">
+                            <option value="" disabled>Статус</option>
                             <option value="to do">Сделать</option>
                             <option value="in progress">В процессе</option>
                             <option value="closed">Завершен</option>
