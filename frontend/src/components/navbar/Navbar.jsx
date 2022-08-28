@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import './navbar.css';
 import { logout } from "../../reducers/userSlice";
-import { showLoader } from "../../reducers/appSlice";
 import { API_URL } from "../../config";
 import avatarLogo from "../../assets/img/avatar.svg";
 

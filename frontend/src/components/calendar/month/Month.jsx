@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
+import { NavLink } from "react-router-dom";
+import { setCurrentTask } from "../../../reducers/taskSlice";
 
 const Month = () => {
     const currentMonth = useSelector(state => state.calendar.currentMonth)
@@ -17,7 +19,7 @@ const Month = () => {
 
         while (date.getMonth() == currentMonth) {
             let tasksOfDay = tasks.filter(task => task.deadline === new Date(currentYear, currentMonth, date.getDate()).toLocaleDateString('en-CA'))
-            
+
             if (date.getFullYear() === new Date().getFullYear() && date.getMonth() === new Date().getMonth() && date.getDate() === new Date().getDate()) {
                 days.push(<Day key={date.getDate()} heading={date.getDate()} tasks={tasksOfDay} today={true} />)
             } else {
@@ -54,7 +56,7 @@ const Month = () => {
     );
 }
 
-const Week = ({days}) => {
+const Week = ({ days }) => {
     return (
         <div className='week'>
             {days}
@@ -73,19 +75,25 @@ const Day = (props) => {
             <div className="heading">{props.heading} {props.today && 'Сегодня'}</div>
             <ul className="task-list">
                 {tasks.length !== 0 &&
-                    tasks.map(task => <TaskOfDay task={task}/>)
+                    tasks.map(task => <TaskOfDay key={task.id} task={task} />)
                 }
             </ul>
         </div>
     );
 }
 
-const TaskOfDay = ({task}) => {
+const TaskOfDay = ({ task }) => {
+    const dispatch = useDispatch()
+
+    function redirectHandler () {
+        dispatch(setCurrentTask(task))
+    }
+
     return (
-        <li className="item">
+        <NavLink to={'/task/' + task.id} onClick={() => redirectHandler()} className="item">
             {task.name}
             <div className={task.priority}>{task.priority}</div>
-        </li>
+        </NavLink>
     );
 }
 

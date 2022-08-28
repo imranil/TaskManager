@@ -77,35 +77,32 @@
     width: -webkit-fill-available;
 }
 
-.item {
+.task-list > .item {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     gap:.25em;
     padding: 0 .2em;
     width: 100%;
+    font-size: 1em;
 }
 .item:hover {
-    background-color: var(--neutral-200);
     cursor: pointer;
 }
 
-.item > .low {
-    display: inline;
+.low {
     color: var(--light-100);
     background-color: var(--green-100);
     border-radius:.5em;
     padding: 0 0.25em;
 }
-.item > .medium {
-    display: inline;
+.medium {
     color: var(--light-100);
     background-color: var(--orange-100);
     border-radius:.5em;
     padding: 0 0.25em;
 }
-.item > .high {
-    display: inline;
+.high {
     color: var(--light-100);
     background-color: var(--red-100);
     border-radius:.5em;

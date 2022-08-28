@@ -7,9 +7,11 @@ import { auth } from '../actions/user'
 import Navbar from "./navbar/Navbar";
 import Calendar from "./calendar/Calendar";
 import CreateTask from "./task/CreateTask";
+import Task from "./task/Task";
 
 function App() {
   const isAuth = useSelector(state => state.user.isAuth)
+  const task = useSelector(state => state.tasks.currentTask)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -27,8 +29,9 @@ function App() {
         <React.Fragment>
           <Navbar />
           <Routes>
-            <Route exact path="/calendar" element={<Calendar/>} />
-            <Route exact path="/task/create" element={<CreateTask/>} />
+            <Route path="/calendar" element={<Calendar/>} />
+            <Route path="/task/create" element={<CreateTask/>} />
+            <Route path="/task/:id" element={<Task />} exact={true} strict={true} />
             <Route path="/profile" element={null} />
             <Route path="*" element={<Navigate to="/calendar" />} />
           </Routes>
