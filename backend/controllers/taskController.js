@@ -25,7 +25,7 @@ class TaskController {
                     where: {
                         id: req.user.id
                     },
-                    attributes: [],
+                    attributes: ['firstName'],
                 },
                 where: {
                     deadline: {
@@ -33,28 +33,7 @@ class TaskController {
                     }
                 }
             })
-
             return res.json(tasks);
-        } catch (e) {
-            console.log(e)
-        }
-    }
-
-    async getTask(req, res) {
-        try {
-            const task = await Task.findOne({
-                include: {
-                    model: User,
-                    where: {
-                        id: req.user.id
-                    },
-                    attributes: [],
-                },
-                where: {
-                    id: req.params.id
-                }
-            })
-            return res.json(task);
         } catch (e) {
             console.log(e)
         }
@@ -84,7 +63,18 @@ class TaskController {
     async updateTask(req, res) {
         try {
             const { id, priority, status } = req.body
-            const task = await Task.findByPk(id)
+            const task = await Task.findOne({
+                include: {
+                    model: User,
+                    where: {
+                        id: req.user.id
+                    },
+                    attributes: ['firstName'],
+                },
+                where: {
+                    id: id
+                }
+            })
             await task.update({
                 priority: priority,
                 status: status,

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { createTask } from "../../actions/task";
-import { setCurrentTask } from "../../reducers/taskSlice";
 import './task.css';
 
 
@@ -20,9 +19,8 @@ const CreateTask = () => {
     function submitHandler(event) {
         event.preventDefault()
         event.stopPropagation()
-        const task = dispatch(createTask(name, description, priority, status, deadline))
-        dispatch(setCurrentTask(task))
-        navigate(`/task/${task.id}`)
+        dispatch(createTask(name, description, priority, status, deadline))
+        navigate(`/calendar`)
     }
 
     return (

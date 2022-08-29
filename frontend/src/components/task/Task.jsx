@@ -54,7 +54,7 @@ const Task = () => {
                         </div>
                         <div className="data-row">
                             <div className="title">Участники:</div>
-                            <div className="value"></div>
+                            <div className="value">{task.users.map(user => user.firstName)}</div>
                         </div>
                     </div>
                     <div className="input-row">

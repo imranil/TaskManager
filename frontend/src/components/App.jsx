@@ -11,11 +11,6 @@ import Task from "./task/Task";
 
 function App() {
   const isAuth = useSelector(state => state.user.isAuth)
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch(auth())
-  })
 
   return (
     <BrowserRouter>

@@ -4,33 +4,16 @@ import { setCurrentTask, deleteTask, setTasks } from "../reducers/taskSlice";
 import { API_URL } from "../config";
 
 
-export function getTasks(dates) {
+export function getTasks(params) {
     return async dispatch => {
         try {
             dispatch(showLoader())
-            const { startDate, endDate } = dates
+            const { startDate, endDate } = params
             const url = `${API_URL}api/tasks?startDate=${startDate}&endDate=${endDate}`
             const response = await axios.get(url, {
                 headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
             })
             dispatch(setTasks(response.data))
-        } catch (e) {
-            alert(e.response.data.message)
-        } finally {
-            dispatch(hideLoader())
-        }
-    }
-}
-
-export function getTask(taskId) {
-    return async dispatch => {
-        try {
-            dispatch(showLoader())
-            const response = await axios.post(`${API_URL}api/tasks/${taskId}`, {
-                headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
-            })
-            dispatch(setCurrentTask(response.data))
-            return response.data
         } catch (e) {
             alert(e.response.data.message)
         } finally {
@@ -53,7 +36,6 @@ export function createTask(name, description, priority, status, deadline) {
                 headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
             })
             dispatch(setCurrentTask(response.data))
-            return response.data
         } catch (e) {
             alert(e.response.data.message)
         } finally {
@@ -90,7 +72,6 @@ export function updateTask(task) {
                 headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
             })
             dispatch(setCurrentTask(response.data))
-            return response.data
         } catch (e) {
             alert(e.response.data.message)
         } finally {
