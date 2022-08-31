@@ -8,6 +8,7 @@ import Navbar from "./navbar/Navbar";
 import Calendar from "./calendar/Calendar";
 import CreateTask from "./task/CreateTask";
 import Task from "./task/Task";
+import Profile from "./profile/Profile";
 
 function App() {
   const isAuth = useSelector(state => state.user.isAuth)
@@ -25,8 +26,8 @@ function App() {
           <Routes>
             <Route path="/calendar" element={<Calendar/>} />
             <Route path="/task/create" element={<CreateTask/>} />
-            <Route path="/task/:id" element={<Task />} exact={true} strict={true} />
-            <Route path="/profile" element={null} />
+            <Route path="/task/:id" element={<Task />} />
+            <Route path="/profile" element={<Profile/>} />
             <Route path="*" element={<Navigate to="/calendar" />} />
           </Routes>
         </React.Fragment>

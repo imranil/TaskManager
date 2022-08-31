@@ -1,6 +1,6 @@
 import axios from "axios";
 import { hideLoader, showLoader } from "../reducers/appSlice";
-import { setCurrentTask, deleteTask, setTasks, setFoundTasks } from "../reducers/taskSlice";
+import { setCurrentTask, deleteTask, setTasks, setFoundTasks, setTasksStatusCounts } from "../reducers/taskSlice";
 import { API_URL } from "../config";
 
 
@@ -82,15 +82,30 @@ export function updateTask(task) {
 
 export function searchTasks(search) {
     return async dispatch => {
-        try{
+        try {
             const response = await axios.get(`${API_URL}api/tasks/search?search=${search}`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 }
             })
             dispatch(setFoundTasks(response.data))
-        } catch(e) {
+        } catch (e) {
             alert(e.response.data.message)
-        } 
+        }
+    }
+}
+
+export function getCounts() {
+    return async dispatch => {
+        try {
+            const response = await axios.get(`${API_URL}api/tasks/counts`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+            })
+            dispatch(setTasksStatusCounts(response.data))
+        } catch (e) {
+            alert(e.response.data.message)
+        }
     }
 }

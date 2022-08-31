@@ -27,5 +27,6 @@ sequelize.sync()
 module.exports = {
   User,
   Task,
-  UserTask
+  UserTask, 
+  sequelize
 }

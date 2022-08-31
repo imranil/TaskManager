@@ -1,5 +1,5 @@
-const { Op } = require('sequelize')
-const { User, Task, UserTask } = require("../models")
+const { Op, QueryTypes } = require('sequelize')
+const { User, Task, UserTask, sequelize } = require("../models")
 
 
 class TaskController {
@@ -54,7 +54,7 @@ class TaskController {
                 }
             })
             await task.destroy()
-            return res.json({ message: 'Task was deleted'});
+            return res.json({ message: 'Task was deleted' });
         } catch (e) {
             console.log(e)
         }
@@ -107,6 +107,24 @@ class TaskController {
         } catch (e) {
             console.log(e)
             return res.status(400).json({ message: 'Search error' })
+        }
+    }
+
+    async getCounts(req, res) {
+        try {
+            const counts = await sequelize.query(
+                `SELECT DISTINCT 
+                    count(if(status='in progress', 1, NULL)) AS 'inProgressCounts',
+                    count(if(status='closed', 1, NULL)) AS 'closedCounts',
+                    count(if(status='frozen', 1, NULL)) AS 'frozenCounts'
+                FROM tasks, usertasks 
+                WHERE tasks.id=usertasks.taskId AND usertasks.userId=${req.user.id}
+                GROUP BY usertasks.userId`, {
+                type: QueryTypes.SELECT,
+            })
+            return res.json(counts);
+        } catch (e) {
+            console.log(e)
         }
     }
 }

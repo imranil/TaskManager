@@ -40,7 +40,7 @@ const Task = () => {
                     <div className="data">
                         <div className="data-row">
                             <div className="title">Приоритет:</div>
-                            <div className="value"><span className={task.priority}>{task.priority}</span></div>
+                            <div className="value"><span className={task.priority}>{priorities[task.priority]}</span></div>
                         </div>
                         <div className="data-row">
                             <div className="title">Статус:</div>

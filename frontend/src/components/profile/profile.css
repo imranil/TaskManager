@@ -1,0 +1,68 @@
+@import url('../../utils/colors.css');
+
+.profile-header {
+    margin-top: 2em;
+    margin-bottom: 1.5em;
+    font-size: 2em;
+    font-weight: 600;
+}
+
+.profile-content {
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+}
+
+.avatar-content {
+    display: flex;
+    flex-direction: column;
+    gap:1em;
+    border: 1em solid var(--neutral-100);
+    border-radius: 1em;
+    background-color: var(--neutral-100);
+}
+
+.avatar {
+    display: flex;
+    width: 20em;
+    height: 20em;
+    border-radius: .75em;
+    background: linear-gradient(45deg, var(--orange-100), var(--blue-200));
+}
+
+.avatar > img {
+    width: inherit;
+    border-radius: .75em;
+}
+
+.avatar-content>input[type=file] {
+    position: absolute;
+    filter: alpha(opacity=0);
+    opacity: 0;
+}
+.avatar-content>label {
+    text-align: center;
+}
+.avatar-content>label::after {
+    content: 'Выберите файл';
+    padding-right: 2em;
+    color: var(--light-100);
+    background: url('../../assets/img/upload.svg') no-repeat right;
+    z-index: 300;
+}
+
+.contacts, .numbers {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    border: 1em solid var(--neutral-100);
+    border-radius: 1em;
+    background-color: var(--neutral-100);
+}
+
+
+.contacts>.data-row, .numbers>.data-row {
+    display: flex;
+    justify-content: space-between;
+    gap:1em;
+}

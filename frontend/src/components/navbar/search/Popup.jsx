@@ -21,7 +21,6 @@ const Popup = ({ setViewPopup, popupCoordinates }) => {
 
     function viewPopupHandler(event) {
         const target = event.target
-        console.log(target)
         if(!target.closest('.popup-content')) {
             setViewPopup(false)
         }

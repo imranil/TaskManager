@@ -6,6 +6,7 @@ const taskController = require('../controllers/taskController')
 router.post('/create', authMiddleware, taskController.createTask)
 router.get('', authMiddleware, taskController.getTasks)
 router.get('/search', authMiddleware, taskController.searchTasks)
+router.get('/counts', authMiddleware, taskController.getCounts)
 router.put('/update', authMiddleware, taskController.updateTask)
 router.delete('', authMiddleware, taskController.deleteTask)
 
