@@ -19,7 +19,7 @@ const UserTask = UserTaskModel(sequelize, Sequelize);
 User.belongsToMany(Task, {through: UserTask});
 Task.belongsToMany(User, {through: UserTask});
 
-sequelize.sync({ alter: true })
+sequelize.sync()
   .then(() => {
     console.log(`Database connected!`)
   })

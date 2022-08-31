@@ -13,5 +13,6 @@
         }
     },
     "serverPort": 5000,
-    "secretKey": "secret-key"
+    "secretKey": "secret-key",
+    "staticPath": "C:\\Users\\user\\Desktop\\webd\\TaskManager(Calendar2.0)\\backend\\static"
 }
