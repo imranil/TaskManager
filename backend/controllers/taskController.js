@@ -90,15 +90,19 @@ class TaskController {
     async searchTasks(req, res) {
         try {
             const searchName = req.query.search;
-            let tasks = await Task.findAll({
+            const tasks = await Task.findAll({
                 include: {
                     model: User,
                     where: {
                         id: req.user.id
                     },
                 },
+                where: {
+                    name: {
+                        [Op.like]: `%${searchName}%`
+                    }
+                }
             })
-            tasks = tasks.filter(task => task.name.includes(searchName))
             return res.json(tasks);
         } catch (e) {
             console.log(e)
