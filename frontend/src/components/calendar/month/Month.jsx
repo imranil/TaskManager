@@ -84,11 +84,11 @@ const Day = (props) => {
 
 const TaskOfDay = ({ task }) => {
     const dispatch = useDispatch()
-
+    const priorities = useSelector(state => state.tasks.priorities)
     return (
         <NavLink to={'/task/' + task.id} onClick={() => dispatch(setCurrentTask(task))} className="item">
             {task.name}
-            <div className={task.priority}>{task.priority}</div>
+            <span className={task.priority}>{priorities[task.priority]}</span>
         </NavLink>
     );
 }

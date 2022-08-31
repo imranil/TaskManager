@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { createTask } from "../../actions/task";
 import './task.css';
@@ -9,6 +9,8 @@ import './task.css';
 const CreateTask = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const priorities = useSelector(state => state.tasks.priorities)
+    const statuses = useSelector(state => state.tasks.statuses)
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [priority, setPriority] = useState('')
@@ -35,16 +37,11 @@ const CreateTask = () => {
                         <textarea value={description} onChange={(event) => setDescription(event.target.value)} name="description" placeholder="Описание" rows="5" />
                         <select value={priority} onChange={(event) => setPriority(event.target.value)} name="priority">
                             <option value="" disabled>Приоритет</option>
-                            <option value="low">Низкий</option>
-                            <option value="medium">Средний</option>
-                            <option value="high">Высокий</option>
+                            {Object.entries(priorities).map((priority, key) => <option key={key} value={priority[0]}>{priority[1]}</option>)}
                         </select>
                         <select value={status} onChange={(event) => setStatus(event.target.value)} name="status">
                             <option value="" disabled>Статус</option>
-                            <option value="to do">Сделать</option>
-                            <option value="in progress">В процессе</option>
-                            <option value="closed">Завершен</option>
-                            <option value="frozen">Заморожен</option>
+                            {Object.entries(statuses).map((status, key) => <option key={key} value={status[0]}>{status[1]}</option>)}
                         </select>
                         <input value={deadline} onChange={(event) => setDeadline(event.target.value)} name="deadline" type="date" />
                     </div>

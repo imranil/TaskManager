@@ -5,11 +5,17 @@ const taskSlice = createSlice({
     name: 'task',
     initialState: {
         tasks: [],
+        foundTasks: [],
         currentTask: null,
+        priorities: { 'low': 'Низкий', 'medium': 'Средний', 'high': 'Высокий' },
+        statuses: { 'to do': 'Сделать', 'in progress': 'В процессе', 'closed': 'Завершён', 'frozen': 'Заморожен' }
     },
     reducers: {
         setTasks(state, action) {
             state.tasks = action.payload
+        },
+        setFoundTasks(state, action) {
+            state.foundTasks = action.payload
         },
         setCurrentTask(state, action) {
             state.currentTask = action.payload
@@ -22,4 +28,4 @@ const taskSlice = createSlice({
 })
 
 export default taskSlice.reducer
-export const { setTasks, setCurrentTask, deleteTask } = taskSlice.actions
+export const { setTasks, setCurrentTask, setFoundTasks, deleteTask } = taskSlice.actions

@@ -4,7 +4,7 @@ import { createSlice } from "@reduxjs/toolkit"
 const appSlice = createSlice({
     name: 'app',
     initialState: {
-        loader: false
+        loader: false,
     },
     reducers: {
         showLoader(state) {

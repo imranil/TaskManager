@@ -1,4 +1,4 @@
-import { configureStore, combineReducers, de } from '@reduxjs/toolkit';
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import userSlice from "./userSlice";
 import appSlice from './appSlice';
 import calendarSlice from './calendarSlice';

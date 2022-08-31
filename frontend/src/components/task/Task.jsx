@@ -9,6 +9,8 @@ const Task = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const task = useSelector(state => state.tasks.currentTask)
+    const priorities = useSelector(state => state.tasks.priorities)
+    const statuses = useSelector(state => state.tasks.statuses)
     const [priority, setPriority] = useState('')
     const [status, setStatus] = useState('')
 
@@ -17,14 +19,14 @@ const Task = () => {
         navigate('/calendar')
     }
 
-    function changePriorityHandler(event) {
-        setPriority(event.target.value)
-        dispatch(updateTask({...task, priority: event.target.value}))
+    function changePriorityHandler(value) {
+        setPriority(value)
+        dispatch(updateTask({ ...task, priority: value }))
     }
 
-    function changeStatusHandler(event) {
-        setStatus(event.target.value)
-        dispatch(updateTask({...task, status: event.target.value}))
+    function changeStatusHandler(value) {
+        setStatus(value)
+        dispatch(updateTask({ ...task, status: value }))
     }
 
     return (
@@ -42,7 +44,7 @@ const Task = () => {
                         </div>
                         <div className="data-row">
                             <div className="title">Статус:</div>
-                            <div className="value">{task.status}</div>
+                            <div className="value">{statuses[task.status]}</div>
                         </div>
                         <div className="data-row">
                             <div className="title">Дата добавления:</div>
@@ -58,20 +60,15 @@ const Task = () => {
                         </div>
                     </div>
                     <div className="input-row">
-                        <select value={priority} onChange={(event) => changePriorityHandler(event)} name="priority">
+                        <select value={priority} onChange={(event) => changePriorityHandler(event.target.value)} name="priority">
                             <option value="" disabled>Приоритет</option>
-                            <option value="low">Низкий</option>
-                            <option value="medium">Средний</option>
-                            <option value="high">Высокий</option>
+                            {Object.entries(priorities).map((priority, key) => <option key={key} value={priority[0]}>{priority[1]}</option>)}
                         </select>
                     </div>
                     <div className="input-row">
-                        <select value={status} onChange={(event) => changeStatusHandler(event)} name="status">
+                        <select value={status} onChange={(event) => changeStatusHandler(event.target.value)} name="status">
                             <option value="" disabled>Статус</option>
-                            <option value="to do">Сделать</option>
-                            <option value="in progress">В процессе</option>
-                            <option value="closed">Завершен</option>
-                            <option value="frozen">Заморожен</option>
+                            {Object.entries(statuses).map((status, key) => <option key={key} value={status[0]}>{status[1]}</option>)}
                         </select>
                     </div>
                     <div className="input-row">

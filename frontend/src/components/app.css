@@ -243,6 +243,25 @@ select {
 }
 
 
+.low {
+    color: var(--light-100);
+    background-color: var(--green-100);
+    border-radius:.5em;
+    padding: 0 0.25em;
+}
+.medium {
+    color: var(--light-100);
+    background-color: var(--orange-100);
+    border-radius:.5em;
+    padding: 0 0.25em;
+}
+.high {
+    color: var(--light-100);
+    background-color: var(--red-100);
+    border-radius:.5em;
+    padding: 0 0.25em;
+}
+
 .container {
     width: 100%;
     padding: 0 1em;
