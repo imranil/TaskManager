@@ -3,6 +3,7 @@ Calendar2.0<br/>
 
 ## Функции
 + Регистрация/авторизация<br/>
++ Добавление/удаление аватарки<br/>
 + Генерация календаря<br/>
 + Переход по месяца<br/>
 + Получение задач для текущего месяца и года<br/>
@@ -26,3 +27,6 @@ Calendar2.0<br/>
 <br/>
 Поиск задач<br/>
 ![image](https://user-images.githubusercontent.com/61901497/187593996-785366d7-d5f6-437b-8a3d-09877fbc1d02.png)<br/>
+<br/>
+Профиль пользователя<br/>
+![image](https://user-images.githubusercontent.com/61901497/187715459-c26428aa-23ca-4b2f-947a-bd3ce83793b3.png)<br/>
