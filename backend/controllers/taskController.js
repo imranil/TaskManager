@@ -113,13 +113,15 @@ class TaskController {
     async getCounts(req, res) {
         try {
             const counts = await sequelize.query(
-                `SELECT DISTINCT 
+                `SELECT
+                    month(deadline) AS 'month',
                     count(if(status='in progress', 1, NULL)) AS 'inProgressCounts',
                     count(if(status='closed', 1, NULL)) AS 'closedCounts',
                     count(if(status='frozen', 1, NULL)) AS 'frozenCounts'
                 FROM tasks, usertasks 
                 WHERE tasks.id=usertasks.taskId AND usertasks.userId=${req.user.id}
-                GROUP BY usertasks.userId`, {
+                GROUP BY month
+                ORDER BY month ASC`, {
                 type: QueryTypes.SELECT,
             })
             return res.json(counts);

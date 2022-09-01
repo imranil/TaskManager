@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { getTasks } from "../../actions/task";
+import { getTasks, getCounts } from "../../actions/task";
 import MonthControl from "./month/MonthControl";
 import Month from "./month/Month";
 import './calendar.css';
@@ -16,6 +16,7 @@ const Calendar = () => {
 
     useEffect(() => {
         dispatch(getTasks({startDate, endDate}))
+        dispatch(getCounts())
     }, [currentMonth, currentYear]);
 
     if (loader) {

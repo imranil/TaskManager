@@ -6,6 +6,7 @@ const calendarSlice = createSlice({
     initialState: {
         currentMonth: new Date().getMonth(),
         currentYear: new Date().getFullYear(),
+        nameMonth: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
         daysOfWeek: {'ПН': 'Понедельник', 'ВТ': 'Вторник', 'СР': 'Среда', 'ЧТ': 'Четверг', 'ПТ': 'Пятница', 'СБ': 'Суббота', 'ВС': 'Воскресенье'},
     },
     reducers: {

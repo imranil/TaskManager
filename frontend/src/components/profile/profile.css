@@ -66,3 +66,10 @@
     justify-content: space-between;
     gap:1em;
 }
+
+.profile-content > .bar-chart{
+    width: 100%;
+    border: 1em solid var(--neutral-100);
+    border-radius: 1em;
+    background-color: var(--neutral-100);
+}
