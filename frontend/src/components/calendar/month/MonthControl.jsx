@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentMonth, setCurrentYear } from "../../../reducers/calendarSlice";
-import CreateTaskPopup from "./Popup";
+import CreateTask from "./CreateTask";
 
 const MonthControl = () => {
     const dispatch = useDispatch();
     const currentMonth = useSelector(state => state.calendar.currentMonth)
     const currentYear = useSelector(state => state.calendar.currentYear)
     const nameMonth = useSelector(state => state.calendar.nameMonth)
-    const [displayPopup, setDisplayPopup] = useState('none')
+    const [modalActive, setModalActive] = useState(false)
 
     function prevMonth() {
         if (currentMonth === 0) {
@@ -49,8 +49,8 @@ const MonthControl = () => {
                 </button>
                 <button className="extra-button" onClick={todayMonth}>Сегодня</button>
             </div>
-            <button onClick={() => setDisplayPopup('flex')} className="main-button">Добавить</button>
-            <CreateTaskPopup displayPopup={displayPopup} setDisplayPopup={setDisplayPopup} />
+            <button onClick={() => setModalActive(true)} className="main-button">Добавить</button>
+            <CreateTask modalActive={modalActive} setModalActive={setModalActive} />
         </div>
     );
 }

@@ -22,7 +22,7 @@ ChartJS.register(
 
 export default function BarChart() {
     const nameMonth = useSelector(state => state.calendar.nameMonth)
-    const counts = useSelector(state => state.tasks.tasksStatusCounts)
+    const counts = useSelector(state => state.tasks.tasksCounts)
 
     const monthNum = counts.map(item => item.month)
     const labels = nameMonth.filter((elem, index) => {

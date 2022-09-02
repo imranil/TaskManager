@@ -16,11 +16,13 @@
     gap: 2em;
     align-items: center;
 }
+
 .month-control>span {
     font-size: 1.5em;
     line-height: 1.5em;
 }
-.month-control > button > svg {
+
+.month-control>button>svg {
     width: 1.5em;
     height: 1.5em;
 }
@@ -38,25 +40,29 @@
     padding: 0.5em;
     height: 8em;
     outline: 1px solid var(--dark-100);
-    background-color:  var(--light-100);
+    background-color: var(--light-100);
     overflow-x: hidden;
     overflow-y: auto;
 }
+
 .day::-webkit-scrollbar {
     width: 0.5em;
 }
+
 .day::-webkit-scrollbar-thumb {
     background-color: var(--neutral-200);
     border-radius: 1em;
 }
+
 .day:active {
     box-shadow: 0px 0px 10px 2px var(--orange-200);
 }
 
-.today > .heading {
+.today>.heading {
     color: var(--orange-100);
     font-weight: 700;
 }
+
 .week-day {
     flex: 1;
     display: flex;
@@ -78,58 +84,48 @@
     width: -webkit-fill-available;
 }
 
-.task-list > .item {
+.task-list>.item {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    gap:.25em;
+    gap: .25em;
     padding: 0 .2em;
     width: 100%;
     font-size: 1em;
 }
+
 .item:hover {
     cursor: pointer;
 }
 
-.create-popup {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: rgba(0, 0, 0, .2);
+.create-task {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    gap: 1em;
 }
 
-.create-popup > .popup-content {
-    position: absolute;
-    top: 5em;
-}
-
-.create-popup > .popup-content > .content {
-    background-color: var(--light-100);
-}
-
-.create-popup > .popup-content > .content > .header {
+.create-task>.header {
     justify-content: space-between;
 }
 
-.create-popup > .popup-content > .content > .header > .title {
+.create-task>.header>.title {
     font-size: 1.5em;
     font-weight: 500;
 }
 
-.create-popup > .popup-content > .content > .header > .close-button{
+.create-task>.header>.close-button {
     background-color: rgba(231, 68, 68, .7);
 }
-.create-popup > .popup-content > .content > .header > .close-button:hover{
+
+.create-task>.header>.close-button:hover {
     background-color: var(--red-100);
 }
-.create-popup > .popup-content > .content > .header > .close-button > svg{
+
+.create-task>.header>.close-button>svg {
     width: 1em;
     height: 1em;
 }
-.create-popup > .popup-content > .content > .header > .close-button > svg > path{
+
+.create-task>.header>.close-button>svg>path {
     fill: var(--light-100);
 }

@@ -7,6 +7,7 @@ import { getCounts } from "../../actions/task";
 import { API_URL } from "../../config";
 import avatarLogo from "../../assets/img/avatar.svg";
 import Search from "./search/Search";
+import Popup from "../popup/Popup";
 
 
 const Navbar = () => {
@@ -33,40 +34,30 @@ const DropDownMenu = () => {
     const navigate = useNavigate()
     const currentUser = useSelector(state => state.user.currentUser)
     const avatar = currentUser.avatar ? `${API_URL + currentUser.avatar}` : avatarLogo
-    const [viewDropdown, setViewDropdown] = useState(false)
-    const [dropdownCoordinates, setDropdownCoordinates] = useState({top: 0, left: 0})
+    const [popupActive, setPopupActive] = useState(false)
+    const [popupCoords, setPopupCoords] = useState()
 
     function toggleClickHandler(event) {
         const elementCoords = event.target.getBoundingClientRect()
-        setDropdownCoordinates({ top: elementCoords.top + elementCoords.height, left: elementCoords.left, width: elementCoords.width})
-        setViewDropdown(!viewDropdown)
-    }
-
-    function viewDropdownHandler(event) {
-        event.preventDefault()
-        event.stopPropagation()
-        const target = event.target
-        if (!target.closest('.dropdown-content')) {
-            setViewDropdown(false)
-        }
+        setPopupCoords({ top: elementCoords.top + elementCoords.height + 10, left: elementCoords.left, width: elementCoords.width })
+        setPopupActive(!popupActive)
     }
 
     function redirectHandler() {
         dispatch(getCounts())
         navigate(`/profile`)
-        setViewDropdown(false)
+        setPopupActive(false)
     }
 
     return (
         <div className="dropdown">
             <a className="dropdown-control" onClick={(event) => toggleClickHandler(event)}><img src={avatar} /> {currentUser.firstName}</a>
-            {viewDropdown &&
-                <div className="dropdown-area" onClick={(event) => viewDropdownHandler(event)} >
-                    <div className="dropdown-content" style={{ top: dropdownCoordinates.top + 'px', left: dropdownCoordinates.left + 'px', width: dropdownCoordinates.width }}>
-                        <a href={null} onClick={(event => redirectHandler(event))} className="dropdown-item">Профиль</a>
-                        <a href={null} onClick={() => dispatch(logout())} className="dropdown-item">Выход</a>
-                    </div>
-                </div>}
+            <Popup active={popupActive} setActive={setPopupActive} coords={popupCoords} bcTransparent={true} >
+                <div className="dropdown-content">
+                    <a href={null} onClick={(event => redirectHandler(event))} className="dropdown-item">Профиль</a>
+                    <a href={null} onClick={() => dispatch(logout())} className="dropdown-item">Выход</a>
+                </div>
+            </Popup>
         </div>
     );
 }

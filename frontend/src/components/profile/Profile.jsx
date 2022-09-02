@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { uploadAvatar, deleteAvatar } from "../../actions/user";
 import { API_URL } from "../../config";
@@ -9,9 +8,9 @@ import './profile.css'
 const Profile = () => {
     const dispatch = useDispatch()
     const user = useSelector(state => state.user.currentUser)
-    const counts = useSelector(state => state.tasks.tasksStatusCounts)
+    const counts = useSelector(state => state.tasks.tasksCounts)
 
-    function inputChangeHanfler(event) {
+    function inputChangeHandler(event) {
         const file = event.target.files[0]
         dispatch(uploadAvatar(file))
     }
@@ -30,7 +29,7 @@ const Profile = () => {
                         {user.avatar
                             ? <button onClick={() => dispatch(deleteAvatar())} className="main-button">Удалить аватарку</button>
                             : <React.Fragment>
-                                <input onChange={event => inputChangeHanfler(event)} accept="image/*" type="file" id="input-file" placeholder="Выберите файл" />
+                                <input onChange={event => inputChangeHandler(event)} accept="image/*" type="file" id="input-file" placeholder="Выберите файл" />
                                 <label className="main-button" htmlFor="input-file"></label>
                             </React.Fragment>
                         }

@@ -1,27 +1,5 @@
 
 
-.create-task {
-    margin-top: 5em;
-}
-
-.create-task > .header {
-    font-size: 1.5em;
-    justify-content: center;
-    margin: 0.5em 0;
-}
-
-.create-task > .body > textarea {
-    resize:none;
-    overflow-y: auto;
-}
-.create-task > .body > textarea::-webkit-scrollbar {
-    width: 0.5em;
-}
-.create-task > .body > textarea::-webkit-scrollbar-thumb {
-    background-color: var(--neutral-200);
-    border-radius: 1em;
-}
-
 .task-header {
     display: flex;
     flex-direction: column;

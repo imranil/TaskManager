@@ -1,6 +1,6 @@
 import axios from "axios";
 import { hideLoader, showLoader } from "../reducers/appSlice";
-import { setCurrentTask, deleteTask, setTasks, setFoundTasks, setTasksStatusCounts } from "../reducers/taskSlice";
+import { setCurrentTask, deleteTask, setTasks, setFoundTasks, setTasksCounts } from "../reducers/taskSlice";
 import { API_URL } from "../config";
 
 
@@ -103,7 +103,7 @@ export function getCounts() {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 }
             })
-            dispatch(setTasksStatusCounts(response.data))
+            dispatch(setTasksCounts(response.data))
         } catch (e) {
             alert(e.response.data.message)
         }
