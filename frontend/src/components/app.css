@@ -226,6 +226,14 @@ select {
     font-size: 1.25em;
 }
 
+.hedaer > .close-button {
+    background-color: var(--red-100);
+}
+.hedaer > .close-button > svg {
+    width: 1.5em;
+    height: 1.5em;
+}
+
 .body {
     display: flex;
     flex-direction: column;

@@ -1,8 +1,8 @@
 @import url('../../utils/colors.css');
 
 .profile-header {
-    margin-top: 2em;
-    margin-bottom: 1.5em;
+    margin-top: 1.5em;
+    margin-bottom: 1em;
     font-size: 2em;
     font-weight: 600;
 }

@@ -21,14 +21,14 @@ const Popup = ({ setViewPopup, popupCoordinates }) => {
 
     function viewPopupHandler(event) {
         const target = event.target
-        if(!target.closest('.popup-content')) {
+        if(!target.closest('.popup-search')) {
             setViewPopup(false)
         }
     }
 
     return (
         <div className="search-popup" onClick={(event) => viewPopupHandler(event)}>
-            <div className="popup-content" style={{ top: popupCoordinates.top + 'px', left: popupCoordinates.left + 'px' }}>
+            <div className="popup-search" style={{ top: popupCoordinates.top + 'px', left: popupCoordinates.left + 'px', width: popupCoordinates.width + 'px' }}>
                 <div className="list">
                     {tasks.length !== 0 
                         ? tasks.map(task => 

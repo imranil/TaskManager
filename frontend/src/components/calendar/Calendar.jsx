@@ -9,6 +9,7 @@ import './calendar.css';
 const Calendar = () => {
     const dispatch = useDispatch()
     const loader = useSelector(state => state.app.loader)
+    const currentTask = useSelector(state => state.tasks.currentTask)
     const currentMonth = useSelector(state => state.calendar.currentMonth)
     const currentYear = useSelector(state => state.calendar.currentYear)
     const startDate = new Date(currentYear, currentMonth, 1).toLocaleDateString('en-CA') // yyyy-mm-dd
@@ -16,8 +17,7 @@ const Calendar = () => {
 
     useEffect(() => {
         dispatch(getTasks({startDate, endDate}))
-        dispatch(getCounts())
-    }, [currentMonth, currentYear]);
+    }, [currentMonth, currentYear, currentTask]);
 
     if (loader) {
         return (

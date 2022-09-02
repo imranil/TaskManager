@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentMonth, setCurrentYear } from "../../../reducers/calendarSlice";
-import ucFirst from '../../../utils/ucFirst'
+import CreateTaskPopup from "./Popup";
 
 const MonthControl = () => {
     const dispatch = useDispatch();
     const currentMonth = useSelector(state => state.calendar.currentMonth)
     const currentYear = useSelector(state => state.calendar.currentYear)
     const nameMonth = useSelector(state => state.calendar.nameMonth)
+    const [displayPopup, setDisplayPopup] = useState('none')
 
     function prevMonth() {
         if (currentMonth === 0) {
@@ -46,8 +47,10 @@ const MonthControl = () => {
                         <path d="M11.1158 6.52067L2.24034 0.462624C1.83045 0.182657 1.41746 0.0344849 1.07419 0.0344849C0.410533 0.0344849 0 0.565532 0 1.45444V14.5476C0 15.4355 0.410015 15.9655 1.07212 15.9655C1.41591 15.9655 1.82231 15.8172 2.2331 15.5365L11.1127 9.47857C11.6838 9.08834 12 8.56322 12 7.99929C12.0001 7.43575 11.6875 6.91076 11.1158 6.52067Z" fill="#6B6B6B" />
                     </svg>
                 </button>
+                <button className="extra-button" onClick={todayMonth}>Сегодня</button>
             </div>
-            <button className="extra-button" onClick={todayMonth}>Сегодня</button>
+            <button onClick={() => setDisplayPopup('flex')} className="main-button">Добавить</button>
+            <CreateTaskPopup displayPopup={displayPopup} setDisplayPopup={setDisplayPopup} />
         </div>
     );
 }

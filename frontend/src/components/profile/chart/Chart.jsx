@@ -25,12 +25,11 @@ export default function BarChart() {
     const counts = useSelector(state => state.tasks.tasksStatusCounts)
 
     const monthNum = counts.map(item => item.month)
-    const labels = nameMonth.map((elem, index) => {
+    const labels = nameMonth.filter((elem, index) => {
         if (monthNum.includes(index + 1)) {
             return nameMonth[index]
         }
-    }).filter(item => item)
-    console.log(labels, monthNum)
+    })
 
     const options = {
         responsive: true,

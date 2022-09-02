@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
-import { createTask } from "../../actions/task";
-import './task.css';
+import { createTask } from "../../../actions/task";
+import '../calendar.css';
 
 
 
-const CreateTask = () => {
+const CreateTaskPopup = ({ displayPopup, setDisplayPopup }) => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const priorities = useSelector(state => state.tasks.priorities)
@@ -25,12 +25,23 @@ const CreateTask = () => {
         navigate(`/calendar`)
     }
 
+    function closeClickHandler(event) {
+        event.preventDefault()
+        event.stopPropagation()
+        setDisplayPopup('none')
+    }
+
     return (
-        <div className="container">
-            <div className="row">
-                <form onSubmit={(event) => submitHandler(event)} className="create-task content">
+        <div className="create-popup" style={{ display: displayPopup }}>
+            <div className="popup-content">
+                <form onSubmit={(event) => submitHandler(event)} className="content">
                     <div className="header">
-                        Создание задачи
+                        <div className="title">Созадние задачи</div>
+                        <button onClick={(event) => closeClickHandler(event)} className="button-icon close-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 101 101">
+                                <path d="M83.9 17.1c-.9-.9-2.5-.9-3.4 0l-30 30-30-30c-.9-.9-2.5-.9-3.4 0s-.9 2.5 0 3.4l30 30-30 30c-.9.9-.9 2.5 0 3.4.5.5 1.1.7 1.7.7.6 0 1.2-.2 1.7-.7l30-30 30 30c.5.5 1.1.7 1.7.7.6 0 1.2-.2 1.7-.7.9-.9.9-2.5 0-3.4l-30-30 30-30c.9-.9.9-2.4 0-3.4z" />
+                            </svg>
+                        </button>
                     </div>
                     <div className="body">
                         <input value={name} onChange={(event) => setName(event.target.value)} name="name" type="text" placeholder="Название" />
@@ -55,4 +66,4 @@ const CreateTask = () => {
 }
 
 
-export default CreateTask;
+export default CreateTaskPopup;

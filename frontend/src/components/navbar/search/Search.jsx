@@ -14,7 +14,7 @@ const Search = () => {
 
     function setCoordinatesHandler(event) {
         const elementCoords = event.target.getBoundingClientRect()
-        setPopupCoordinates({ top: elementCoords.top + elementCoords.height + 15, left: elementCoords.left})
+        setPopupCoordinates({ top: elementCoords.top + elementCoords.height + 15, left: elementCoords.left, width: elementCoords.width})
     }
 
     function searchChangeHandler(event) {

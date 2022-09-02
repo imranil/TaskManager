@@ -6,6 +6,7 @@
     padding: 1em 0;
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     gap: 2em;
     align-items: center;
 }
@@ -88,4 +89,47 @@
 }
 .item:hover {
     cursor: pointer;
+}
+
+.create-popup {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, .2);
+    display: flex;
+    justify-content: center;
+}
+
+.create-popup > .popup-content {
+    position: absolute;
+    top: 5em;
+}
+
+.create-popup > .popup-content > .content {
+    background-color: var(--light-100);
+}
+
+.create-popup > .popup-content > .content > .header {
+    justify-content: space-between;
+}
+
+.create-popup > .popup-content > .content > .header > .title {
+    font-size: 1.5em;
+    font-weight: 500;
+}
+
+.create-popup > .popup-content > .content > .header > .close-button{
+    background-color: rgba(231, 68, 68, .7);
+}
+.create-popup > .popup-content > .content > .header > .close-button:hover{
+    background-color: var(--red-100);
+}
+.create-popup > .popup-content > .content > .header > .close-button > svg{
+    width: 1em;
+    height: 1em;
+}
+.create-popup > .popup-content > .content > .header > .close-button > svg > path{
+    fill: var(--light-100);
 }
