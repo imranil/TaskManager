@@ -91,6 +91,10 @@ class TaskController {
         try {
             const searchName = req.query.search;
             const tasks = await Task.findAll({
+                limit: 10,
+                order: [
+                    ['deadline', 'ASC']
+                ],
                 include: {
                     model: User,
                     where: {
@@ -101,7 +105,7 @@ class TaskController {
                     name: {
                         [Op.like]: `%${searchName}%`
                     }
-                }
+                },
             })
             return res.json(tasks);
         } catch (e) {
