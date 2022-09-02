@@ -10,7 +10,7 @@ Calendar2.0<br/>
 + Создание, чтение, изменение, удаление задачи<br/>
 + Переход на страницу задачи<br/>
 + Поиск задач по названию<br/>
-+ Запрос и отображение кол-ва задач по месяцам<br/>
++ Отображение гистограммы с кол-вом задач по месяцам<br/>
 
 ## Скриншоты
 
@@ -30,4 +30,4 @@ Calendar2.0<br/>
 ![image](https://user-images.githubusercontent.com/61901497/187594210-40f65338-9e85-420e-bc7d-156c57c5b9b0.png)<br/>
 <br/>
 **Поиск задач**<br/>
-![image](https://user-images.githubusercontent.com/61901497/188057244-e39b2dc9-b88c-4a8c-a594-a125956c17c9.png)<br/>
+![image](https://user-images.githubusercontent.com/61901497/188127354-25a2d627-1429-469f-9411-786b4e89df79.png)<br/>
