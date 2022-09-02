@@ -94,7 +94,7 @@ nav a.active {
     flex-direction: column;
 }
 
-.dropdown-content a {
+.dropdown-item {
     text-decoration: none;
     padding: .5em .5em;
     font-size: 1.15em;
@@ -107,15 +107,18 @@ nav a.active {
     overflow-y: auto;
     max-height: 15em;
 }
+
 .list::-webkit-scrollbar {
     position: absolute;
     right: -1em;
     width: 0.5em;
 }
+
 .list::-webkit-scrollbar-thumb {
     background-color: var(--neutral-200);
     border-radius: 1em;
 }
+
 .item {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -124,6 +127,23 @@ nav a.active {
     padding: 0.25em 0.75em;
     font-size: 1.5em;
 }
+
 .item:hover {
     background: var(--neutral-100);
 }
+
+@media (max-width:576px) {
+    nav {
+        flex-wrap: wrap-reverse;
+    }
+}
+
+@media (max-width:768px) {
+    nav {
+        flex-wrap: wrap-reverse;
+    }
+}
+
+@media (max-width:992px) {}
+
+@media (max-width:1200px) {}

@@ -11,12 +11,17 @@
     display: flex;
     flex-direction: row;
     gap: 1em;
+    margin-bottom: 1em;
+}
+
+.profile-content > .info {
+    flex-grow: 1;
 }
 
 .avatar-content {
     display: flex;
     flex-direction: column;
-    gap:1em;
+    gap: 1em;
     border: 1em solid var(--neutral-100);
     border-radius: 1em;
     background-color: var(--neutral-100);
@@ -30,7 +35,7 @@
     background: linear-gradient(45deg, var(--orange-100), var(--blue-200));
 }
 
-.avatar > img {
+.avatar>img {
     width: inherit;
     border-radius: .75em;
 }
@@ -40,9 +45,11 @@
     filter: alpha(opacity=0);
     opacity: 0;
 }
+
 .avatar-content>label {
     text-align: center;
 }
+
 .avatar-content>label::after {
     content: 'Выберите файл';
     padding-right: 2em;
@@ -51,7 +58,8 @@
     z-index: 300;
 }
 
-.contacts, .numbers {
+.contacts,
+.numbers {
     display: flex;
     flex-direction: column;
     gap: 1em;
@@ -61,15 +69,69 @@
 }
 
 
-.contacts>.data-row, .numbers>.data-row {
+.contacts>.data-row,
+.numbers>.data-row {
     display: flex;
     justify-content: space-between;
-    gap:1em;
+    gap: 1em;
 }
 
-.profile-content > .bar-chart{
-    width: 100%;
+.bar-chart {
+    flex-grow: 3;
+    width: max-content;
     border: 1em solid var(--neutral-100);
     border-radius: 1em;
     background-color: var(--neutral-100);
+}
+.bar-chart > canvas {
+    width: max-content;
+    height: auto;
+}
+
+@media (max-width:576px) {
+    .profile-content {
+        flex-wrap: wrap;
+    }
+
+    .profile-content > .info {
+        flex-grow: 1;
+    }
+
+    .bar-chart {
+        flex-grow: 0;
+    }
+}
+
+@media (max-width:768px) {
+    .profile-content {
+        flex-wrap: wrap;
+    }
+    
+    .profile-content> .info {
+        flex-grow: 1;
+    }
+
+    .bar-chart {
+        flex-grow: 1;
+    }
+}
+
+@media (max-width:992px) {
+    .profile-content> .info {
+        flex-grow: 1;
+    }
+
+    .bar-chart {
+        flex-grow: 3;
+        overflow-x: auto;
+    }
+}
+
+@media (max-width:1200px) {
+    .profile-content> .info {
+        flex-grow: 1;
+    }
+    .bar-chart {
+        flex-grow: 3;
+    }
 }
