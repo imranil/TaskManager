@@ -6,7 +6,7 @@ import useInput from "../../utils/useInput";
 
 const Login = () => {
     const email = useInput('', {isEmpty: true, isEmail: true})
-    const password = useInput('', {minLength: 4})
+    const password = useInput('', {isEmpty: true, minLength: 4})
     const dispatch = useDispatch();
 
     return (

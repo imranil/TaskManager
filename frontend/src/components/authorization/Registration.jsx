@@ -8,8 +8,8 @@ const Registration = () => {
     const email = useInput('', {isEmpty: true, isEmail: true})
     const firstName = useInput('', {isEmpty: true})
     const lastName =  useInput('', {isEmpty: true})
-    const password = useInput('', {minLength: 4})
-    const password2 = useInput('', {minLength: 4})
+    const password = useInput('', {isEmpty: true, minLength: 4})
+    const password2 = useInput('', {isEmpty: true, minLength: 4})
 
     function registrationHandler() {
         registration(email.value, firstName.value, lastName.value, password.value)
@@ -33,11 +33,11 @@ const Registration = () => {
             </div>
             <div className="footer">
                 <button disabled={
-                    !email.value || 
-                    !firstName.value || 
-                    !lastName.value || 
-                    !password.value || 
-                    !password2.value || 
+                    !email.inputValid || 
+                    !firstName.inputValid || 
+                    !lastName.inputValid || 
+                    !password.inputValid || 
+                    !password2.inputValid || 
                     password.value != password2.value} className="main-button" onClick={registrationHandler}>Зарегистрироваться</button>
             </div>
         </React.Fragment>
