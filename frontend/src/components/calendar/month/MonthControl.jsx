@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentMonth, setCurrentYear } from "../../../reducers/calendarSlice";
-import CreateTask from "./CreateTask";
+import CreateTask from "../../task/CreateTask";
 
 const MonthControl = () => {
     const dispatch = useDispatch();

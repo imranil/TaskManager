@@ -111,6 +111,10 @@
         flex-grow: 1;
     }
 
+    .avatar {
+        flex: 1
+    }
+
     .bar-chart {
         flex-grow: 1;
     }

@@ -98,38 +98,6 @@
     cursor: pointer;
 }
 
-.create-task {
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-}
-
-.create-task>.header {
-    justify-content: space-between;
-}
-
-.create-task>.header>.title {
-    font-size: 1.5em;
-    font-weight: 500;
-}
-
-.create-task>.header>.close-button {
-    background-color: rgba(231, 68, 68, .7);
-}
-
-.create-task>.header>.close-button:hover {
-    background-color: var(--red-100);
-}
-
-.create-task>.header>.close-button>svg {
-    width: 1em;
-    height: 1em;
-}
-
-.create-task>.header>.close-button>svg>path {
-    fill: var(--light-100);
-}
-
 
 @media (max-width:576px) {
     .top-row {

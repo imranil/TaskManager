@@ -241,7 +241,10 @@ select {
 .body {
     display: flex;
     flex-direction: column;
-    gap: 1em;
+}
+
+.body>input, .body>textarea, .body>select {
+    margin-top: 1em;
 }
 
 .body>input {
@@ -286,6 +289,11 @@ select {
     flex-direction: row;
     justify-content: center;
     align-items: center;
+}
+
+.has-error {
+    font-size: .8em;
+    color: var(--red-100);
 }
 
 @media (min-width:576px) {

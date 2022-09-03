@@ -44,7 +44,6 @@ const DropDownMenu = () => {
     }
 
     function redirectHandler() {
-        dispatch(getCounts())
         navigate(`/profile`)
         setPopupActive(false)
     }

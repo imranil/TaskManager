@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { getCounts } from "../../actions/task";
 import { uploadAvatar, deleteAvatar } from "../../actions/user";
 import { API_URL } from "../../config";
 import BarChart from "./chart/Chart";
@@ -9,6 +11,10 @@ const Profile = () => {
     const dispatch = useDispatch()
     const user = useSelector(state => state.user.currentUser)
     const counts = useSelector(state => state.tasks.tasksCounts)
+
+    useEffect(() => {
+        dispatch(getCounts())
+    }, [])
 
     function inputChangeHandler(event) {
         const file = event.target.files[0]
