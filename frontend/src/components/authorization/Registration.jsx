@@ -12,12 +12,7 @@ const Registration = () => {
     const password2 = useInput('', {minLength: 4})
 
     function registrationHandler() {
-        if (password.value === password2.value) {
-            registration(email.value, firstName.value, lastName.value, password.value)
-        } else {
-            password = '',
-            password2 = ''
-        }
+        registration(email.value, firstName.value, lastName.value, password.value)
     }
 
     return (
