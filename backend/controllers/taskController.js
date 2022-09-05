@@ -59,20 +59,25 @@ class TaskController {
         try {
             const { id, priority, status } = req.body
             const task = await Task.findOne({
-                include: {
-                    model: User,
-                    where: {
-                        id: req.user.id
-                    },
-                    attributes: ['firstName'],
+                attributes: {
+                    include: [
+                        [
+                            sequelize.literal(`(
+                                SELECT GROUP_CONCAT(users.firstName)
+                                FROM users
+                                INNER JOIN usertasks ON usertasks.userId=users.id 
+                                INNER JOIN tasks ON usertasks.taskId=tasks.id AND tasks.id=${id}
+                                WHERE usertasks.taskId IN (SELECT usertasks.taskId FROM usertasks INNER JOIN users ON users.id=usertasks.userId WHERE users.id=${req.user.id})
+                            )`),
+                            'usersName'
+                        ]
+                    ]
                 },
-                where: {
-                    id: id
-                }
+                where: { id: id },
             })
-            await task.update({
-                priority: priority,
-                status: status,
+            await task.update({ 
+                priority: priority, 
+                status: status, 
             })
             await task.save()
             return res.json(task);
@@ -92,7 +97,7 @@ class TaskController {
                 INNER JOIN tasks ON usertasks.taskId = tasks.id AND (tasks.name LIKE '%${searchName}%' OR tasks.description LIKE '%${searchName}%' OR tasks.deadline LIKE '%${searchName}%')
                 WHERE usertasks.taskId IN (SELECT usertasks.taskId FROM usertasks INNER JOIN users ON users.id = usertasks.userId WHERE users.id = ${req.user.id})
                 GROUP BY tasks.id
-                ORDER BY tasks.deadline DESC 
+                ORDER BY tasks.deadline DESC
                 LIMIT 10 `, {
                 type: QueryTypes.SELECT,
             })

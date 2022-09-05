@@ -5,6 +5,7 @@ module.exports = (sequelize, type) => {
             allowNull: false,
             references: {
                 model: 'users',
+                onDelete: 'CASCADE',
                 key: "id"
             }
         },
@@ -13,6 +14,7 @@ module.exports = (sequelize, type) => {
             allowNull: false,
             references: {
                 model: 'users',
+                onDelete: 'CASCADE',
                 key: "id"
             }
         },
@@ -21,6 +23,7 @@ module.exports = (sequelize, type) => {
             allowNull: false,
             references: {
                 model: 'tasks',
+                onDelete: 'CASCADE',
                 key: "id"
             }
         }
