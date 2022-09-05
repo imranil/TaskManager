@@ -8,7 +8,6 @@ import './calendar.css';
 
 const Calendar = () => {
     const dispatch = useDispatch()
-    const loader = useSelector(state => state.app.loader)
     const currentTask = useSelector(state => state.tasks.currentTask)
     const currentMonth = useSelector(state => state.calendar.currentMonth)
     const currentYear = useSelector(state => state.calendar.currentYear)
@@ -18,14 +17,6 @@ const Calendar = () => {
     useEffect(() => {
         dispatch(getTasks({startDate, endDate}))
     }, [currentMonth, currentYear, currentTask]);
-
-    if (loader) {
-        return (
-            <div className="loader">
-                <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
-            </div>
-        );
-    }
 
     return (
         <div className="container">

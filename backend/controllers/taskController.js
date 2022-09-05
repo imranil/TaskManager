@@ -19,19 +19,14 @@ class TaskController {
         try {
             const startDate = req.query.startDate;
             const endDate = req.query.endDate;
-            const tasks = await Task.findAll({
-                include: {
-                    model: User,
-                    where: {
-                        id: req.user.id
-                    },
-                    attributes: ['firstName'],
-                },
-                where: {
-                    deadline: {
-                        [Op.between]: [startDate, endDate]
-                    }
-                }
+            const tasks = await sequelize.query(
+                `SELECT tasks.*, GROUP_CONCAT(users.firstName) AS 'usersName'
+                FROM users
+                INNER JOIN usertasks ON usertasks.userId = users.id 
+                INNER JOIN tasks ON usertasks.taskId = tasks.id AND tasks.deadline BETWEEN '${startDate}' AND '${endDate}'
+                WHERE usertasks.taskId IN (SELECT usertasks.taskId FROM usertasks INNER JOIN users ON users.id = usertasks.userId WHERE users.id = ${req.user.id})
+                GROUP BY tasks.id`, {
+                type: QueryTypes.SELECT,
             })
             return res.json(tasks);
         } catch (e) {
@@ -90,22 +85,16 @@ class TaskController {
     async searchTasks(req, res) {
         try {
             const searchName = req.query.search;
-            const tasks = await Task.findAll({
-                limit: 10,
-                order: [
-                    ['deadline', 'ASC']
-                ],
-                include: {
-                    model: User,
-                    where: {
-                        id: req.user.id
-                    },
-                },
-                where: {
-                    name: {
-                        [Op.like]: `%${searchName}%`
-                    }
-                },
+            const tasks = await sequelize.query(
+                `SELECT tasks.*, GROUP_CONCAT(users.firstName) AS 'usersName'
+                FROM users
+                INNER JOIN usertasks ON usertasks.userId = users.id 
+                INNER JOIN tasks ON usertasks.taskId = tasks.id AND (tasks.name LIKE '%${searchName}%' OR tasks.description LIKE '%${searchName}%' OR tasks.deadline LIKE '%${searchName}%')
+                WHERE usertasks.taskId IN (SELECT usertasks.taskId FROM usertasks INNER JOIN users ON users.id = usertasks.userId WHERE users.id = ${req.user.id})
+                GROUP BY tasks.id
+                ORDER BY tasks.deadline DESC 
+                LIMIT 10 `, {
+                type: QueryTypes.SELECT,
             })
             return res.json(tasks);
         } catch (e) {

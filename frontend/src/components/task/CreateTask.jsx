@@ -34,7 +34,7 @@ const CreateTaskPopup = ({ modalActive, setModalActive }) => {
     }
 
     return (
-        <Popup active={modalActive} setActive={setModalActive}>
+        <Popup active={modalActive} setActive={setModalActive} coords={{top: '10em'}}>
             <form onSubmit={(event) => submitHandler(event)} className="create-task">
                 <div className="header">
                     <div className="title">Созадние задачи</div>

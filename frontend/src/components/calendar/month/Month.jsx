@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import { setCurrentTask } from "../../../reducers/taskSlice";
 
 const Month = () => {
+    const loader = useSelector(state => state.app.loader)
     const currentMonth = useSelector(state => state.calendar.currentMonth)
     const currentYear = useSelector(state => state.calendar.currentYear)
     const tasks = useSelector(state => state.tasks.tasks)
@@ -46,6 +47,15 @@ const Month = () => {
         let day = date.getDay();
         if (day === 0) day = 7;
         return day - 1;
+    }
+
+    
+    if (loader) {
+        return (
+            <div className="loader">
+                <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
+            </div>
+        );
     }
 
     return (

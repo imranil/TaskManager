@@ -47,6 +47,14 @@ nav>.search-area>svg>path {
     fill: gray;
 }
 
+.nav-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1.5em;
+}
+
 a {
     display: flex;
     align-items: center;
@@ -73,7 +81,8 @@ nav a.active {
     border: 1px solid var(--orange-100);
 }
 
-.dropdown {
+.dropdown,
+.invitations {
     position: relative;
 }
 

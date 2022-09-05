@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { removeTask, updateTask } from "../../actions/task";
+import SendInvitation from "../invitation/SendInvitation";
 import "./task.css"
 
 
@@ -56,23 +57,28 @@ const Task = () => {
                         </div>
                         <div className="data-row">
                             <div className="title">Участники:</div>
-                            <div className="value">{task.users.map(user => user.firstName)}</div>
+                            <div className="value">{task.usersName}</div>
                         </div>
                     </div>
-                    <div className="input-row">
+                    <div className="interaction-row">
                         <select value={priority} onChange={(event) => changePriorityHandler(event.target.value)} name="priority">
                             <option value="" disabled>Приоритет</option>
                             {Object.entries(priorities).map((priority, key) => <option key={key} value={priority[0]}>{priority[1]}</option>)}
                         </select>
                     </div>
-                    <div className="input-row">
+                    <div className="interaction-row">
                         <select value={status} onChange={(event) => changeStatusHandler(event.target.value)} name="status">
                             <option value="" disabled>Статус</option>
                             {Object.entries(statuses).map((status, key) => <option key={key} value={status[0]}>{status[1]}</option>)}
                         </select>
                     </div>
-                    <div className="input-row">
-                        <button onClick={() => removeTaskHandler()} className="main-button">Удалить</button>
+                    <div className="interaction-row">
+                        <SendInvitation taskId={task.id} />
+                    </div>
+                    <div className="interaction-row">
+                        <button onClick={() => removeTaskHandler()} className="main-button close-button">
+                            Удалить
+                        </button>
                     </div>
                 </div>
             </div>

@@ -13,7 +13,6 @@ const Login = () => {
         <React.Fragment>
             <div className="body">
                 <input value={email.value} onChange={e => email.onChange(e)} onBlur={e => email.onBlur(e)} name="email" type="text" placeholder="Электронная почта" />
-                {(email.isDirty && email.isEmpty) && <div className="has-error">Поле не может быть пустым</div>}
                 {(email.isDirty && email.emailError) && <div className="has-error">Поле должно содержать адрес электронной почты</div>}
                 <input value={password.value} onChange={e => password.onChange(e)} onBlur={e => password.onBlur(e)} name="password" type="password" placeholder="Пароль" />
                 {(password.isDirty && password.minLengthError) && <div className="has-error">Поле не может иметь меньше 4 символов</div>}

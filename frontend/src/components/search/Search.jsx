@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import Popup from "../../popup/Popup";
-import { searchTasks } from "../../../actions/task";
-import { setCurrentTask, setFoundTasks } from "../../../reducers/taskSlice";
+import Popup from "../popup/Popup";
+import { searchTasks } from "../../actions/task";
+import { setCurrentTask, setFoundTasks } from "../../reducers/taskSlice";
 
 
 const Search = () => {
@@ -17,10 +17,15 @@ const Search = () => {
     const [popupActive, setPopupActive] = useState(false)
     const [popupCoords, setPopupCoords] = useState({ top: 0, left: 0, width: 0 })
 
+    useEffect(() => {
+        if (!popupActive) {
+            dispatch(setFoundTasks([]))
+        }
+    }, [popupActive])
+
     function setPopupCoordsHandler(event) {
         const elementCoords = event.target.getBoundingClientRect()
         setPopupCoords({ top: elementCoords.top + elementCoords.height + 10, left: elementCoords.left, width: elementCoords.width })
-        console.log(popupCoords)
     }
 
     function searchChangeHandler(event) {
@@ -34,7 +39,6 @@ const Search = () => {
                 dispatch(searchTasks(value));
             }, 500, event.target.value))
         } else {
-            dispatch(setFoundTasks([]))
             setPopupActive(false)
         }
     }
@@ -42,7 +46,6 @@ const Search = () => {
     function redirectHandler(task) {
         dispatch(setCurrentTask(task))
         navigate(`/task/${task.id}`)
-        dispatch(setFoundTasks([]))
         setPopupActive(false)
     }
 

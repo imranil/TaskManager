@@ -1,0 +1,91 @@
+@import url('../../utils/colors.css');
+
+
+.invitations-content::-webkit-scrollbar {
+    position: absolute;
+    right: -1em;
+    width: 0.5em;
+}
+
+.invitations-content::-webkit-scrollbar-thumb {
+    background-color: var(--neutral-200);
+    border-radius: 1em;
+}
+
+.invitations-content {
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-height: 13.5em;
+}
+
+.invite-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    padding: 0.5em;
+}
+
+.invite-item:hover {
+    background: var(--neutral-100);
+}
+
+.invite-item>.title {
+    display: flex;
+    justify-content: space-between;
+}
+.invite-item>.title>.name {
+    font-size: 1.125em;
+    font-weight: 600;
+}
+.invite-item>.title>.date {
+    font-size: .875em;
+    font-weight: 600;
+    color: rgba(0, 0, 0, .5);
+}
+
+.invite-item>.description {
+    font-weight: 300;
+}
+
+.invite-item>.make-decision {
+    display: flex;
+    gap: 1em;
+}
+
+.invite-item>.make-decision:first-child button {
+    background-color: var(--green-100);
+    color: var(--light-100);
+}
+
+.invitation-exists::after {
+    content: ".";
+    display: inline-block;
+    vertical-align: center;
+    text-align: center;
+    background-color: var(--orange-100);
+    color: var(--orange-100);
+    font-size: .7em;
+    line-height: .7em;
+    width: .75em;
+    border-radius: 50%;
+    position: absolute;
+    top: .2em;
+    right: .75em;
+}
+
+.send-invitation-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.send-invitation-content>.header {
+    justify-content: space-between;
+}
+
+.send-invitation-content>.header>.title {
+    font-size: 1.5em;
+    font-weight: 500;
+}

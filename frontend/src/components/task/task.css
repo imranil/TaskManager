@@ -47,7 +47,7 @@
     padding-left: 2em;
 }
 
-.input-row > select {
+.interaction-row > select {
     width: 100%;
     box-shadow: none;
     background-color: var(--neutral-100);
@@ -56,12 +56,17 @@
     cursor: pointer;
 }
 
-.input-row > .main-button {
+.interaction-row > .main-button {
     width: 100%;
-    background-color: var(--red-100);
     font-size: 1.2em;
     line-height: 1.2em;
     cursor: pointer;
+}
+
+.interaction-task {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
 }
 
 .create-task {
@@ -79,19 +84,19 @@
     font-weight: 500;
 }
 
-.create-task>.header>.close-button {
-    background-color: rgba(231, 68, 68, .7);
+.close-button {
+    background-color: rgba(231, 68, 68, .9);
 }
 
-.create-task>.header>.close-button:hover {
+.close-button:hover {
     background-color: var(--red-100);
 }
 
-.create-task>.header>.close-button>svg {
+.close-button>svg {
     width: 1em;
     height: 1em;
 }
 
-.create-task>.header>.close-button>svg>path {
+.close-button>svg>path {
     fill: var(--light-100);
 }
