@@ -17,7 +17,7 @@ const Dropdown = () => {
 
     function toggleClickHandler(event) {
         const elementCoords = event.target.closest('.dropdown').getBoundingClientRect()
-        setPopupCoords({ top: elementCoords.top + elementCoords.height + 10, left: elementCoords.left, width: elementCoords.width })
+        setPopupCoords({ top: elementCoords.bottom + 10, left: elementCoords.left, width: elementCoords.width })
         setPopupActive(!popupActive)
     }
 

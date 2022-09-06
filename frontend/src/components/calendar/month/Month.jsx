@@ -7,8 +7,8 @@ const Month = () => {
     const isLoading = useSelector(state => state.app.loader)
     const currentMonth = useSelector(state => state.calendar.currentMonth)
     const currentYear = useSelector(state => state.calendar.currentYear)
-    const daysOfWeek = Object.keys(useSelector(state => state.calendar.daysOfWeek))
     const tasks = useSelector(state => state.tasks.tasks)
+    const daysOfWeek = Object.keys(useSelector(state => state.calendar.daysOfWeek))
 
     const WEEK_DAY_SUNDAY = 6;
     const WEEK_DAY_MONDAY = 0;
@@ -60,7 +60,10 @@ const Month = () => {
     }
 
     function isToday(date) {
-        return date.getFullYear() === new Date().getFullYear() && date.getMonth() === new Date().getMonth() && date.getDate() === new Date().getDate();
+        const today = new Date()
+        return date.getFullYear() === today.getFullYear() 
+            && date.getMonth() === today.getMonth() 
+            && date.getDate() === today.getDate();
     }
     
     if (isLoading) {
@@ -108,7 +111,7 @@ const Day = (props) => {
 const TaskOfDay = ({ task }) => {
     const dispatch = useDispatch()
     const priorities = useSelector(state => state.tasks.priorities)
-    
+
     return (
         <NavLink to={'/task/' + task.id} onClick={() => dispatch(setCurrentTask(task))} className="item">
             {task.name}

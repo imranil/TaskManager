@@ -41,6 +41,7 @@ export function acceptInvitation(invitationId, taskId) {
                 headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
             })
             dispatch(setCurrentTask(response.data))
+            dispatch(removeInvitations(invitationId))
         } catch(e) {
             alert(e.response.data.message)
         }
@@ -50,7 +51,7 @@ export function acceptInvitation(invitationId, taskId) {
 export function declineInvitation(invitationId) {
     return async dispatch => {
         try {
-            await axios.delete(`${API_URL}api/invites?id=${invitationId}`, {
+            axios.delete(`${API_URL}api/invites?id=${invitationId}`, {
                 headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
             })
             dispatch(removeInvitations(invitationId))

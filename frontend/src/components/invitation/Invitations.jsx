@@ -26,13 +26,8 @@ const Invitations = () => {
             dispatch(getInvitations())
         }
         const elementCoords = event.target.closest('.nav-bar').getBoundingClientRect()
-        setPopupCoords({ top: elementCoords.top + elementCoords.height + 10, left: elementCoords.left, width: elementCoords.width })
+        setPopupCoords({ top: elementCoords.bottom + 10, left: elementCoords.left, width: elementCoords.width })
         setPopupActive(!popupActive)
-    }
-
-    function deleteInvitationHandler(invitationId) {
-        dispatch(declineInvitation(invitationId))
-        dispatch(getInvitations())
     }
 
     return (
@@ -44,7 +39,7 @@ const Invitations = () => {
             </a>
             <Popup active={popupActive} setActive={setPopupActive} coords={popupCoords} bcTransparent={true} >
                 <div className="invitations-content">
-                    {invitationsЕxist && invitations.length !== 0
+                    {invitations.length !== 0
                         ? invitations.map(invitation =>
                             <div className="invite-item">
                                 <div className="title">
@@ -56,7 +51,7 @@ const Invitations = () => {
                                 </div>
                                 <div className="make-decision">
                                     <button onClick={() => dispatch(acceptInvitation(invitation.id, invitation.taskId))} className="extra-button">Принять</button>
-                                    <button onClick={() => deleteInvitationHandler(invitation.id)} className="extra-button">Отклонить</button>
+                                    <button onClick={() => dispatch(declineInvitation(invitation.id))} className="extra-button">Отклонить</button>
                                 </div>
                             </div>)
                         : <div className="invite-item"><div className="title">Приглашений нет</div></div>

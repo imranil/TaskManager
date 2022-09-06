@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { removeTask, updateTask } from "../../actions/task";
+import { setCurrentTask } from "../../reducers/taskSlice";
 import SendInvitation from "../invitation/SendInvitation";
 import "./task.css"
 

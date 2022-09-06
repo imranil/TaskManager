@@ -46,7 +46,6 @@ const CreateTaskPopup = ({ modalActive, setModalActive }) => {
                 </div>
                 <div className="body">
                     <input value={name.value} onChange={e => name.onChange(e)} onBlur={e => name.onBlur(e)} name="name" type="text" placeholder="Название" formNoValidate={false} />
-                    {(name.isDirty && name.isEmpty) && <div className="has-error">Поле не может быть пустым</div>}
                     {(name.isDirty && name.minLengthError) && <div className="has-error">Поле не должно содержать меньше 2 символов</div>}
                     <textarea value={description.value} onChange={e => description.onChange(e)} onBlur={e =>description.onBlur(e)} name="description" placeholder="Описание" rows="5" />
                     <select value={priority.value} onChange={e => priority.onChange(e)} onBlur={e => priority.onBlur(e)} name="priority">
