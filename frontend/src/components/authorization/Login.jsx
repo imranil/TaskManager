@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from 'react-redux';
 import { login } from "../../actions/user";
-import useInput from "../../utils/useInput";
+import useInput from "../../hooks/useInput";
 
 
 const Login = () => {

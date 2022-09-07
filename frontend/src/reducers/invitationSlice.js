@@ -5,7 +5,7 @@ const invitationSlice = createSlice({
     name: 'invitation',
     initialState: {
         invitations: [],
-        invitationsЕxist: false,
+        invitationsЕxist: true,
     },
     reducers: {
         setInvitations(state, action) {

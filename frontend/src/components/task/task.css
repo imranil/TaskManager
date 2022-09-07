@@ -85,11 +85,11 @@
 }
 
 .close-button {
-    background-color: rgba(231, 68, 68, .9);
+    background-color: rgba(231, 68, 68, .9) !important;
 }
 
 .close-button:hover {
-    background-color: var(--red-100);
+    background-color: var(--red-100) !important;
 }
 
 .close-button>svg {
@@ -98,5 +98,5 @@
 }
 
 .close-button>svg>path {
-    fill: var(--light-100);
+    fill: var(--light-100) !important;
 }

@@ -56,7 +56,7 @@ const Month = () => {
     }
 
     function getTasksOfDay(currentDay) {
-        return tasks.filter(task => task.deadline === new Date(currentYear, currentMonth, currentDay).toLocaleDateString('en-CA'))
+        return tasks.filter(task => task.deadline === new Date(currentYear, currentMonth, currentDay).toLocaleDateString('en-CA'))//yyyy-mm-dd
     }
 
     function isToday(date) {
@@ -91,10 +91,7 @@ const Week = ({ days }) => {
 }
 
 const Day = (props) => {
-    let tasks = []
-    for (let key in props.tasks) {
-        tasks.push(props.tasks[key])
-    }
+    const tasks = props.tasks ? Object.values(props.tasks).map(task => task) : []
 
     return (
         <div className={props.today ? 'day today' : 'day'}>

@@ -10,9 +10,12 @@ const MonthControl = () => {
     const nameMonth = useSelector(state => state.calendar.nameMonth)
     const [modalActive, setModalActive] = useState(false)
 
+    const MONTH_OF_JANUARY = 0
+    const MONTH_OF_DECEMBER = 11
+
     function prevMonth() {
-        if (currentMonth === 0) {
-            dispatch(setCurrentMonth(11))
+        if (currentMonth === MONTH_OF_JANUARY) {
+            dispatch(setCurrentMonth(MONTH_OF_DECEMBER))
             dispatch(setCurrentYear(currentYear - 1))
         } else {
             dispatch(setCurrentMonth(currentMonth - 1))
@@ -25,8 +28,8 @@ const MonthControl = () => {
     }
 
     function nextMonth() {
-        if (currentMonth === 11) {
-            dispatch(setCurrentMonth(0))
+        if (currentMonth === MONTH_OF_DECEMBER) {
+            dispatch(setCurrentMonth(MONTH_OF_JANUARY))
             dispatch(setCurrentYear(currentYear + 1))
         } else {
             dispatch(setCurrentMonth(currentMonth + 1))

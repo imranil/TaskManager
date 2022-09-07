@@ -1,16 +1,26 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Authorization from "./authorization/Authorization";
-import './app.css';
 import { auth } from '../actions/user'
 import Navbar from "./navbar/Navbar";
 import Calendar from "./calendar/Calendar";
 import Task from "./task/Task";
 import Profile from "./profile/Profile";
+import { io } from "socket.io-client";
+import { API_URL } from "../config";
+import './app.css';
 
 function App() {
   const isAuth = useSelector(state => state.user.isAuth)
+
+  useEffect(() => {
+    if(isAuth) {
+      const socket = io(API_URL);
+      socket.on('message', function(data) {alert(data)});
+      return () => socket.close();
+    }
+  }, [isAuth])
 
   return (
     <BrowserRouter>
@@ -23,9 +33,9 @@ function App() {
         <React.Fragment>
           <Navbar />
           <Routes>
-            <Route path="/calendar" element={<Calendar/>} />
+            <Route path="/calendar" element={<Calendar />} />
             <Route path="/task/:id" element={<Task />} />
-            <Route path="/profile" element={<Profile/>} />
+            <Route path="/profile" element={<Profile />} />
             <Route path="*" element={<Navigate to="/calendar" />} />
           </Routes>
         </React.Fragment>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { createTask, getTasks } from "../../actions/task";
-import useInput from "../../utils/useInput";
+import useInput from "../../hooks/useInput";
 import Popup from "../popup/Popup";
 import './task.css';
 

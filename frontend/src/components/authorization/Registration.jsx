@@ -1,6 +1,6 @@
 import React from "react";
 import { registration } from "../../actions/user";
-import useInput from "../../utils/useInput";
+import useInput from "../../hooks/useInput";
 
 
 
