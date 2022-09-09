@@ -14,13 +14,15 @@ module.exports = (sequelize, type) => {
             type: type.STRING,
             allowNull: false,
             validate: {
-                notNull: {msg: "description is required"}
+                isIn: [['low', 'medium', 'high']],
+                notNull: {msg: "priority is required"}
             },
         },
         status: {
             type: type.STRING,
             allowNull: false,
             validate: {
+                isIn: [['to do', 'in progress', 'closed', 'frozen']],
                 notNull: {msg: "status is required"}
             },
         },

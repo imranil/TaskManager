@@ -25,16 +25,15 @@ class InviteController {
 
     async getInvitations(req, res) {
         try {
-            const invitations = await sequelize.query(
-                `SELECT *,
-                    (SELECT name FROM tasks
-                    WHERE tasks.id=invitations.taskId) AS taskName,
-                    (SELECT firstName FROM users
-                    WHERE users.id=invitations.senderId) AS senderName
-                FROM invitations
-                WHERE invitations.receiverId=${req.user.id}
-                ORDER BY invitations.createdAt DESC`, {
-                type: QueryTypes.SELECT,
+            const invitations = await Invitation.findAll({
+                attributes: {
+                    include: [
+                        [sequelize.literal(`(SELECT name FROM tasks WHERE taskId=tasks.id)`), 'taskName'],
+                        [sequelize.literal(`(SELECT firstName FROM users WHERE senderId=users.id)`), 'senderName']
+                    ],
+                },
+                where: { receiverId: req.user.id },
+                order: [['createdAt', 'DESC']]
             })
             return res.json(invitations);
         } catch (e) {
@@ -60,7 +59,7 @@ class InviteController {
                 return res.status(404).json({message: `Resources not found`})
             }
             invitation.destroy()
-            await UserTask.create({ userId: req.user.id, taskId: task.id })
+            await UserTask.create({ userId: req.user.id, taskId: task.id, role: 'contributor' })
             return res.status(200).json(task)
         } catch(e) {
             console.log(e)

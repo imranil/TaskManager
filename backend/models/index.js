@@ -21,6 +21,8 @@ const Invitation = InvitationModel(sequelize, Sequelize);
 User.belongsToMany(Task, {through: UserTask});
 Task.belongsToMany(User, {through: UserTask});
 
+
+
 sequelize.sync()
   .then(() => {
     console.log(`Database connected!`)

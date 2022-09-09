@@ -18,7 +18,7 @@ class UserController {
             const hashPassword = await bcrypt.hash(password, 8)
             const user = await User.build({ email: email, password: hashPassword, firstName: firstName, lastName: lastName })
             await user.save()
-            return res.json({ message: "User was created" })
+            return res.status(201).json({ message: "User was created" })
     
         } catch (e) {
             console.log(e)
@@ -40,7 +40,7 @@ class UserController {
                 return res.status(400).json({ message: "Invalid password" })
             }
             const token = jwt.sign({ id: user.id }, config.get('secretKey'), { expiresIn: "1h" })
-            return res.json({
+            return res.status(200).json({
                 token,
                 user: {
                     id: user.id,
@@ -67,7 +67,7 @@ class UserController {
             }
             user.avatar = avatarName
             await user.save()
-            return res.json(user)
+            return res.status(200).json(user)
         } catch (e) {
             console.log(e)
             res.send({ message: "Server error" })
@@ -80,7 +80,7 @@ class UserController {
             fs.unlinkSync(config.get('staticPath') + '\\' + user.avatar)
             user.avatar = null
             await user.save()
-            return res.json(user)
+            return res.status(200).json(user)
         } catch (e) {
             console.log(e)
             return res.status(400).json({ message: 'Delete avatar error' })
@@ -91,7 +91,7 @@ class UserController {
         try {
             const user = await User.findByPk(req.user.id)
             const token = jwt.sign({ id: user.id }, config.get('secretKey'), { expiresIn: "1h" })
-            return res.json({
+            return res.status(200).json({
                 token,
                 user: {
                     id: user.id,

@@ -7,8 +7,8 @@ class TaskController {
         try {
             const { name, description, priority, status, deadline } = req.body
             const task = await Task.create({ name, description, priority, status, deadline })
-            await UserTask.create({ userId: req.user.id, taskId: task.id })
-            return res.json(task);
+            UserTask.create({ userId: req.user.id, taskId: task.id, role: 'creator' })
+            return res.status(201).json(task);
         } catch (e) {
             console.log(e)
             return res.status(400).json(e)
@@ -17,18 +17,18 @@ class TaskController {
 
     async getTasks(req, res) {
         try {
-            const startDate = req.query.startDate;
-            const endDate = req.query.endDate;
-            const tasks = await sequelize.query(
-                `SELECT tasks.*, GROUP_CONCAT(users.firstName) AS 'usersName'
-                FROM users
-                INNER JOIN usertasks ON usertasks.userId = users.id 
-                INNER JOIN tasks ON usertasks.taskId = tasks.id AND tasks.deadline BETWEEN '${startDate}' AND '${endDate}'
-                WHERE usertasks.taskId IN (SELECT usertasks.taskId FROM usertasks INNER JOIN users ON users.id = usertasks.userId WHERE users.id = ${req.user.id})
-                GROUP BY tasks.id`, {
-                type: QueryTypes.SELECT,
+            const { startDate, endDate } = req.query;
+            const tasks = await Task.findAll({
+                include: {
+                    model: User,
+                    required: false,
+                },
+                where: {
+                    id: { [Op.in]: sequelize.literal(`(SELECT usertasks.taskId FROM usertasks INNER JOIN users ON users.id=usertasks.userId WHERE users.id=${req.user.id})`)},
+                    deadline: { [Op.between]: [startDate, endDate] },
+                },
             })
-            return res.json(tasks);
+            return res.status(200).json(tasks);
         } catch (e) {
             console.log(e)
         }
@@ -59,28 +59,20 @@ class TaskController {
         try {
             const { id, priority, status } = req.body
             const task = await Task.findOne({
-                attributes: {
-                    include: [
-                        [
-                            sequelize.literal(`(
-                                SELECT GROUP_CONCAT(users.firstName)
-                                FROM users
-                                INNER JOIN usertasks ON usertasks.userId=users.id 
-                                INNER JOIN tasks ON usertasks.taskId=tasks.id AND tasks.id=${id}
-                                WHERE usertasks.taskId IN (SELECT usertasks.taskId FROM usertasks INNER JOIN users ON users.id=usertasks.userId WHERE users.id=${req.user.id})
-                            )`),
-                            'usersName'
-                        ]
-                    ]
+                include: {
+                    model: User,
+                    required: false,
                 },
-                where: { id: id },
+                where: {
+                    id: id
+                },
             })
             await task.update({ 
                 priority: priority, 
                 status: status, 
             })
             await task.save()
-            return res.json(task);
+            return res.status(200).json(task);
         } catch (e) {
             console.log(e)
             return res.status(400).json(e)
@@ -89,17 +81,18 @@ class TaskController {
 
     async searchTasks(req, res) {
         try {
-            const searchName = req.query.search;
-            const tasks = await sequelize.query(
-                `SELECT tasks.*, GROUP_CONCAT(users.firstName) AS 'usersName'
-                FROM users
-                INNER JOIN usertasks ON usertasks.userId = users.id 
-                INNER JOIN tasks ON usertasks.taskId = tasks.id AND (tasks.name LIKE '%${searchName}%' OR tasks.description LIKE '%${searchName}%' OR tasks.deadline LIKE '%${searchName}%')
-                WHERE usertasks.taskId IN (SELECT usertasks.taskId FROM usertasks INNER JOIN users ON users.id = usertasks.userId WHERE users.id = ${req.user.id})
-                GROUP BY tasks.id
-                ORDER BY tasks.deadline DESC
-                LIMIT 10 `, {
-                type: QueryTypes.SELECT,
+            const search = req.query.search;
+            const tasks = await Task.findAll({
+                include: {
+                    model: User,
+                    required: false,
+                },
+                where: {
+                    id: { [Op.in]: sequelize.literal(`(SELECT usertasks.taskId FROM usertasks INNER JOIN users ON users.id=usertasks.userId WHERE users.id=${req.user.id})`)},
+                    [Op.or]: [{name: {[Op.like]: `%${search}%`}}, {description: {[Op.like]: `%${search}%`}}, {deadline: {[Op.like]: `%${search}%`},}]
+                },
+                order: [['deadline', 'DESC']],
+                limit: 10
             })
             return res.json(tasks);
         } catch (e) {
@@ -110,8 +103,8 @@ class TaskController {
 
     async getCounts(req, res) {
         try {
-            const counts = await sequelize.query(
-                `SELECT
+            const counts = await sequelize.query(`
+                SELECT
                     month(deadline) AS 'month',
                     count(if(status='in progress', 1, NULL)) AS 'inProgressCounts',
                     count(if(status='closed', 1, NULL)) AS 'closedCounts',
