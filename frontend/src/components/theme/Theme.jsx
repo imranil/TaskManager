@@ -6,7 +6,7 @@ import sunSvg from "../../assets/img/sun.svg"
 import moonSvg from "../../assets/img/moon.svg"
 
 
-const Theme = ({ className }) => {
+const Theme = () => {
     const theme = useSelector((state) => state.theme.theme)
     const dispatch = useDispatch()
 
@@ -21,8 +21,7 @@ const Theme = ({ className }) => {
     }
 
     return (
-        <a className={className} onClick={handleChange}>
-            Тема
+        <a className="theme-toggle" onClick={handleChange}>
             <img className={theme === 'dark' ? 'dark' : 'light'} 
                 src={theme === 'dark' ? moonSvg : sunSvg} alt="theme" />
         </a>

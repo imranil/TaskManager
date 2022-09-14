@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import './navbar.css';
 import Search from "../search/Search";
 import Invitations from "../invitation/Invitations";
+import Theme from "../theme/Theme";
 import Dropdown from "./dropdown/Dropdown";
 
 const Navbar = () => {
@@ -19,6 +20,7 @@ const Navbar = () => {
                             </svg>
                         </NavLink>
                         <Invitations />
+                        <Theme />
                         <Dropdown />
                     </div>
                 </nav>

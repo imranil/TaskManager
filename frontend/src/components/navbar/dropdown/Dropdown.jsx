@@ -5,7 +5,6 @@ import { logout } from "../../../reducers/userSlice";
 import { API_URL } from "../../../config";
 import avatarLogo from "../../../assets/img/avatar.svg";
 import Popup from "../../popup/Popup";
-import Theme from "../../theme/Theme";
 
 
 const Dropdown = () => {
@@ -33,7 +32,6 @@ const Dropdown = () => {
             <Popup active={popupActive} setActive={setPopupActive} coords={popupCoords} bcTransparent={true} >
                 <div className="dropdown-content">
                     <a href={null} onClick={(event => redirectHandler(event))} className="dropdown-item">Профиль</a>
-                    <Theme className="dropdown-item" />
                     <a href={null} onClick={() => dispatch(logout())} className="dropdown-item">Выход</a>
                 </div>
             </Popup>
