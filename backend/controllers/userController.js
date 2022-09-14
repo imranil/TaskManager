@@ -39,7 +39,7 @@ class UserController {
             if (!isPassValid) {
                 return res.status(400).json({ message: "Invalid password" })
             }
-            const token = jwt.sign({ id: user.id }, config.get('secretKey'), { expiresIn: "1h" })
+            const token = jwt.sign({ id: user.id }, config.get('secretKey'), { expiresIn: "8h" })
             return res.status(200).json({
                 token,
                 user: {

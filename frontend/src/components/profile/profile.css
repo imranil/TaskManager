@@ -22,9 +22,9 @@
     display: flex;
     flex-direction: column;
     gap: 1em;
-    border: 1em solid var(--neutral-100);
+    border: 1em solid var(--bc-content);
     border-radius: 1em;
-    background-color: var(--neutral-100);
+    background-color: var(--bc-content);
 }
 
 .avatar {
@@ -63,9 +63,9 @@
     display: flex;
     flex-direction: column;
     gap: 1em;
-    border: 1em solid var(--neutral-100);
+    border: 1em solid var(--bc-content);
     border-radius: 1em;
-    background-color: var(--neutral-100);
+    background-color: var(--bc-content);
 }
 
 
@@ -79,9 +79,9 @@
 .bar-chart {
     flex-grow: 3;
     width: max-content;
-    border: 1em solid var(--neutral-100);
+    border: 1em solid var(--bc-content);
     border-radius: 1em;
-    background-color: var(--neutral-100);
+    background-color: var(--bc-content);
 }
 .bar-chart > canvas {
     width: max-content;

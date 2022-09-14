@@ -28,7 +28,7 @@
 }
 
 .invite-item:hover {
-    background: var(--neutral-100);
+    background: var(--bc-active);
 }
 
 .invite-item>.title {
@@ -42,7 +42,8 @@
 .invite-item>.title>.date {
     font-size: .875em;
     font-weight: 600;
-    color: rgba(0, 0, 0, .5);
+    color: var(--text-color);
+    opacity: 0.5;
 }
 
 .invite-item>.description {

@@ -35,7 +35,6 @@ const start = async () => {
         })
 
         io.on('connect', async function (socket) {
-            console.log('A user connected');
 
             socket.on('user', function(data) {
                 console.log(socket.id)

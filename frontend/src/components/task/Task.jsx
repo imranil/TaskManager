@@ -2,8 +2,9 @@ import React, { useState, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { removeTask, updateTask } from "../../actions/task";
-import { setCurrentTask } from "../../reducers/taskSlice";
 import SendInvitation from "../invitation/SendInvitation";
+import { API_URL } from "../../config";
+import avatarLogo from "../../assets/img/avatar.svg";
 import "./task.css"
 
 
@@ -58,7 +59,11 @@ const Task = () => {
                         </div>
                         <div className="data-row">
                             <div className="title">Участники:</div>
-                            <div className="value">{task.usersName}</div>
+                            <div className="value">
+                                {task.users.map(user =>
+                                    <img src={user.avatar ? API_URL + user.avatar : avatarLogo} alt={user.fullName} />
+                                )}
+                            </div>
                         </div>
                     </div>
                     <div className="interaction-row">

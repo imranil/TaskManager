@@ -1,3 +1,26 @@
+:root[data-theme="light"] {
+    --bc-body: #fff;
+    --bc-input: #fff;
+    --bc-extra-button: #fff;
+    --bc-calendar: #fff;
+    --bc-content: #f4f4f4;
+    --bc-popup: #fff;
+    --bc-active: #f4f4f4;
+    --text-color: #1C1E21;
+}
+
+:root[data-theme="dark"] {
+    --bc-body: #1f2023;
+    --bc-input: #383b40;
+    --bc-extra-button: #383b40;
+    --bc-calendar: #383b40;
+    --bc-content: #383b40;
+    --bc-popup: #383b40;
+    --bc-active: #2d2f34;
+    --text-color: #f5f6f7;
+}
+
+
 * {
     margin: 0;
     padding: 0;
@@ -7,10 +30,13 @@
     font-size: 14px;
     line-height: 16px;
     text-decoration: none;
+    transition: .5s fill;
 }
 
 body {
-    background-color: var(--light-100);
+    background-color: var(--bc-body);
+    color: var(--text-color);
+    transition: .5s all;
 }
 
 input,
@@ -22,6 +48,8 @@ select {
     border-radius: 1em;
     padding: 0.5em 1em;
     font-weight: 300;
+    background-color: var(--bc-input);
+    color: var(--text-color);
 }
 
 textarea {
@@ -48,8 +76,6 @@ select {
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
-    background: url('../assets/img/arrow.svg') no-repeat right;
-    background-position-x: calc(100% - .5em);
 }
 
 .input-area {
@@ -81,8 +107,8 @@ select {
 }
 
 .tab-button {
-    background-color: var(--neutral-100);
-    color: var(--dark-200);
+    background-color: var(--bc-body);
+    color: var(--text-color);
     padding: 0.5em 1em;
     font-weight: 500;
     border: none;
@@ -96,16 +122,16 @@ select {
 }
 
 .tab-button:active {
-    background-color: var(--light-100);
+    background-color: var(--bc-active);
 }
 
 .extra-button {
     padding: 2px 6px;
-    background: var(--light-100);
+    background-color: var(--bc-extra-button);
     box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.25);
     border: none;
     border-radius: 4px;
-    color: var(--dark-200);
+    color: var(--text-color);
 }
 
 .extra-button:hover {
@@ -130,14 +156,15 @@ select {
     justify-content: center;
     align-items: center;
     padding: 2px 6px;
-    background: var(--light-100);
+    background-color: var(--bc-extra-button);
     box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.25);
     border: none;
     border-radius: 4px;
 }
 
 .button-icon>svg>path {
-    fill: var(--gray-100);
+    fill: var(--text-color);
+    opacity: .75;
 }
 
 .button-icon:hover {
@@ -227,14 +254,15 @@ select {
 }
 
 .header>.active {
-    background-color: var(--light-100);
+    background-color: var(--bc-active);
     font-size: 1.25em;
 }
 
-.hedaer > .close-button {
+.hedaer>.close-button {
     background-color: var(--red-100);
 }
-.hedaer > .close-button > svg {
+
+.hedaer>.close-button>svg {
     width: 1.5em;
     height: 1.5em;
 }
@@ -244,7 +272,9 @@ select {
     flex-direction: column;
 }
 
-.body>input, .body>textarea, .body>select {
+.body>input,
+.body>textarea,
+.body>select {
     margin-top: 1em;
 }
 
@@ -262,19 +292,21 @@ select {
 .low {
     color: var(--light-100);
     background-color: var(--green-100);
-    border-radius:.5em;
+    border-radius: .5em;
     padding: 0 0.25em;
 }
+
 .medium {
     color: var(--light-100);
     background-color: var(--orange-100);
-    border-radius:.5em;
+    border-radius: .5em;
     padding: 0 0.25em;
 }
+
 .high {
     color: var(--light-100);
     background-color: var(--red-100);
-    border-radius:.5em;
+    border-radius: .5em;
     padding: 0 0.25em;
 }
 

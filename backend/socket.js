@@ -9,7 +9,8 @@ class Socket {
     }
 
     setUser() {
-        
+        users.set(this.socket.id, data)
+        console.log('User set. id:', socket.id)
     }    
 
     disconnect() {
@@ -18,3 +19,5 @@ class Socket {
         });
     }
 }
+
+module.exports = Socket;

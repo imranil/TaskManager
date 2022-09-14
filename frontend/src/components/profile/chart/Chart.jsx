@@ -23,6 +23,8 @@ ChartJS.register(
 export default function BarChart() {
     const nameMonth = useSelector(state => state.calendar.nameMonth)
     const counts = useSelector(state => state.tasks.tasksCounts)
+    const textColor = useSelector(state => state.theme.theme) === 'dark' ? '#f5f6f7' : '#1C1E21'
+    const gridColor = useSelector(state => state.theme.theme) === 'dark' ? 'rgba(245, 246, 247, .2)' : 'rgba(28, 30, 33, .2)'
 
     const monthNum = counts.map(item => item.month)
     const labels = nameMonth.filter((elem, index) => {
@@ -36,12 +38,26 @@ export default function BarChart() {
         plugins: {
             legend: {
                 position: 'top',
+                labels: { color: textColor }
             },
             title: {
                 display: true,
                 text: 'Число задач по месяцам',
+                color: textColor,
             },
         },
+        scales: {
+            yAxes: {
+                ticks: { color: textColor },
+                grid: { color: gridColor }
+            },
+            xAxes: {
+                ticks: { color: textColor },
+                grid: {
+                    color: gridColor
+                }
+            }
+        }
     };
     const data = {
         labels,

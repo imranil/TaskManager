@@ -4,6 +4,7 @@ import appSlice from './appSlice';
 import calendarSlice from './calendarSlice';
 import taskSlice from './taskSlice';
 import invitationSlice from './invitationSlice';
+import themeSlice from './themeSlice';
 
 
 const rootReducer = combineReducers({
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
     calendar: calendarSlice,
     tasks: taskSlice,
     invitations: invitationSlice,
+    theme: themeSlice,
     app: appSlice,
 })
 

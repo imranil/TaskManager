@@ -17,7 +17,8 @@ function App() {
   useEffect(() => {
     if(isAuth) {
       const socket = io(API_URL);
-      socket.on('message', function(data) {alert(data)});
+      socket.emit('user', {email: "test@mail.ru"})
+
       return () => socket.close();
     }
   }, [isAuth])
