@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createInvitation } from "../../actions/invitation";
 import useInput from "../../hooks/useInput";
-import Popup from "../popup/Popup";
+import Popup from "../common/popup/Popup";
 import './invitation.css'
 
 

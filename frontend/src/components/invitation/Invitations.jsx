@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import Popup from "../popup/Popup";
+import Popup from "../common/popup/Popup";
 import { getInvitations, acceptInvitation, declineInvitation } from "../../actions/invitation";
 import { setInvitations } from "../../reducers/invitationSlice";
 import './invitation.css';

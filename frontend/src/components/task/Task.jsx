@@ -6,6 +6,7 @@ import SendInvitation from "../invitation/SendInvitation";
 import { API_URL } from "../../config";
 import avatarLogo from "../../assets/img/avatar.svg";
 import "./task.css"
+import Select from "../common/select/Select";
 
 
 const Task = () => {
@@ -67,16 +68,10 @@ const Task = () => {
                         </div>
                     </div>
                     <div className="interaction-row">
-                        <select value={priority} onChange={(event) => changePriorityHandler(event.target.value)} name="priority">
-                            <option value="" disabled>Приоритет</option>
-                            {Object.entries(priorities).map((priority, key) => <option key={key} value={priority[0]}>{priority[1]}</option>)}
-                        </select>
+                        <Select value={priority} onChange={(event) => changePriorityHandler(event.target.value)} name="priority" placeholder="Приоритет" objects={priorities} />
                     </div>
                     <div className="interaction-row">
-                        <select value={status} onChange={(event) => changeStatusHandler(event.target.value)} name="status">
-                            <option value="" disabled>Статус</option>
-                            {Object.entries(statuses).map((status, key) => <option key={key} value={status[0]}>{status[1]}</option>)}
-                        </select>
+                        <Select value={status} onChange={(event) => changeStatusHandler(event.target.value)} name="status" placeholder="Статус" objects={statuses} />
                     </div>
                     <div className="interaction-row">
                         <SendInvitation taskId={task.id} />

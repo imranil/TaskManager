@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentMonth, setCurrentYear } from "../../../reducers/calendarSlice";
-import CreateTask from "../../task/CreateTask";
+import Select from "../../common/select/Select";
+import CreateTaskPopup from "../../task/CreateTaskPopup";
 
-const MonthControl = () => {
+const Control = () => {
     const dispatch = useDispatch();
     const currentMonth = useSelector(state => state.calendar.currentMonth)
     const currentYear = useSelector(state => state.calendar.currentYear)
     const nameMonth = useSelector(state => state.calendar.nameMonth)
-    const [modalActive, setModalActive] = useState(false)
+    const priorities = useSelector(state => state.tasks.priorities)
 
     const MONTH_OF_JANUARY = 0
     const MONTH_OF_DECEMBER = 11
@@ -52,11 +53,13 @@ const MonthControl = () => {
                 </button>
                 <button className="extra-button" onClick={todayMonth}>Сегодня</button>
             </div>
-            <button onClick={() => setModalActive(true)} className="main-button">Добавить</button>
-            <CreateTask modalActive={modalActive} setModalActive={setModalActive} />
+            <div className="task-control">
+                <Select className="task-sort-select" placeholder="По приоритету" objects={priorities} />
+                <CreateTaskPopup />
+            </div>
         </div>
     );
 }
 
 
-export default MonthControl;
+export default Control;

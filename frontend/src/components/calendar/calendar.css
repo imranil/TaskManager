@@ -27,6 +27,16 @@
     height: 1.5em;
 }
 
+.task-control {
+    display: flex;
+    flex-direction: row;
+    gap: 2em;
+}
+
+.task-control > select {
+    padding-right: 3em;
+}
+
 .week {
     display: grid;
     grid-template-columns: repeat(7, 1fr);

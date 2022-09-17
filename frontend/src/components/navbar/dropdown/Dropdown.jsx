@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../reducers/userSlice";
 import { API_URL } from "../../../config";
 import avatarLogo from "../../../assets/img/avatar.svg";
-import Popup from "../../popup/Popup";
+import Popup from "../../common/popup/Popup";
 
 
 const Dropdown = () => {

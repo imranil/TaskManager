@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { getTasks } from "../../actions/task";
-import MonthControl from "./month/MonthControl";
+import Control from "./month/Control";
 import Month from "./month/Month";
 import './calendar.css';
 
@@ -20,7 +20,7 @@ const Calendar = () => {
 
     return (
         <div className="container">
-            <MonthControl/>
+            <Control/>
             <Month/>
         </div>
     );
