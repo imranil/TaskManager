@@ -5,7 +5,7 @@ import { removeTask, updateTask } from "../../actions/task";
 import SendInvitation from "../invitation/SendInvitation";
 import { API_URL } from "../../config";
 import avatarLogo from "../../assets/img/avatar.svg";
-import "./task.css"
+import "./task.css";
 import Select from "../common/select/Select";
 
 

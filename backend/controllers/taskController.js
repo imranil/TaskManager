@@ -17,16 +17,48 @@ class TaskController {
 
     async getTasks(req, res) {
         try {
-            const { startDate, endDate } = req.query;
-            const tasks = await Task.findAll({
-                include: {
-                    model: User,
-                },
-                where: {
-                    id: { [Op.in]: sequelize.literal(`(SELECT usertasks.taskId FROM usertasks INNER JOIN users ON users.id=usertasks.userId WHERE users.id=${req.user.id})`)},
-                    deadline: { [Op.between]: [startDate, endDate] },
-                },
-            })
+            const { startDate, endDate, priority, status } = req.query;
+            let tasks;
+            if (priority) {
+                tasks = await Task.findAll({
+                    include: { model: User, },
+                    where: {
+                        id: { [Op.in]: sequelize.literal(`(SELECT usertasks.taskId FROM usertasks INNER JOIN users ON users.id=usertasks.userId WHERE users.id=${req.user.id})`) },
+                        deadline: { [Op.between]: [startDate, endDate] },
+                        priority: priority
+                    },
+                })
+            }
+            if (status) {
+                tasks = await Task.findAll({
+                    include: { model: User, },
+                    where: {
+                        id: { [Op.in]: sequelize.literal(`(SELECT usertasks.taskId FROM usertasks INNER JOIN users ON users.id=usertasks.userId WHERE users.id=${req.user.id})`) },
+                        deadline: { [Op.between]: [startDate, endDate] },
+                        status: status
+                    },
+                })
+            }
+            if (priority && status) {
+                tasks = await Task.findAll({
+                    include: { model: User, },
+                    where: {
+                        id: { [Op.in]: sequelize.literal(`(SELECT usertasks.taskId FROM usertasks INNER JOIN users ON users.id=usertasks.userId WHERE users.id=${req.user.id})`) },
+                        deadline: { [Op.between]: [startDate, endDate] },
+                        priority: priority,
+                        status: status
+                    },
+                })
+            }
+            if (!priority && !status) {
+                tasks = await Task.findAll({
+                    include: { model: User, },
+                    where: {
+                        id: { [Op.in]: sequelize.literal(`(SELECT usertasks.taskId FROM usertasks INNER JOIN users ON users.id=usertasks.userId WHERE users.id=${req.user.id})`) },
+                        deadline: { [Op.between]: [startDate, endDate] },
+                    },
+                })
+            }
             return res.status(200).json(tasks);
         } catch (e) {
             console.log(e)
@@ -66,9 +98,9 @@ class TaskController {
                     id: id
                 },
             })
-            await task.update({ 
-                priority: priority, 
-                status: status, 
+            await task.update({
+                priority: priority,
+                status: status,
             })
             await task.save()
             return res.status(200).json(task);
@@ -87,8 +119,8 @@ class TaskController {
                     required: false,
                 },
                 where: {
-                    id: { [Op.in]: sequelize.literal(`(SELECT usertasks.taskId FROM usertasks INNER JOIN users ON users.id=usertasks.userId WHERE users.id=${req.user.id})`)},
-                    [Op.or]: [{name: {[Op.like]: `%${search}%`}}, {description: {[Op.like]: `%${search}%`}}, {deadline: {[Op.like]: `%${search}%`},}]
+                    id: { [Op.in]: sequelize.literal(`(SELECT usertasks.taskId FROM usertasks INNER JOIN users ON users.id=usertasks.userId WHERE users.id=${req.user.id})`) },
+                    [Op.or]: [{ name: { [Op.like]: `%${search}%` } }, { description: { [Op.like]: `%${search}%` } }, { deadline: { [Op.like]: `%${search}%` }, }]
                 },
                 order: [['deadline', 'DESC']],
                 limit: 10

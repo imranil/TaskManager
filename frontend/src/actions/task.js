@@ -8,8 +8,17 @@ export function getTasks(params) {
     return async dispatch => {
         try {
             dispatch(showLoader())
-            const { startDate, endDate } = params
-            const url = `${API_URL}api/tasks?startDate=${startDate}&endDate=${endDate}`
+            const { startDate, endDate, priority, status } = params
+            let url = `${API_URL}api/tasks?startDate=${startDate}&endDate=${endDate}`
+            if(priority) {
+                url = `${API_URL}api/tasks?startDate=${startDate}&endDate=${endDate}&priority=${priority}`
+            }
+            if(status) {
+                url = `${API_URL}api/tasks?startDate=${startDate}&endDate=${endDate}&status=${status}`
+            }
+            if(priority && status) {
+                url = `${API_URL}api/tasks?startDate=${startDate}&endDate=${endDate}&priority=${priority}&status=${status}`
+            }
             const response = await axios.get(url, {
                 headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
             })
