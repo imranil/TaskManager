@@ -21,7 +21,10 @@ class TaskController {
             let tasks;
             if (priority) {
                 tasks = await Task.findAll({
-                    include: { model: User, },
+                    include: [
+                        {model: User, attributes: ['avatar', 'fullName']},
+                        {model: Tag, attributes: ['name']}
+                    ],
                     where: {
                         id: { [Op.in]: sequelize.literal(`(SELECT usertasks.taskId FROM usertasks INNER JOIN users ON users.id=usertasks.userId WHERE users.id=${req.user.id})`) },
                         deadline: { [Op.between]: [startDate, endDate] },
@@ -31,7 +34,10 @@ class TaskController {
             }
             if (status) {
                 tasks = await Task.findAll({
-                    include: { model: User, },
+                    include: [
+                        {model: User, attributes: ['avatar', 'fullName']},
+                        {model: Tag, attributes: ['name']}
+                    ],
                     where: {
                         id: { [Op.in]: sequelize.literal(`(SELECT usertasks.taskId FROM usertasks INNER JOIN users ON users.id=usertasks.userId WHERE users.id=${req.user.id})`) },
                         deadline: { [Op.between]: [startDate, endDate] },
@@ -41,7 +47,10 @@ class TaskController {
             }
             if (priority && status) {
                 tasks = await Task.findAll({
-                    include: { model: User, },
+                    include: [
+                        {model: User, attributes: ['avatar', 'fullName']},
+                        {model: Tag, attributes: ['name']}
+                    ],
                     where: {
                         id: { [Op.in]: sequelize.literal(`(SELECT usertasks.taskId FROM usertasks INNER JOIN users ON users.id=usertasks.userId WHERE users.id=${req.user.id})`) },
                         deadline: { [Op.between]: [startDate, endDate] },
@@ -52,7 +61,10 @@ class TaskController {
             }
             if (!priority && !status) {
                 tasks = await Task.findAll({
-                    include: { model: User, },
+                    include: [
+                        {model: User, attributes: ['avatar', 'fullName']},
+                        {model: Tag, attributes: ['name']}
+                    ],
                     where: {
                         id: { [Op.in]: sequelize.literal(`(SELECT usertasks.taskId FROM usertasks INNER JOIN users ON users.id=usertasks.userId WHERE users.id=${req.user.id})`) },
                         deadline: { [Op.between]: [startDate, endDate] },
@@ -90,10 +102,10 @@ class TaskController {
         try {
             const { id, priority, status } = req.body
             const task = await Task.findOne({
-                include: {
-                    model: User,
-                    required: false,
-                },
+                include: [
+                    {model: User, attributes: ['avatar', 'fullName']},
+                    {model: Tag, attributes: ['name']}
+                ],
                 where: {
                     id: id
                 },
@@ -114,10 +126,10 @@ class TaskController {
         try {
             const search = req.query.search;
             const tasks = await Task.findAll({
-                include: {
-                    model: User,
-                    required: false,
-                },
+                include: [
+                    {model: User, attributes: ['avatar', 'fullName']},
+                    {model: Tag, attributes: ['name']}
+                ],
                 where: {
                     id: { [Op.in]: sequelize.literal(`(SELECT usertasks.taskId FROM usertasks INNER JOIN users ON users.id=usertasks.userId WHERE users.id=${req.user.id})`) },
                     [Op.or]: [{ name: { [Op.like]: `%${search}%` } }, { description: { [Op.like]: `%${search}%` } }, { deadline: { [Op.like]: `%${search}%` }, }]
