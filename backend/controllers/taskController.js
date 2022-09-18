@@ -1,5 +1,5 @@
 const { Op, QueryTypes } = require('sequelize')
-const { User, Task, UserTask, sequelize } = require("../models")
+const { User, Task, UserTask, Tag, sequelize } = require("../models")
 
 
 class TaskController {
