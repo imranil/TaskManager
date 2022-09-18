@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Authorization from "./authorization/Authorization";
 import { auth } from '../actions/user'
@@ -7,19 +7,17 @@ import Navbar from "./navbar/Navbar";
 import Calendar from "./calendar/Calendar";
 import Task from "./task/Task";
 import Profile from "./profile/Profile";
-import { io } from "socket.io-client";
-import { API_URL } from "../config";
+import { getTags } from "../actions/tag";
 import './app.css';
 
 function App() {
+  const dispatch = useDispatch()
   const isAuth = useSelector(state => state.user.isAuth)
+  dispatch(getTags)
 
   useEffect(() => {
-    if(isAuth) {
-      const socket = io(API_URL);
-      socket.emit('user', {email: "test@mail.ru"})
-
-      return () => socket.close();
+    if (isAuth) {
+      dispatch(getTags)
     }
   }, [isAuth])
 

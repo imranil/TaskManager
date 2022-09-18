@@ -1,0 +1,61 @@
+
+
+
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image:
+        linear-gradient(45deg, transparent 50%, gray 50%),
+        linear-gradient(135deg, gray 50%, transparent 50%);
+    background-position:
+        calc(100% - 1.6em) calc(1em - 2px),
+        calc(100% - 1.1em) calc(1em - 2px),
+        calc(100%) .5em;
+    background-size:
+        .5em .5em,
+        .5em .5em,
+        1.25em 1.25em;
+    background-repeat: no-repeat;
+}
+
+select > option.select-placeholder {
+    display: none;
+}
+
+select > option::before {
+    display: inline-block;
+    transform: rotate(45deg);
+    height: 1em;
+    width: 1em;
+    border-bottom: 1px solid var(--bc-input);
+    border-right: 1px solid var(--bc-input);
+}
+
+.multiselect-wrap {
+    display: flex;
+    flex-direction: column;
+}
+
+.field-multiselect {
+    border: none;
+    outline: none;
+    box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.25);
+    border-radius: 1em;
+    padding: 0.5em 1em;
+    font-weight: 300;
+    background-color: var(--bc-input);
+    color: var(--text-color);
+    background-image:
+        linear-gradient(45deg, transparent 50%, gray 50%),
+        linear-gradient(135deg, gray 50%, transparent 50%);
+    background-position:
+        calc(100% - 1.6em) calc(1em - 2px),
+        calc(100% - 1.1em) calc(1em - 2px),
+        calc(100%) .5em;
+    background-size:
+        .5em .5em,
+        .5em .5em,
+        1.25em 1.25em;
+    background-repeat: no-repeat;
+}

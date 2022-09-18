@@ -66,6 +66,14 @@ const Task = () => {
                                 )}
                             </div>
                         </div>
+                        <div className="data-row">
+                            <div className="title">Тэги:</div>
+                            <div className="value">
+                                {task.tags.map(tag =>
+                                    <span className="tag">{tag.name}</span>
+                                )}
+                            </div>
+                        </div>
                     </div>
                     <div className="interaction-row">
                         <Select value={priority} onChange={(event) => changePriorityHandler(event.target.value)} name="priority" placeholder="Приоритет" objects={priorities} />

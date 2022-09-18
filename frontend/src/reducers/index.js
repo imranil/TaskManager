@@ -5,6 +5,7 @@ import calendarSlice from './calendarSlice';
 import taskSlice from './taskSlice';
 import invitationSlice from './invitationSlice';
 import themeSlice from './themeSlice';
+import tagSlice from './tagSlice';
 
 
 const rootReducer = combineReducers({
@@ -13,13 +14,10 @@ const rootReducer = combineReducers({
     tasks: taskSlice,
     invitations: invitationSlice,
     theme: themeSlice,
+    tags: tagSlice,
     app: appSlice,
 })
 
 export const store = configureStore({
     reducer: rootReducer,
-    middleware: getDefaultMiddleware =>
-    getDefaultMiddleware({
-      serializableCheck: false,
-    }),
 });
