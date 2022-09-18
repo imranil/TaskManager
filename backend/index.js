@@ -6,6 +6,7 @@ const config = require('config')
 const authRouter = require('./routes/auth.routes')
 const taskRouter = require('./routes/task.routes')
 const inviteRouter = require('./routes/invite.routes')
+const tagRouter = require('./routes/tag.routes')
 const corsMiddleware = require('./middleware/cors.middleware')
 
 const PORT = config.get('serverPort')
@@ -26,6 +27,7 @@ app.use(express.static('static'))
 app.use('/api/auth', authRouter)
 app.use('/api/tasks', taskRouter)
 app.use('/api/invites', inviteRouter)
+app.use('/api/tags', tagRouter)
 
 const start = async () => {
     try {

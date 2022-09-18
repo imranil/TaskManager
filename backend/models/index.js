@@ -6,6 +6,7 @@ const TaskModel = require('./Task');
 const UserTaskModel = require('./UserTask');
 const InvitationModel = require('./Invitation');
 const TagModel = require('./Tag');
+const TaskTagModel = require('./TaskTag')
 
 
 const sequelize = new Sequelize(dbConfig.dbName, dbConfig.user, dbConfig.password, {
@@ -19,11 +20,12 @@ const Task = TaskModel(sequelize, Sequelize);
 const UserTask = UserTaskModel(sequelize, Sequelize);
 const Invitation = InvitationModel(sequelize, Sequelize);
 const Tag = TagModel(sequelize, Sequelize);
+const TaskTag = TaskTagModel(sequelize, Sequelize);
 
 User.belongsToMany(Task, {through: UserTask});
 Task.belongsToMany(User, {through: UserTask});
-Tag.belongsToMany(Task, {through: 'tasktag'});
-Task.belongsToMany(Tag, {through: 'tasktag'})
+Tag.belongsToMany(Task, {through: TaskTag});
+Task.belongsToMany(Tag, {through: TaskTag})
 
 
 
@@ -38,5 +40,6 @@ module.exports = {
   UserTask, 
   Invitation,
   Tag,
+  TaskTag,
   sequelize
 }
