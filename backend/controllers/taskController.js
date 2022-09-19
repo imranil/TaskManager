@@ -23,7 +23,7 @@ class TaskController {
                 tasks = await Task.findAll({
                     include: [
                         {model: User, attributes: ['avatar', 'fullName']},
-                        {model: Tag, attributes: ['name']}
+                        {model: Tag, attributes: ['id', 'name']}
                     ],
                     where: {
                         id: { [Op.in]: sequelize.literal(`(SELECT usertasks.taskId FROM usertasks INNER JOIN users ON users.id=usertasks.userId WHERE users.id=${req.user.id})`) },
@@ -36,7 +36,7 @@ class TaskController {
                 tasks = await Task.findAll({
                     include: [
                         {model: User, attributes: ['avatar', 'fullName']},
-                        {model: Tag, attributes: ['name']}
+                        {model: Tag, attributes: ['id', 'name']}
                     ],
                     where: {
                         id: { [Op.in]: sequelize.literal(`(SELECT usertasks.taskId FROM usertasks INNER JOIN users ON users.id=usertasks.userId WHERE users.id=${req.user.id})`) },
@@ -49,7 +49,7 @@ class TaskController {
                 tasks = await Task.findAll({
                     include: [
                         {model: User, attributes: ['avatar', 'fullName']},
-                        {model: Tag, attributes: ['name']}
+                        {model: Tag, attributes: ['id', 'name']}
                     ],
                     where: {
                         id: { [Op.in]: sequelize.literal(`(SELECT usertasks.taskId FROM usertasks INNER JOIN users ON users.id=usertasks.userId WHERE users.id=${req.user.id})`) },
@@ -63,7 +63,7 @@ class TaskController {
                 tasks = await Task.findAll({
                     include: [
                         {model: User, attributes: ['avatar', 'fullName']},
-                        {model: Tag, attributes: ['name']}
+                        {model: Tag, attributes: ['id', 'name']}
                     ],
                     where: {
                         id: { [Op.in]: sequelize.literal(`(SELECT usertasks.taskId FROM usertasks INNER JOIN users ON users.id=usertasks.userId WHERE users.id=${req.user.id})`) },
@@ -104,7 +104,7 @@ class TaskController {
             const task = await Task.findOne({
                 include: [
                     {model: User, attributes: ['avatar', 'fullName']},
-                    {model: Tag, attributes: ['name']}
+                    {model: Tag, attributes: ['id', 'name']}
                 ],
                 where: {
                     id: id
@@ -128,7 +128,7 @@ class TaskController {
             const tasks = await Task.findAll({
                 include: [
                     {model: User, attributes: ['avatar', 'fullName']},
-                    {model: Tag, attributes: ['name']}
+                    {model: Tag, attributes: ['id', 'name']}
                 ],
                 where: {
                     id: { [Op.in]: sequelize.literal(`(SELECT usertasks.taskId FROM usertasks INNER JOIN users ON users.id=usertasks.userId WHERE users.id=${req.user.id})`) },

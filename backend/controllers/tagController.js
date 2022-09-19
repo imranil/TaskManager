@@ -10,7 +10,7 @@ class TagController {
             const task = await Task.findOne({
                 include: [
                     {model: User, attributes: ['avatar', 'fullName']},
-                    {model: Tag, attributes: ['name']}
+                    {model: Tag, attributes: ['id', 'name']}
                 ],
                 where: { id: taskId}
             })

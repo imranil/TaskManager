@@ -1,37 +1,19 @@
-import React, { useState, useMemo } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { removeTask, updateTask } from "../../actions/task";
-import SendInvitation from "../invitation/SendInvitation";
 import { API_URL } from "../../config";
 import avatarLogo from "../../assets/img/avatar.svg";
+import Tag from "../tag/Tag";
+import SendInvitation from "../invitation/send/SendInvitation";
+import DeleteTask from "./operations/DeleteTask";
+import { UpdateState } from "./operations/UpdateTask";
 import "./task.css";
-import Select from "../common/select/Select";
 
 
 const Task = () => {
     const dispatch = useDispatch()
-    const navigate = useNavigate()
     const task = useSelector(state => state.tasks.currentTask)
     const priorities = useSelector(state => state.tasks.priorities)
     const statuses = useSelector(state => state.tasks.statuses)
-    const [priority, setPriority] = useState('')
-    const [status, setStatus] = useState('')
-
-    function removeTaskHandler() {
-        dispatch(removeTask(task))
-        navigate('/calendar')
-    }
-
-    function changePriorityHandler(value) {
-        setPriority(value)
-        dispatch(updateTask({ ...task, priority: value }))
-    }
-
-    function changeStatusHandler(value) {
-        setStatus(value)
-        dispatch(updateTask({ ...task, status: value }))
-    }
 
     return (
         <div className="container">
@@ -70,24 +52,22 @@ const Task = () => {
                             <div className="title">Тэги:</div>
                             <div className="value">
                                 {task.tags.map(tag =>
-                                    <span className="tag">{tag.name}</span>
+                                    <Tag key={tag.id} name={tag.name}/>
                                 )}
                             </div>
                         </div>
                     </div>
                     <div className="interaction-row">
-                        <Select value={priority} onChange={(event) => changePriorityHandler(event.target.value)} name="priority" placeholder="Приоритет" objects={priorities} />
+                        <UpdateState name="priority" placeholder="Приоритет" objects={priorities} />
                     </div>
                     <div className="interaction-row">
-                        <Select value={status} onChange={(event) => changeStatusHandler(event.target.value)} name="status" placeholder="Статус" objects={statuses} />
+                        <UpdateState name="status" placeholder="Статус" objects={statuses} />
                     </div>
                     <div className="interaction-row">
                         <SendInvitation taskId={task.id} />
                     </div>
                     <div className="interaction-row">
-                        <button onClick={() => removeTaskHandler()} className="main-button close-button">
-                            Удалить
-                        </button>
+                        <DeleteTask />
                     </div>
                 </div>
             </div>

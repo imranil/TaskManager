@@ -4,7 +4,7 @@ import './navbar.css';
 import Search from "../search/Search";
 import Invitations from "../invitation/Invitations";
 import Theme from "../theme/Theme";
-import Dropdown from "./dropdown/Dropdown";
+import Menu from "./dropdownmenu/Menu";
 
 const Navbar = () => {
 
@@ -21,7 +21,7 @@ const Navbar = () => {
                         </NavLink>
                         <Invitations />
                         <Theme />
-                        <Dropdown />
+                        <Menu />
                     </div>
                 </nav>
             </div>

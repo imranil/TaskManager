@@ -1,14 +1,13 @@
 
 import './checkbox.css';
 
-const Checkbox = ({ label, value, onChange, onBlur }) => {
+const Checkbox = ({ label }) => {
     return (
         <div className="checkbox-wrap">
             <label className="checkbox-label">
+                <input className="checkbox-input" type="checkbox" />
                 {label}
-                <input className="checkbox-input" type="checkbox" value={value} onChange={onChange} onBlur={onBlur} />
             </label>
-
         </div>
     );
 }

@@ -1,9 +1,8 @@
 import React from "react";
 import { useSelector } from 'react-redux';
-import Checkbox from "../../common/checkbox/Checkbox";
-import MultiSelect from "../../common/select/MultiSelect";
+import Multiselect from "../../common/select/MultiSelect";
 import Select from "../../common/select/Select";
-import CreateTaskPopup from "../../task/CreateTaskPopup";
+import CreateTask from "../../task/operations/CreateTask";
 
 const TaskControl = ({ setPriority, setStatus }) => {
     const priorities = useSelector(state => state.tasks.priorities)
@@ -14,7 +13,8 @@ const TaskControl = ({ setPriority, setStatus }) => {
         <div className="task-control">
             <Select onChange={e => setPriority(e.target.value) } placeholder="По приоритету" objects={{ '': 'Все', ...priorities }} />
             <Select onChange={e => setStatus(e.target.value) } placeholder="По статусу" objects={{  '': 'Все', ...statuses }} />
-            <CreateTaskPopup />
+            <Multiselect placeholder="Мультиселект" />
+            <CreateTask />
         </div>
     );
 }

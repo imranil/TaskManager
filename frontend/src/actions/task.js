@@ -53,14 +53,14 @@ export function createTask(name, description, priority, status, deadline) {
     }
 }
 
-export function removeTask(task) {
+export function removeTask(taskId) {
     return async dispatch => {
         try {
             dispatch(showLoader())
-            axios.delete(`${API_URL}api/tasks?id=${task.id}`, {
+            axios.delete(`${API_URL}api/tasks?id=${taskId}`, {
                 headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
             })
-            dispatch(deleteTask(task.id))
+            dispatch(deleteTask(taskId))
         } catch (e) {
             alert(e.response.data.message)
         } finally {

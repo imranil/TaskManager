@@ -85,19 +85,26 @@
     gap: 1em;
 }
 
-.create-task {
+.task-form {
     display: flex;
     flex-direction: column;
     gap: 1em;
 }
 
-.create-task>.header {
+.task-form>.header {
     justify-content: space-between;
 }
 
-.create-task>.header>.title {
+.task-form>.header>.title {
     font-size: 1.5em;
     font-weight: 500;
+}
+
+.task-form > .footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 2em;
 }
 
 .close-button {
@@ -115,17 +122,4 @@
 
 .close-button>svg>path {
     fill: var(--light-100) !important;
-}
-
-.tag {
-    padding: .15em .5em;
-    border-radius: 1em;
-    background-color: rgba(0, 0, 0, .1);
-}
-.tag::before {
-    content: "#";
-}
-.tag:hover {
-    background-color: rgba(0, 0, 0, .05);
-    cursor:default;
 }
