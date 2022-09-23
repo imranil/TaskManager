@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCounts } from "../../actions/task";
 import { uploadAvatar, deleteAvatar } from "../../actions/user";
 import { API_URL } from "../../config";
-import BarChart from "./chart/Chart";
+import BarChart from "../../components/chart/Chart";
 import './profile.css'
 
 const Profile = () => {
@@ -42,8 +42,8 @@ const Profile = () => {
                     </div>
                     <div className="contacts">
                         <div className="data-row">
-                            <span className="title">Электронная почта: </span>
-                            <span className="value">{user.email}</span>
+                            <div className="title">Электронная почта: </div>
+                            <div className="value">{user.email}</div>
                         </div>
                     </div>
                     <div className="numbers">

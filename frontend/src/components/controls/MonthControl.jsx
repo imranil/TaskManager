@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { setCurrentMonth, setCurrentYear } from "../../../reducers/calendarSlice";
+import { setCurrentMonth, setCurrentYear } from "../../reducers/calendarSlice";
 
 const MonthControl = ({ currentMonth, currentYear}) => {
     const dispatch = useDispatch();

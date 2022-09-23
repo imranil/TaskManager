@@ -1,14 +1,14 @@
 import React from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from "react-router-dom";
-import { setCurrentTask } from "../../../reducers/taskSlice";
+import { setCurrentTask } from "../../reducers/taskSlice";
 
 const Month = () => {
     const isLoading = useSelector(state => state.app.loader)
     const currentMonth = useSelector(state => state.calendar.currentMonth)
     const currentYear = useSelector(state => state.calendar.currentYear)
     const tasks = useSelector(state => state.tasks.tasks)
-    const daysOfWeek = Object.keys(useSelector(state => state.calendar.daysOfWeek))
+    const daysOfWeek = Object.values(useSelector(state => state.calendar.daysOfWeek))
 
     const WEEK_DAY_SUNDAY = 6;
     const WEEK_DAY_MONDAY = 0;
@@ -61,11 +61,11 @@ const Month = () => {
 
     function isToday(date) {
         const today = new Date()
-        return date.getFullYear() === today.getFullYear() 
-            && date.getMonth() === today.getMonth() 
+        return date.getFullYear() === today.getFullYear()
+            && date.getMonth() === today.getMonth()
             && date.getDate() === today.getDate();
     }
-    
+
     if (isLoading) {
         return (
             <div className="loader">

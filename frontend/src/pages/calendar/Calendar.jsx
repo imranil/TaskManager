@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { getTasks } from "../../actions/task";
 import { getTags } from "../../actions/tag";
-import Month from "./month/Month";
-import MonthControl from "./controls/MonthControl";
-import TaskControl from "./controls/TaskControl";
+import Month from "../../components/month/Month";
+import MonthControl from "../../components/controls/MonthControl";
+import TaskControl from "../../components/controls/TaskControl";
 import './calendar.css';
 
 

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Option from './option/Option';
-import './select.css';
+import './select.scss';
 
 const Multiselect = ({ placeholder, objects, value, onChange, onBlur }) => {
     const [active, setActive] = useState(false)

@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import Authorization from "./authorization/Authorization";
-import { auth } from '../actions/user'
-import Navbar from "./navbar/Navbar";
-import Calendar from "./calendar/Calendar";
-import Task from "./task/Task";
-import Profile from "./profile/Profile";
-import { getTags } from "../actions/tag";
+import Authorization from "./pages/authorization/Authorization";
+import { auth } from './actions/user'
+import Navbar from "./components/navbar/Navbar";
+import Calendar from "./pages/calendar/Calendar";
+import Task from "./components/task/Task";
+import Profile from "./pages/profile/Profile";
+import { getTags } from "./actions/tag";
 import './app.css';
 
 function App() {

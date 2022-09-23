@@ -1,5 +1,5 @@
 import Option from './option/Option';
-import './select.css';
+import './select.scss';
 
 const Select = ({ className, placeholder, objects, value, onChange, onBlur }) => {
     return (
