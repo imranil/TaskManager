@@ -8,6 +8,7 @@ Calendar2.0<br/>
 + Переход по месяца<br/>
 + Получение задач для текущего месяца и года<br/>
 + Создание, чтение, изменение, удаление задачи<br/>
++ Фильтр задач по приоритету и статусу<br/>
 + Переход на страницу задачи<br/>
 + Поиск задач по названию, описанию или дате<br/>
 + Отображение гистограммы с кол-вом задач по месяцам<br/>
@@ -21,10 +22,10 @@ Calendar2.0<br/>
 <br/>
 **Календарь**<br/>
 ![image](https://user-images.githubusercontent.com/61901497/188365868-9b3da827-4697-4e38-8e77-6ed80961ec5c.png)<br/>
-![image](https://user-images.githubusercontent.com/61901497/190068980-902fb826-403e-40bd-8eb4-d0472068ec3e.png)<br/>
+![image](https://user-images.githubusercontent.com/61901497/191906645-6c3502cf-6968-4bd5-a4d7-576d885b8cea.png)<br/>
 <br/>
 **Профиль пользователя**<br/>
-![image](https://user-images.githubusercontent.com/61901497/188365927-fb70103c-0562-4c68-975d-da8023907a86.png)<br/>
+![image](https://user-images.githubusercontent.com/61901497/191906798-cb069f69-801c-404c-b7e7-87cb4c672840.png)<br/>
 <br/>
 **Приглашения**<br/>
 ![image](https://user-images.githubusercontent.com/61901497/188366314-3a19f827-470d-4675-9fc2-eb59f45216bc.png)<br/>
