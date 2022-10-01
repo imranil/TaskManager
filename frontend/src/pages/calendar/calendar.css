@@ -2,13 +2,12 @@
 
 
 .top-row {
-    margin-top: 2em;
+    margin-top: 1.5em;
     padding: 1em 0;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     gap: 2em;
-    align-items: center;
 }
 
 .month {
@@ -17,8 +16,21 @@
 
 .month-control {
     display: flex;
-    gap: 2em;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
+}
+
+.month-control>.button-area {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2em;
+}
+
+.month-control>.button-area>button>svg {
+    width: 1.5em;
+    height: 1.5em;
 }
 
 .month-control>span {
@@ -27,19 +39,23 @@
     line-height: 1.5em;
 }
 
-.month-control>button>svg {
-    width: 1.5em;
-    height: 1.5em;
-}
-
 .task-control {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     flex-wrap: wrap;
+}
+
+.task-control>.select-area {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     gap: 2em;
 }
 
-.task-control>.select {
+.task-control>.select-area>.select {
     min-width: 12.5em;
 }
 

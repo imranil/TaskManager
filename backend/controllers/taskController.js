@@ -7,8 +7,14 @@ class TaskController {
         try {
             const { name, description, priority, status, deadline } = req.body
             const task = await Task.create({ name, description, priority, status, deadline })
-            UserTask.create({ userId: req.user.id, taskId: task.id, role: 'creator' })
-            return res.status(201).json(task);
+            await UserTask.create({ userId: req.user.id, taskId: task.id, role: 'creator'})
+            const createdTask = await Task.findByPk(task.id, {
+                include: [
+                    {model: User, attributes: ['avatar', 'fullName']},
+                    {model: Tag, attributes: ['id', 'name']}
+                ],
+            })
+            return res.status(201).json(createdTask);
         } catch (e) {
             console.log(e)
             return res.status(400).json(e)
@@ -17,9 +23,11 @@ class TaskController {
 
     async getTasks(req, res) {
         try {
-            const { startDate, endDate, priority, status } = req.query;
+            const { startDate, endDate, priorities, statuses } = req.query;
+
             let tasks;
-            if (priority) {
+            if (priorities) {
+                const prioritiesArray = JSON.parse(priorities)
                 tasks = await Task.findAll({
                     include: [
                         {model: User, attributes: ['avatar', 'fullName']},
@@ -28,11 +36,12 @@ class TaskController {
                     where: {
                         id: { [Op.in]: sequelize.literal(`(SELECT usertasks.taskId FROM usertasks INNER JOIN users ON users.id=usertasks.userId WHERE users.id=${req.user.id})`) },
                         deadline: { [Op.between]: [startDate, endDate] },
-                        priority: priority
+                        priority: { [Op.in]: prioritiesArray},
                     },
                 })
             }
-            if (status) {
+            if (statuses) {
+                const statusesArray = JSON.parse(statuses)
                 tasks = await Task.findAll({
                     include: [
                         {model: User, attributes: ['avatar', 'fullName']},
@@ -41,11 +50,13 @@ class TaskController {
                     where: {
                         id: { [Op.in]: sequelize.literal(`(SELECT usertasks.taskId FROM usertasks INNER JOIN users ON users.id=usertasks.userId WHERE users.id=${req.user.id})`) },
                         deadline: { [Op.between]: [startDate, endDate] },
-                        status: status
+                        status: { [Op.in]: statusesArray},
                     },
                 })
             }
-            if (priority && status) {
+            if (priorities && statuses) {
+                const prioritiesArray = JSON.parse(priorities)
+                const statusesArray = JSON.parse(statuses)
                 tasks = await Task.findAll({
                     include: [
                         {model: User, attributes: ['avatar', 'fullName']},
@@ -54,12 +65,12 @@ class TaskController {
                     where: {
                         id: { [Op.in]: sequelize.literal(`(SELECT usertasks.taskId FROM usertasks INNER JOIN users ON users.id=usertasks.userId WHERE users.id=${req.user.id})`) },
                         deadline: { [Op.between]: [startDate, endDate] },
-                        priority: priority,
-                        status: status
+                        priority: { [Op.in]: prioritiesArray},
+                        status: { [Op.in]: statusesArray},
                     },
                 })
             }
-            if (!priority && !status) {
+            if (!priorities && !statuses) {
                 tasks = await Task.findAll({
                     include: [
                         {model: User, attributes: ['avatar', 'fullName']},
@@ -71,9 +82,11 @@ class TaskController {
                     },
                 })
             }
+            
             return res.status(200).json(tasks);
         } catch (e) {
             console.log(e)
+            return res.status(400).json(e)
         }
     }
 
@@ -95,6 +108,7 @@ class TaskController {
             return res.json({ message: 'Task was deleted' });
         } catch (e) {
             console.log(e)
+            return res.status(400).json(e)
         }
     }
 

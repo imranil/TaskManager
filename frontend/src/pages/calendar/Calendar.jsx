@@ -5,21 +5,30 @@ import { getTags } from "../../actions/tag";
 import Month from "../../components/month/Month";
 import MonthControl from "../../components/controls/MonthControl";
 import TaskControl from "../../components/controls/TaskControl";
+import { taskPropertyAdapter } from "../../utils/taskPropertyAdapter";
 import './calendar.css';
 
 const TaskControlMemo = memo(TaskControl);
 
 const Calendar = () => {
     const dispatch = useDispatch()
-    const currentTask = useSelector(state => state.tasks.currentTask)
     const currentMonth = useSelector(state => state.calendar.currentMonth)
     const currentYear = useSelector(state => state.calendar.currentYear)
     const startDate = new Date(currentYear, currentMonth, 1).toLocaleDateString('en-CA') // yyyy-mm-dd
     const endDate = new Date(currentYear, currentMonth + 1, 0).toLocaleDateString('en-CA')
 
+    const [selectedPriorities, setSelectedPriorities] = useState([])
+    const [selectedStatuses, setSelectedStatuses] = useState([])
+    const [selectedTags, setSelectedTags] = useState([])
+
     useEffect(() => {
-        dispatch(getTasks({ startDate, endDate }))
-    }, [currentMonth, currentYear, currentTask]);
+        dispatch(getTasks({
+            startDate,
+            endDate,
+            priorities: taskPropertyAdapter(selectedPriorities),
+            statuses: taskPropertyAdapter(selectedStatuses)
+        }))
+    }, [currentMonth, currentYear, selectedPriorities, selectedStatuses]);
 
     useEffect(() => {
         dispatch(getTags())
@@ -28,8 +37,15 @@ const Calendar = () => {
     return (
         <div className="container">
             <div className="top-row">
+                <TaskControlMemo
+                    selectedPriorities={selectedPriorities}
+                    setSelectedPriorities={setSelectedPriorities}
+                    selectedStatuses={selectedStatuses}
+                    setSelectedStatuses={setSelectedStatuses}
+                    selectedTags={selectedTags}
+                    setSelectedTags={setSelectedTags}
+                />
                 <MonthControl currentMonth={currentMonth} currentYear={currentYear} />
-                <TaskControlMemo />
             </div>
             <Month />
         </div>
