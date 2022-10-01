@@ -23,7 +23,7 @@
     flex-direction: column;
     gap: 1em;
     border: 1em solid var(--bc-content);
-    border-radius: 1em;
+    border-radius: 4px;
     background-color: var(--bc-content);
 }
 
@@ -31,13 +31,13 @@
     display: flex;
     width: 20em;
     height: 20em;
-    border-radius: .75em;
+    border-radius: 4px;
     background: linear-gradient(45deg, var(--orange-100), var(--blue-200));
 }
 
 .avatar>img {
     width: inherit;
-    border-radius: .75em;
+    border-radius: 4px;
 }
 
 .avatar-content>input[type=file] {
@@ -64,7 +64,7 @@
     flex-direction: column;
     gap: 1em;
     border: 1em solid var(--bc-content);
-    border-radius: 1em;
+    border-radius: 4px;
     background-color: var(--bc-content);
 }
 
@@ -80,7 +80,7 @@
     flex-grow: 3;
     width: max-content;
     border: 1em solid var(--bc-content);
-    border-radius: 1em;
+    border-radius: 4px;
     background-color: var(--bc-content);
 }
 .bar-chart > canvas {

@@ -22,7 +22,8 @@
 }
 
 .month-control>span {
-    font-size: 1.5em;
+    font-size: 1.25em;
+    font-weight: 500;
     line-height: 1.5em;
 }
 
@@ -34,7 +35,12 @@
 .task-control {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     gap: 2em;
+}
+
+.task-control>.select {
+    min-width: 12.5em;
 }
 
 .week {

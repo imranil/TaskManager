@@ -3,6 +3,8 @@ import { createTask, getTasks } from "../../../../actions/task";
 import useInput from "../../../../hooks/useInput";
 import Popup from "../Popup";
 import Select from "../../select/Select";
+import Input from '../../input/Input';
+import { useState } from 'react';
 
 
 
@@ -12,14 +14,14 @@ const CreateTaskPopup = ({ popupActive, setPopupActive }) => {
     const statuses = useSelector(state => state.tasks.statuses)
     const name = useInput('', { isEmpty: true, minLength: 2 })
     const description = useInput('', { isEmpty: true })
-    const priority = useInput('', { isEmpty: true })
-    const status = useInput('', { isEmpty: true })
     const deadline = useInput('', { isEmpty: true })
+    const [priority, setPriority] = useState([])
+    const [status, setStatus] = useState([])
 
 
     function submitHandler(event) {
         event.preventDefault()
-        dispatch(createTask(name.value, description.value, priority.value, status.value, deadline.value))
+        dispatch(createTask(name.value, description.value, priority[0].value, status[0].value, deadline.value))
         dispatch(getTasks())
         setPopupActive(false)
     }
@@ -42,18 +44,16 @@ const CreateTaskPopup = ({ popupActive, setPopupActive }) => {
                     </button>
                 </div>
                 <div className="body">
-                    <input value={name.value} onChange={e => name.onChange(e)} onBlur={e => name.onBlur(e)} name="name" type="text" placeholder="Название" formNoValidate={false} />
+                    <Input value={name.value} onChange={e => name.onChange(e)} onBlur={e => name.onBlur(e)} name="name" type="text" placeholder="Название" formNoValidate={false} />
                     {(name.isDirty && name.minLengthError) && <div className="has-error">Поле не должно содержать меньше 2 символов</div>}
                     <textarea value={description.value} onChange={e => description.onChange(e)} onBlur={e => description.onBlur(e)} name="description" placeholder="Описание" rows="5" />
-                    <Select value={priority.value} onChange={e => priority.onChange(e)} onBlur={e => priority.onBlur(e)} name="priority" placeholder="Приоритет" objects={priorities} />
-                    {(priority.isDirty && priority.isEmpty) && <div className="has-error">Поле не может быть пустым</div>}
-                    <Select value={status.value} onChange={e => status.onChange(e)} onBlur={e => status.onBlur(e)} name="status" placeholder="Статус" objects={statuses} />
-                    {(status.isDirty && status.isEmpty) && <div className="has-error">Поле не может быть пустым</div>}
-                    <input value={deadline.value} onChange={e => deadline.onChange(e)} onBlur={e => deadline.onBlur(e)} name="deadline" type="date" />
+                    <Select selectedItems={priority} setSelectedItems={setPriority} placeholder="Приоритет" options={priorities} />
+                    <Select selectedItems={status} setSelectedItems={setStatus} placeholder="Статус" options={statuses} />
+                    <Input value={deadline.value} onChange={e => deadline.onChange(e)} onBlur={e => deadline.onBlur(e)} name="deadline" type="date" />
                     {(deadline.isDirty && deadline.isEmpty) && <div className="has-error">Поле не может быть пустым</div>}
                 </div>
                 <div className="footer">
-                    <button disabled={!name.inputValid || !priority.inputValid || !status.inputValid || !deadline.inputValid} type="submit" className="main-button">Создать</button>
+                    <button disabled={!name.inputValid || priority.length===0 || status.length===0 || !deadline.inputValid} type="submit" className="main-button">Создать</button>
                 </div>
             </form>
         </Popup>

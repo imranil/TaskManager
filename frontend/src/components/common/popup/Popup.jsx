@@ -10,7 +10,7 @@ const Popup = ({ active, setActive, children, coords, bcTransparent }) => {
             <div className={active ? "popup-content active" : "popup-content"} 
                 onClick={event => event.stopPropagation()} 
                 style={coords && {top: coords.top, left: coords.left, width: coords.width}}>
-                {children}
+                { active && children}
             </div>
         </div>
     );

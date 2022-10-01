@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { createInvitation } from "../../../../actions/invitation";
 import useInput from "../../../../hooks/useInput";
 import Popup from "../Popup";
+import Input from "../../input/Input";
 
 
 const SendInvitationPopup = ({ taskId, popupActive, setPopupActive }) => {
@@ -32,7 +33,7 @@ const SendInvitationPopup = ({ taskId, popupActive, setPopupActive }) => {
                     </button>
                 </div>
                 <div className="body">
-                    <input value={email.value} onChange={e => email.onChange(e)} onBlur={e => email.onBlur(e)} name="email" type="email" placeholder="Электронная почта" />
+                    <Input value={email.value} onChange={e => email.onChange(e)} onBlur={e => email.onBlur(e)} name="email" type="email" placeholder="Электронная почта" />
                     {(email.isDirty && email.emailError) && <div className="has-error">Поле должно содержать адрес электронной почты!</div>}
                     {(email.isDirty && (email.value === currentUserEmail)) && <div className="has-error">Вы не можете отправлять приглашение себе!</div>}
                 </div>

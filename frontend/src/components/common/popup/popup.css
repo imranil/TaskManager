@@ -25,16 +25,12 @@
 .popup-content {
     position: absolute;
     padding: 1em;
-    border-radius: 1em;
+    border-radius: 4px;
     background-color: var(--bc-popup);
     filter: drop-shadow(0px 0px 7px rgba(0, 0, 0, 0.25));
     transform: scale(0.5);
     transition: 0.4s all;
     z-index: 600;
-}
-
-.popup-content > select {
-    background-color: var(--bc-input);
 }
 
 .popup-content.active {

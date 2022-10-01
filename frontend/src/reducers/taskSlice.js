@@ -8,8 +8,8 @@ const taskSlice = createSlice({
         foundTasks: [],
         tasksCounts: [],
         currentTask: null,
-        priorities: { 'low': 'Низкий', 'medium': 'Средний', 'high': 'Высокий' },
-        statuses: { 'to do': 'Сделать', 'in progress': 'В процессе', 'closed': 'Завершён', 'frozen': 'Заморожен' }
+        priorities: [ { value:'low', label:'Низкий' }, { value:'medium', label:'Средний' }, { value:'high', label:'Высокий' } ],
+        statuses: [ { value:'in progress', label:'В процессе' }, { value:'closed', label:'Завершён' }, { value:'frozen', label:'Заморожен' } ]
     },
     reducers: {
         setTasks(state, action) {
@@ -24,12 +24,14 @@ const taskSlice = createSlice({
         setCurrentTask(state, action) {
             state.currentTask = action.payload
         },
-        deleteTask(state, action) {
-            state.currentTask = null
-            state.tasks = state.tasks.filter(task => task.id != action.payload)
+        addTask(state, action) {
+            state.tasks = [...state.tasks, action.payload]
+        },
+        removeTask(state, action) {
+            state.tasks = state.tasks.filter(task => task.id !== action.payload)
         },
     }
 })
 
 export default taskSlice.reducer
-export const { setTasks, setCurrentTask, setFoundTasks, deleteTask, setTasksCounts } = taskSlice.actions
+export const { setTasks, setCurrentTask, setFoundTasks, addTask, removeTask, setTasksCounts } = taskSlice.actions

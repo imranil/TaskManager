@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import CreateTaskPopup from "../../common/popup/popups/CreateTaskPopup";
-import '../task.css';
 
 const CreateTask = () => {
     const [popupActive, setPopupActive] = useState(false)

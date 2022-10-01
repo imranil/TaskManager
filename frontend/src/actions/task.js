@@ -1,6 +1,6 @@
 import axios from "axios";
 import { hideLoader, showLoader } from "../reducers/appSlice";
-import { setCurrentTask, deleteTask, setTasks, setFoundTasks, setTasksCounts } from "../reducers/taskSlice";
+import { setCurrentTask, removeTask, setTasks, setFoundTasks, setTasksCounts, addTask } from "../reducers/taskSlice";
 import { API_URL } from "../config";
 
 
@@ -8,17 +8,8 @@ export function getTasks(params) {
     return async dispatch => {
         try {
             dispatch(showLoader())
-            const { startDate, endDate, priority, status } = params
+            const { startDate, endDate } = params
             let url = `${API_URL}api/tasks?startDate=${startDate}&endDate=${endDate}`
-            if(priority) {
-                url = `${API_URL}api/tasks?startDate=${startDate}&endDate=${endDate}&priority=${priority}`
-            }
-            if(status) {
-                url = `${API_URL}api/tasks?startDate=${startDate}&endDate=${endDate}&status=${status}`
-            }
-            if(priority && status) {
-                url = `${API_URL}api/tasks?startDate=${startDate}&endDate=${endDate}&priority=${priority}&status=${status}`
-            }
             const response = await axios.get(url, {
                 headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
             })
@@ -44,7 +35,7 @@ export function createTask(name, description, priority, status, deadline) {
             }, {
                 headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
             })
-            dispatch(setCurrentTask(response.data))
+            dispatch(addTask(response.data))
         } catch (e) {
             alert(e.response.data.message)
         } finally {
@@ -53,14 +44,14 @@ export function createTask(name, description, priority, status, deadline) {
     }
 }
 
-export function removeTask(taskId) {
+export function deleteTask(taskId) {
     return async dispatch => {
         try {
             dispatch(showLoader())
             axios.delete(`${API_URL}api/tasks?id=${taskId}`, {
                 headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
             })
-            dispatch(deleteTask(taskId))
+            dispatch(removeTask(taskId))
         } catch (e) {
             alert(e.response.data.message)
         } finally {

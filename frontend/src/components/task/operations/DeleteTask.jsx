@@ -1,6 +1,5 @@
 import { useState } from "react";
 import DeleteTaskPopup from "../../common/popup/popups/DeleteTaskPopup";
-import '../task.css';
 
 
 const DeleteTask = () => {

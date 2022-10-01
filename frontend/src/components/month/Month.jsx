@@ -1,14 +1,16 @@
 import React from "react";
+import { useCallback } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from "react-router-dom";
 import { setCurrentTask } from "../../reducers/taskSlice";
+
 
 const Month = () => {
     const isLoading = useSelector(state => state.app.loader)
     const currentMonth = useSelector(state => state.calendar.currentMonth)
     const currentYear = useSelector(state => state.calendar.currentYear)
     const tasks = useSelector(state => state.tasks.tasks)
-    const daysOfWeek = Object.values(useSelector(state => state.calendar.daysOfWeek))
+    const daysOfWeek = Object.keys(useSelector(state => state.calendar.daysOfWeek))
 
     const WEEK_DAY_SUNDAY = 6;
     const WEEK_DAY_MONDAY = 0;
@@ -22,7 +24,7 @@ const Month = () => {
         while (date.getMonth() === currentMonth) {
             let tasksOfDay = getTasksOfDay(date.getDate())
 
-            days.push(<Day key={date.getDate()} heading={date.getDate()} tasks={tasksOfDay} today={isToday(date)} />)
+            days.push(<Day key={date.getDate()} heading={date.getDate()} tasks={tasksOfDay} isToday={isToday(date)} />)
 
             if (getDay(date) % 7 === WEEK_DAY_SUNDAY) {
                 month.push(<Week key={month.length} days={days} />)
@@ -90,14 +92,13 @@ const Week = ({ days }) => {
     );
 }
 
-const Day = (props) => {
-    const tasks = props.tasks ? Object.values(props.tasks).map(task => task) : []
+const Day = ({ tasks, isToday, heading}) => {
 
     return (
-        <div className={props.today ? 'day today' : 'day'}>
-            <div className="heading">{props.heading} {props.today && 'Сегодня'}</div>
+        <div className={isToday ? 'day today' : 'day'}>
+            <div className="heading">{heading} {isToday && 'Сегодня'}</div>
             <ul className="task-list">
-                {tasks.length !== 0 &&
+                {Array.isArray(tasks) &&
                     tasks.map(task => <TaskOfDay key={task.id} task={task} />)
                 }
             </ul>
@@ -112,7 +113,7 @@ const TaskOfDay = ({ task }) => {
     return (
         <NavLink to={'/task/' + task.id} onClick={() => dispatch(setCurrentTask(task))} className="item">
             {task.name}
-            <span className={task.priority}>{priorities[task.priority]}</span>
+            <span className={task.priority}>{priorities.find(priority => priority.value === task.priority).label}</span>
         </NavLink>
     );
 }

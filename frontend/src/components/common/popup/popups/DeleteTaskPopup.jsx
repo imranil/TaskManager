@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { removeTask } from "../../../../actions/task";
+import { deleteTask } from "../../../../actions/task";
 import Popup from "../Popup";
 
 
@@ -11,7 +11,7 @@ const DeleteTaskPopup = ({ popupActive, setPopupActive }) => {
 
     function removeTaskHandler(event) {
         event.preventDefault()
-        dispatch(removeTask(taskId))
+        dispatch(deleteTask(taskId))
         setPopupActive(false)
         navigate('/calendar')
     }
@@ -34,7 +34,7 @@ const DeleteTaskPopup = ({ popupActive, setPopupActive }) => {
                     </button>
                 </div>
                 <div className="body">
-                    Вы действительно хотите удалить задачу?
+                    <span>Вы действительно хотите удалить задачу?</span>
                 </div>
                 <div className="footer">
                     <button type="submit" className="main-button close-button">Удалить</button>

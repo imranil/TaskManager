@@ -24,8 +24,8 @@ const SearchPopup = ({ popupActive, setPopupActive, popupCoords }) => {
                     ? tasks.map(task =>
                         <div onClick={() => redirectHandler(task)} key={task.id} className="item">
                             <div className="name">{task.name}</div>
-                            <div className="priority"><span className={task.priority}>{priorities[task.priority]}</span></div>
-                            <div className="status">{statuses[task.status]}</div>
+                            <div className="priority"><span className={task.priority}>{priorities.find(priority => priority.value === task.priority).label}</span></div>
+                            <div className="status">{statuses.find(status => status.value === task.status).label}</div>
                             <div className="deadline">{new Date(task.deadline).toLocaleDateString()}</div>
                         </div>)
                     : <div className="item"><div className="name">Задачи не найдены</div></div>

@@ -1,8 +1,13 @@
 
 
-const Option = ({ onClick, value, label, className, disabled, selected }) => {
+const Option = ({ option, onClick }) => {
+
     return (
-        <option onClick={onClick} className={className} value={value} disabled={disabled} selected={selected} >{label}</option>
+        <div onClick={(e) => onClick(e, option)} onMouseDown={e => e.preventDefault()} className="select__menu__item">
+            <div className="select__menu__item-label">
+                {option.label}
+            </div>
+        </div>
     );
 }
 

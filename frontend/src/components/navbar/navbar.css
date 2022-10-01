@@ -8,7 +8,7 @@ header {
 nav {
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
     gap: 1.5em;
     padding: .75em 0;
@@ -20,16 +20,18 @@ nav>.search-area {
     position: relative;
     left: -2em;
 }
-
-nav>.search-area>input[type=search] {
+nav>.search-area>.input {
     width: 100%;
     padding-left: 2.5em;
 }
+nav>.search-area>.input>input[type=search] {
+    width: 100%;
+}
 
-nav>.search-area>input[type=search]::-webkit-search-cancel-button {
+nav>.search-area>.input>input[type=search]::-webkit-search-cancel-button {
     -webkit-appearance: none;
-    height: 1em;
-    width: 1em;
+    height: .75em;
+    width: .75em;
     background-color: var(--text-color);
     -webkit-mask-image:  url('../../assets/img/cross.svg');
     mask-image: url('../../assets/img/cross.svg');
@@ -52,7 +54,7 @@ nav>.search-area>svg>path {
 .nav-bar {
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
     gap: 1.5em;
 }
@@ -62,7 +64,7 @@ a {
     align-items: center;
     gap: 0.5em;
     border: 1px solid transparent;
-    border-radius: 0.5em;
+    border-radius: 4px;
     color: var(--text-color);
     font-size: 1.25em;
     padding: 0 0.5em;
@@ -157,6 +159,9 @@ nav a.active {
 @media (max-width:576px) {
     nav {
         flex-wrap: wrap-reverse;
+    }
+    nav > .nav-bar {
+        width: 100%;
     }
 }
 
