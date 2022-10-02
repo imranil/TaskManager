@@ -37,6 +37,7 @@ const Calendar = () => {
     return (
         <div className="container">
             <div className="top-row">
+                <MonthControl currentMonth={currentMonth} currentYear={currentYear} />
                 <TaskControlMemo
                     selectedPriorities={selectedPriorities}
                     setSelectedPriorities={setSelectedPriorities}
@@ -45,7 +46,6 @@ const Calendar = () => {
                     selectedTags={selectedTags}
                     setSelectedTags={setSelectedTags}
                 />
-                <MonthControl currentMonth={currentMonth} currentYear={currentYear} />
             </div>
             <Month />
         </div>

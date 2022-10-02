@@ -10,17 +10,10 @@ export function getTasks(params) {
         try {
             dispatch(showLoader())
             const { startDate, endDate, priorities, statuses } = params
-            let url = `${API_URL}api/tasks?startDate=${startDate}&endDate=${endDate}`
-            console.log(statuses)
-            if(!arrayIsEmpty(priorities)) {
-                url = `${API_URL}api/tasks?startDate=${startDate}&endDate=${endDate}&priorities=${JSON.stringify(priorities)}`
-            }
-            if(!arrayIsEmpty(statuses)) {
-                url = `${API_URL}api/tasks?startDate=${startDate}&endDate=${endDate}&statuses=${JSON.stringify(statuses)}`
-            }
-            if(!arrayIsEmpty(priorities) && !arrayIsEmpty(statuses)) {
-                url = `${API_URL}api/tasks?startDate=${startDate}&endDate=${endDate}&priorities=${JSON.stringify(priorities)}&statuses=${JSON.stringify(statuses)}`
-            }
+            
+            const url = `${API_URL}api/tasks?startDate=${startDate}&endDate=${endDate}` +
+                (!arrayIsEmpty(priorities) ? `&priorities=${JSON.stringify(priorities)}` : '') +
+                (!arrayIsEmpty(statuses) ? `&statuses=${JSON.stringify(statuses)}` : '');
 
             const response = await axios.get(url, {
                 headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }

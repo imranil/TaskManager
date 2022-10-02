@@ -197,6 +197,7 @@ select>option.select-placeholder {
         position: absolute;
         transition: all 100ms ease 0s;
         box-sizing: border-box;
+        cursor: default;
         z-index: 300;
 
         .select__menu__item {

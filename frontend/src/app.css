@@ -98,7 +98,10 @@ textarea:invalid::placeholder {
 }
 
 .tab-button {
-    background-color: var(--bc-body);
+    background-color: var(--bc-active);
+    -webkit-box-shadow: inset 0px 0px 2px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: inset 0px 0px 2px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: inset 0px 0px 2px 0px rgba(0, 0, 0, 0.75);
     color: var(--text-color);
     padding: 0.5em 1em;
     font-weight: 500;
@@ -114,6 +117,13 @@ textarea:invalid::placeholder {
 
 .tab-button:active {
     background-color: var(--bc-active);
+}
+
+.tab-button.active {
+    background-color: var(--bc-body) !important;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
 }
 
 .extra-button {
@@ -243,6 +253,7 @@ textarea:invalid::placeholder {
 .header {
     display: flex;
     flex-direction: row;
+    gap: 1em;
 }
 
 .header>.active {

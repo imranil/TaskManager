@@ -5,7 +5,7 @@
     margin-top: 1.5em;
     padding: 1em 0;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-between;
     gap: 2em;
 }
@@ -19,6 +19,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    gap: 2em;
 }
 
 .month-control>.button-area {
@@ -42,16 +43,18 @@
 .task-control {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     flex-wrap: wrap;
+    gap: 2em;
 }
 
 .task-control>.select-area {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
+    flex-wrap: wrap;
     gap: 2em;
 }
 

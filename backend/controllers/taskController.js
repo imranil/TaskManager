@@ -24,64 +24,21 @@ class TaskController {
     async getTasks(req, res) {
         try {
             const { startDate, endDate, priorities, statuses } = req.query;
+            const prioritiesArray = priorities ? JSON.parse(priorities) : ['low', 'medium', 'high'];
+            const statusesArray = statuses ? JSON.parse(statuses) : ['in progress', 'closed', 'frozen'];
 
-            let tasks;
-            if (priorities) {
-                const prioritiesArray = JSON.parse(priorities)
-                tasks = await Task.findAll({
-                    include: [
-                        {model: User, attributes: ['avatar', 'fullName']},
-                        {model: Tag, attributes: ['id', 'name']}
-                    ],
-                    where: {
-                        id: { [Op.in]: sequelize.literal(`(SELECT usertasks.taskId FROM usertasks INNER JOIN users ON users.id=usertasks.userId WHERE users.id=${req.user.id})`) },
-                        deadline: { [Op.between]: [startDate, endDate] },
-                        priority: { [Op.in]: prioritiesArray},
-                    },
-                })
-            }
-            if (statuses) {
-                const statusesArray = JSON.parse(statuses)
-                tasks = await Task.findAll({
-                    include: [
-                        {model: User, attributes: ['avatar', 'fullName']},
-                        {model: Tag, attributes: ['id', 'name']}
-                    ],
-                    where: {
-                        id: { [Op.in]: sequelize.literal(`(SELECT usertasks.taskId FROM usertasks INNER JOIN users ON users.id=usertasks.userId WHERE users.id=${req.user.id})`) },
-                        deadline: { [Op.between]: [startDate, endDate] },
-                        status: { [Op.in]: statusesArray},
-                    },
-                })
-            }
-            if (priorities && statuses) {
-                const prioritiesArray = JSON.parse(priorities)
-                const statusesArray = JSON.parse(statuses)
-                tasks = await Task.findAll({
-                    include: [
-                        {model: User, attributes: ['avatar', 'fullName']},
-                        {model: Tag, attributes: ['id', 'name']}
-                    ],
-                    where: {
-                        id: { [Op.in]: sequelize.literal(`(SELECT usertasks.taskId FROM usertasks INNER JOIN users ON users.id=usertasks.userId WHERE users.id=${req.user.id})`) },
-                        deadline: { [Op.between]: [startDate, endDate] },
-                        priority: { [Op.in]: prioritiesArray},
-                        status: { [Op.in]: statusesArray},
-                    },
-                })
-            }
-            if (!priorities && !statuses) {
-                tasks = await Task.findAll({
-                    include: [
-                        {model: User, attributes: ['avatar', 'fullName']},
-                        {model: Tag, attributes: ['id', 'name']}
-                    ],
-                    where: {
-                        id: { [Op.in]: sequelize.literal(`(SELECT usertasks.taskId FROM usertasks INNER JOIN users ON users.id=usertasks.userId WHERE users.id=${req.user.id})`) },
-                        deadline: { [Op.between]: [startDate, endDate] },
-                    },
-                })
-            }
+            const tasks = await Task.findAll({
+                include: [
+                    {model: User, attributes: ['avatar', 'fullName']},
+                    {model: Tag, attributes: ['id', 'name']}
+                ],
+                where: {
+                    id: { [Op.in]: sequelize.literal(`(SELECT usertasks.taskId FROM usertasks INNER JOIN users ON users.id=usertasks.userId WHERE users.id=${req.user.id})`) },
+                    deadline: { [Op.between]: [startDate, endDate] },
+                    priority: { [Op.in]: prioritiesArray},
+                    status: { [Op.in]: statusesArray},
+                },
+            })
             
             return res.status(200).json(tasks);
         } catch (e) {
