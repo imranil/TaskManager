@@ -1,7 +1,7 @@
 import axios from "axios";
 import { hideLoader, showLoader } from "../reducers/appSlice";
 import { setCurrentTask, removeTask, setTasks, setFoundTasks, setTasksCounts, addTask } from "../reducers/taskSlice";
-import { arrayIsEmpty } from "../utils/isEmpty";
+import { arrIsEmpty } from "../utils/isEmpty";
 import { API_URL } from "../config";
 
 
@@ -12,8 +12,8 @@ export function getTasks(params) {
             const { startDate, endDate, priorities, statuses } = params
             
             const url = `${API_URL}api/tasks?startDate=${startDate}&endDate=${endDate}` +
-                (!arrayIsEmpty(priorities) ? `&priorities=${JSON.stringify(priorities)}` : '') +
-                (!arrayIsEmpty(statuses) ? `&statuses=${JSON.stringify(statuses)}` : '');
+                (!arrIsEmpty(priorities) ? `&priorities=${JSON.stringify(priorities)}` : '') +
+                (!arrIsEmpty(statuses) ? `&statuses=${JSON.stringify(statuses)}` : '');
 
             const response = await axios.get(url, {
                 headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }

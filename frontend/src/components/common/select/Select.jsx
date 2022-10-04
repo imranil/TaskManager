@@ -4,16 +4,27 @@ import CleanIndicator from './indicators/CleanIndicator';
 import DropdownIndicator from './indicators/DropdownIndicator';
 import Option from './option/Option';
 import SelectedOption from './option/SelectedOption';
+import { arrIsEmpty, strIsEmpty } from '../../../utils/isEmpty';
 import './select.scss';
 
 const Select = ({selectedItems, setSelectedItems, options = [], placeholder = '', isMulti = false }) => {
     const [isFocused, setIsFocused] = useState(false)
     const [isOpenMenu, setIsOpenMenu] = useState(false)
+    const [searchInput, setSearchInput] = useState('')
     const inputRef = useRef()
+
+    function handleBlurInput() {
+        setSearchInput('')
+        setIsFocused(false)
+    }
 
     function clearSelectedItems(event) {
         event.stopPropagation()
-        setSelectedItems([])
+        if(arrIsEmpty(selectedItems)) {
+            setSearchInput('')
+        } else {
+            setSelectedItems([])
+        }
     }
 
     function removeSelectedItem(event, option) {
@@ -30,7 +41,7 @@ const Select = ({selectedItems, setSelectedItems, options = [], placeholder = ''
         }
     }
 
-    function clickOptionHandler(event, option) {
+    function handleClickOption(event, option) {
         event.preventDefault()
         if (isMulti) {
             setSelectedItems(selectedItems.includes(option) ? selectedItems.filter(item => item !== option) : selectedItems.concat([option]))
@@ -57,34 +68,36 @@ const Select = ({selectedItems, setSelectedItems, options = [], placeholder = ''
         <div className="select">
             <div onClick={() => inputRef.current.focus()} onMouseDown={e => e.preventDefault()} className={isFocused ? `select__control active` : "select__control"}>
                 <div className="select__container">
-                    {selectedItems.length !== 0 && selectedItems.map(option =>
+                    {!arrIsEmpty(selectedItems) && selectedItems.map(option =>
                         <SelectedOption key={option.value} onClick={removeSelectedItem} option={option} isMulti={isMulti} />
                     )}
-                    {selectedItems.length === 0 &&
+                    {arrIsEmpty(selectedItems) &&
                         <div className="select__placeholder">
-                            {placeholder}
+                            {strIsEmpty(searchInput) ? placeholder : searchInput}
                         </div>
                     }
                     <div className="select__input-container">
                         <input
                             className='select__input-search'
                             ref={inputRef}
+                            value={searchInput}
+                            onChange={e => setSearchInput(e.target.value)}
                             type="text"
                             name="searchInput"
                             onFocus={() => setIsFocused(true)}
-                            onBlur={() => setIsFocused(false)} />
+                            onBlur={handleBlurInput} />
                     </div>
                 </div>
                 <div className="select__indicators">
-                    {selectedItems.length !== 0 && <CleanIndicator clearSelectedItems={clearSelectedItems} />}
+                    {(!arrIsEmpty(selectedItems) || !strIsEmpty(searchInput)) && <CleanIndicator clearSelectedItems={clearSelectedItems} />}
                     <DropdownIndicator isOpenMenu={isOpenMenu} toggleOpenMenu={toggleOpenMenu} />
                 </div>
             </div>
             {isOpenMenu &&
                 <div className="select__menu">
-                    {displayedOptions.length !== 0 ?
+                    {!arrIsEmpty(displayedOptions) ?
                         displayedOptions.map((option, index) =>
-                            <Option key={index} option={option} onClick={clickOptionHandler} />)
+                            <Option key={index} option={option} onClick={handleClickOption} />)
                         :
                         <div className="select__menu__empty">Нет вариантов</div>
                     }

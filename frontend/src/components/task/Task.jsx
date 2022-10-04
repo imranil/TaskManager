@@ -15,15 +15,12 @@ const Task = () => {
     const priorities = useSelector(state => state.tasks.priorities)
     const statuses = useSelector(state => state.tasks.statuses)
 
-    if(!task) {
-        return (<div>Жди</div>);
-    }
-
     return (
         <div className="container">
             <div className="task-header">
                 <div className="name">
                     {task.name}
+                    
                 </div>
                 <div className="description">
                     {task.description}

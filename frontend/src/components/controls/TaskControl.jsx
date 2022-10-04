@@ -16,12 +16,11 @@ const TaskControl = (props) => {
             <div className="select-area">
                 <Select selectedItems={selectedPriorities} setSelectedItems={setSelectedPriorities} placeholder="По приоритету" options={priorities} isMulti={true} />
                 <Select selectedItems={selectedStatuses} setSelectedItems={setSelectedStatuses} placeholder="По статусу" options={statuses} isMulti={true} />
-                <Select selectedItems={selectedTags} setSelectedItems={setSelectedTags} placeholder="По тэгу" options={tags} isMulti={true} />
             </div>
             <CreateTask />
         </div>
     );
 }
 
-
+// <Select selectedItems={selectedTags} setSelectedItems={setSelectedTags} placeholder="По тэгу" options={tags} isMulti={true} />
 export default TaskControl;
