@@ -1,9 +1,10 @@
 const { Op, QueryTypes } = require('sequelize')
 const { User, Task, UserTask, Tag, sequelize } = require("../models")
+const ApiError = require('../error/ApiError')
 
 
 class TaskController {
-    async createTask(req, res) {
+    async createTask(req, res, next) {
         try {
             const { name, description, priority, status, deadline } = req.body
             const task = await Task.create({ name, description, priority, status, deadline })
@@ -17,11 +18,11 @@ class TaskController {
             return res.status(201).json(createdTask);
         } catch (e) {
             console.log(e)
-            return res.status(400).json(e)
+            return next(ApiError.badRequest('Некорректный запрос!'))
         }
     }
 
-    async getTasks(req, res) {
+    async getTasks(req, res, next) {
         try {
             const { startDate, endDate, priorities, statuses } = req.query;
             const prioritiesArray = priorities ? JSON.parse(priorities) : ['low', 'medium', 'high'];
@@ -43,11 +44,11 @@ class TaskController {
             return res.status(200).json(tasks);
         } catch (e) {
             console.log(e)
-            return res.status(400).json(e)
+            return next(ApiError.badRequest('Некорректный запрос!'))
         }
     }
 
-    async deleteTask(req, res) {
+    async deleteTask(req, res, next) {
         try {
             const task = await Task.findOne({
                 include: {
@@ -62,14 +63,14 @@ class TaskController {
                 }
             })
             await task.destroy()
-            return res.json({ message: 'Task was deleted' });
+            return res.json({ message: 'Задача была удалена.' });
         } catch (e) {
             console.log(e)
-            return res.status(400).json(e)
+            return next(ApiError.badRequest('Некорректный запрос!'))
         }
     }
 
-    async updateTask(req, res) {
+    async updateTask(req, res, next) {
         try {
             const { id, priority, status } = req.body
             const task = await Task.findOne({
@@ -89,11 +90,11 @@ class TaskController {
             return res.status(200).json(task);
         } catch (e) {
             console.log(e)
-            return res.status(400).json(e)
+            return next(ApiError.badRequest('Некорректный запрос!'))
         }
     }
 
-    async searchTasks(req, res) {
+    async searchTasks(req, res, next) {
         try {
             const search = req.query.search;
             const tasks = await Task.findAll({
@@ -111,7 +112,7 @@ class TaskController {
             return res.json(tasks);
         } catch (e) {
             console.log(e)
-            return res.status(400).json({ message: 'Search error' })
+            return next(ApiError.badRequest('Некорректный запрос!'))
         }
     }
 
@@ -132,6 +133,7 @@ class TaskController {
             return res.json(counts);
         } catch (e) {
             console.log(e)
+            return next(ApiError.internal('Внутренняя ошибка сервера!'))
         }
     }
 }

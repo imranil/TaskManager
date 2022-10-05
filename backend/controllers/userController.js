@@ -4,16 +4,17 @@ const config = require('config')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const { User } = require('../models');
+const ApiError = require('../error/ApiError');
 
 class UserController {
-    async registration(req, res) {
+    async registration(req, res, next) {
         try {
             const { email, password, firstName, lastName } = req.body
             const candidate = await User.findOne({
                 where: { email: email },
             })
             if (candidate) {
-                return res.status(400).json({ message: `User with email ${email} already exist` })
+                return next(ApiError.badRequest(`Пользователь с адресом электронной почты ${email} уже существует!`))
             }
             const hashPassword = await bcrypt.hash(password, 8)
             const user = await User.build({ email: email, password: hashPassword, firstName: firstName, lastName: lastName })
@@ -22,22 +23,22 @@ class UserController {
     
         } catch (e) {
             console.log(e)
-            res.send({ message: "Server error" })
+            return next(ApiError.internal('Внутренняя ошибка сервера!'))
         }
     }
 
-    async login(req, res) {
+    async login(req, res, next) {
         try {
             const { email, password } = req.body
             const user = await User.findOne({
                 where: { email: email }
             })
             if (!user) {
-                return res.status(404).json({ message: "User not found" })
+                return next(ApiError.notFound(`Пользователь с адресом электронной почты ${email} не найден!`))
             }
             const isPassValid = bcrypt.compareSync(password, user.password)
             if (!isPassValid) {
-                return res.status(400).json({ message: "Invalid password" })
+                return next(ApiError.badRequest(`Неверный пароль!`))
             }
             const token = jwt.sign({ id: user.id }, config.get('secretKey'), { expiresIn: "8h" })
             return res.status(200).json({
@@ -52,7 +53,7 @@ class UserController {
             })
         } catch (e) {
             console.log(e)
-            res.send({ message: "Server error" })
+            return next(ApiError.internal('Внутренняя ошибка сервера!'))
         }
     }
 
@@ -70,7 +71,7 @@ class UserController {
             return res.status(200).json(user)
         } catch (e) {
             console.log(e)
-            res.send({ message: "Server error" })
+            return next(ApiError.internal('Внутренняя ошибка сервера!'))
         }
     }
 
@@ -83,7 +84,7 @@ class UserController {
             return res.status(200).json(user)
         } catch (e) {
             console.log(e)
-            return res.status(400).json({ message: 'Delete avatar error' })
+            return next(ApiError.internal('Внутренняя ошибка сервера!'))
         }
     }
 
@@ -103,7 +104,7 @@ class UserController {
             })
         } catch (e) {
             console.log(e)
-            res.send({ message: "Server error" })
+            return next(ApiError.internal('Внутренняя ошибка сервера!'))
         }
     }
 }

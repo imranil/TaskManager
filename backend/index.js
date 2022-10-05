@@ -8,6 +8,7 @@ const taskRouter = require('./routes/task.routes')
 const inviteRouter = require('./routes/invite.routes')
 const tagRouter = require('./routes/tag.routes')
 const corsMiddleware = require('./middleware/cors.middleware')
+const errorMiddleware = require('./middleware/error.middleware')
 
 const PORT = config.get('serverPort')
 const app = express()
@@ -28,6 +29,9 @@ app.use('/api/auth', authRouter)
 app.use('/api/tasks', taskRouter)
 app.use('/api/invites', inviteRouter)
 app.use('/api/tags', tagRouter)
+
+// Обработка ошибок
+app.use(errorMiddleware)
 
 const start = async () => {
     try {

@@ -2,7 +2,7 @@ const { Tag, Task, TaskTag, User } = require("../models")
 
 
 class TagController {
-    async createTag(req, res) {
+    async createTag(req, res, next) {
         try {
             const { name, taskId } = req.body
             const tag = await Tag.create({ userId: req.user.id, name: name })
@@ -17,11 +17,11 @@ class TagController {
             return res.status(201).json(task);
         } catch (e) {
             console.log(e)
-            return res.status(400).json(e)
+            return next(ApiError.badRequest('Некорректный запрос!'))
         }
     }
 
-    async getTags(req, res) {
+    async getTags(req, res, next) {
         try {
             const tags = await Tag.findAll({
                 attributes: ['name'],
@@ -32,7 +32,7 @@ class TagController {
             return res.json(tags);
         } catch (e) {
             console.log(e)
-            return res.status(400).json(e)
+            return next(ApiError.internal('Внутренняя ошибка сервера!'))
         }
     }
 }

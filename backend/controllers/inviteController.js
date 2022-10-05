@@ -3,7 +3,7 @@ const { User, Task, UserTask, Invitation, sequelize } = require("../models")
 
 
 class InviteController {
-    async createInvitation(req, res) {
+    async createInvitation(req, res, next) {
         try {
             const { receiverEmail, taskId } = req.body
             const receiver = await User.findOne({
@@ -13,17 +13,17 @@ class InviteController {
             })
             const task = await Task.findByPk(taskId)
             if(!receiver || !task) {
-                return res.status(404).json({message: `Resources not found`})
+                return next(ApiError.notFound('Не найдено!'))
             }
             await Invitation.create({ senderId: req.user.id, receiverId: receiver.id, taskId: task.id })
             return res.status(201).json({message: `Приглашение отправлено ${receiver.email}`});
         } catch (e) {
             console.log(e)
-            return res.status(400).json(e)
+            return next(ApiError.internal('Внутренняя ошибка сервера!'))
         }
     }
 
-    async getInvitations(req, res) {
+    async getInvitations(req, res, next) {
         try {
             const invitations = await Invitation.findAll({
                 attributes: {
@@ -38,11 +38,11 @@ class InviteController {
             return res.json(invitations);
         } catch (e) {
             console.log(e)
-            return res.status(400).json(e)
+            return next(ApiError.internal('Внутренняя ошибка сервера!'))
         }
     }
 
-    async acceptInvitation(req, res) {
+    async acceptInvitation(req, res, next) {
         try {
             const { invitationId, taskId } = req.body
             const invitation = await Invitation.findByPk(invitationId)
@@ -56,18 +56,18 @@ class InviteController {
                 }
             })
             if(!invitation || !task) {
-                return res.status(404).json({message: `Resources not found`})
+                return next(ApiError.notFound('Не найдено!'))
             }
             invitation.destroy()
             await UserTask.create({ userId: req.user.id, taskId: task.id, role: 'contributor' })
             return res.status(200).json(task)
         } catch(e) {
             console.log(e)
-            return res.status(400).json(e)
+            return next(ApiError.internal('Внутренняя ошибка сервера!'))
         }
     }
 
-    async declineInvitation(req, res) {
+    async declineInvitation(req, res, next) {
         try {
             const invitation = await Invitation.findOne({
                 where: {
@@ -76,13 +76,13 @@ class InviteController {
                 }
             })
             if(!invitation) {
-                return res.status(404).json({message: `Resources not found`})
+                return next(ApiError.notFound('Не найдено!'))
             }
             invitation.destroy()
             return res.status(204)
         } catch(e) {
             console.log(e)
-            return res.status(400).json(e)
+            return next(ApiError.internal('Внутренняя ошибка сервера!'))
         }
     }
 }
