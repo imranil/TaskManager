@@ -98,10 +98,10 @@ textarea:invalid::placeholder {
 }
 
 .tab-button {
-    background-color: var(--bc-active);
-    -webkit-box-shadow: inset 0px 0px 2px 0px rgba(0, 0, 0, 0.75);
-    -moz-box-shadow: inset 0px 0px 2px 0px rgba(0, 0, 0, 0.75);
-    box-shadow: inset 0px 0px 2px 0px rgba(0, 0, 0, 0.75);
+    background-color: var(--bc-body);
+    -webkit-box-shadow: inset 0px 0px 5px 0px rgba(0, 0, 0, .5);
+    -moz-box-shadow: inset 0px 0px 5px 0px rgba(0, 0, 0, .5);
+    box-shadow: inset 0px 0px 5px 0px rgba(0, 0, 0, .5);
     color: var(--text-color);
     padding: 0.5em 1em;
     font-weight: 500;

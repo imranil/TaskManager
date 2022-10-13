@@ -8,12 +8,14 @@ import TaskControl from "../../components/controls/TaskControl";
 import { taskPropertyAdapter } from "../../utils/taskPropertyAdapter";
 import './calendar.css';
 
+const MonthControlMemo = memo(MonthControl);
 const TaskControlMemo = memo(TaskControl);
 
 const Calendar = () => {
     const dispatch = useDispatch()
     const currentMonth = useSelector(state => state.calendar.currentMonth)
     const currentYear = useSelector(state => state.calendar.currentYear)
+    
     const startDate = new Date(currentYear, currentMonth, 1).toLocaleDateString('en-CA') // yyyy-mm-dd
     const endDate = new Date(currentYear, currentMonth + 1, 0).toLocaleDateString('en-CA')
 
@@ -37,7 +39,7 @@ const Calendar = () => {
     return (
         <div className="container">
             <div className="top-row">
-                <MonthControl currentMonth={currentMonth} currentYear={currentYear} />
+                <MonthControlMemo currentMonth={currentMonth} currentYear={currentYear} />
                 <TaskControlMemo
                     selectedPriorities={selectedPriorities}
                     setSelectedPriorities={setSelectedPriorities}

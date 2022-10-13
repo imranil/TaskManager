@@ -1,12 +1,11 @@
 import React from "react";
-import { useCallback } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from "react-router-dom";
 import { setCurrentTask } from "../../reducers/taskSlice";
 
 
 const Month = () => {
-    const isLoading = useSelector(state => state.app.loader)
+    const isLoading = useSelector(state => state.app.isLoading)
     const currentMonth = useSelector(state => state.calendar.currentMonth)
     const currentYear = useSelector(state => state.calendar.currentYear)
     const tasks = useSelector(state => state.tasks.tasks)

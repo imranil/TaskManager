@@ -4,14 +4,14 @@ import { createSlice } from "@reduxjs/toolkit"
 const appSlice = createSlice({
     name: 'app',
     initialState: {
-        loader: false,
+        isLoading: false,
     },
     reducers: {
         showLoader(state) {
-            state.loader = true
+            state.isLoading = true
         },
         hideLoader(state) {
-            state.loader = false
+            state.isLoading = false
         }
     }
 })

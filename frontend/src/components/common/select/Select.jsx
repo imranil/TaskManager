@@ -83,7 +83,7 @@ const Select = ({selectedItems, setSelectedItems, options = [], placeholder = ''
                             value={searchInput}
                             onChange={e => setSearchInput(e.target.value)}
                             type="text"
-                            name="searchInput"
+                            name="search"
                             onFocus={() => setIsFocused(true)}
                             onBlur={handleBlurInput} />
                     </div>

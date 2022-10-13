@@ -1,16 +1,14 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { API_URL } from "../../config";
-import avatarLogo from "../../assets/img/avatar.svg";
 import Tag from "../tag/Tag";
 import SendInvitation from "../invitation/send/SendInvitation";
 import DeleteTask from "./operations/DeleteTask";
 import { UpdateState } from "./operations/UpdateTask";
 import "./task.css";
+import Members from "../members/Members";
 
 
 const Task = () => {
-    const dispatch = useDispatch()
     const task = useSelector(state => state.tasks.currentTask)
     const priorities = useSelector(state => state.tasks.priorities)
     const statuses = useSelector(state => state.tasks.statuses)
@@ -45,14 +43,7 @@ const Task = () => {
                             <div className="title">Крайний срок:</div>
                             <div className="value">{new Date(task.deadline).toLocaleDateString()}</div>
                         </div>
-                        <div className="data-row">
-                            <div className="title">Участники:</div>
-                            <div className="value">
-                                {task.users.map(user =>
-                                    <img src={user.avatar ? API_URL + user.avatar : avatarLogo} alt={user.fullName} />
-                                )}
-                            </div>
-                        </div>
+                        <Members users={task.users} />
                         <div className="data-row">
                             <div className="title">Тэги:</div>
                             <div className="value">
